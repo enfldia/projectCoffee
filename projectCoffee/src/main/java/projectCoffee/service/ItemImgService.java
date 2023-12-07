@@ -33,7 +33,7 @@ public class ItemImgService {
         if(!StringUtils.isEmpty(oriImgName)) {
             imgName = fileService.uploadFile(itemImgLocation, oriImgName,
                     itemImgFile.getBytes());
-            //저장할 경로, 실제 파일명, 파일의 바이트 배열
+            //저장할 경로, 실제 파일명, 파일의 바이트 배열111
             //uploadFile을 호출하여 파일을 업로드하고
             imgUrl = "/images/item/" + imgName;
             //업로드된 파일의 이름과 url을 얻어옵니다.
