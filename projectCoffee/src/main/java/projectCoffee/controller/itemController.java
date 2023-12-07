@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import projectCoffee.dto.ItemFormDto;
-import projectCoffee.service.ItemService;
 
 import javax.validation.Valid;
 import java.util.List;
