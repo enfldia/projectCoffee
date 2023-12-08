@@ -14,7 +14,7 @@ import projectCoffee.service.MemberService;
 
 import javax.validation.Valid;
 
-@RequestMapping(value = "/members")
+//@RequestMapping(value = "/members")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -22,13 +22,13 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/members/new")
     public String memberForm(Model model) {
         model.addAttribute("memberFormDto", new MemberFormDto());
         return "member/memberForm";
     }
 
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/members/new")
     public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
 
         if(bindingResult.hasErrors()) {
@@ -43,7 +43,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/members/login")
     public String loginMember(){
         return "/member/memberLoginForm";
     }
