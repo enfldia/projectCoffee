@@ -6,6 +6,8 @@ import projectCoffee.constant.ArticleType;
 import projectCoffee.entity.Article;
 
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
@@ -16,6 +18,7 @@ public class ArticleDto {
     private String title;
     @NotEmpty(message = "내용은 필수 입력값입니다.")
     private String content;
+    @Enumerated(EnumType.STRING)
     private ArticleType articleType;
 
     public Article toEntity() {
