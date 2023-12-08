@@ -22,13 +22,13 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 
     private JPAQueryFactory queryFactory;
     //동적쿼리를 생성하기 위해서 JPAQueryFactory 선언
-    private ItemRepositoryCustom(EntityManager em){
+    public ItemRepositoryCustomImpl(EntityManager em){
         this.queryFactory = new JPAQueryFactory(em);
     }
     //JPAQueryFactory의 생성자로 EntityManager 객체를 넣어줌
 
     //    searchSellStatusEq(): 상품 판매 조건이 전체(null)일 경우는 null를 리턴합니다.
-//    결과값이 null이면 where절에서 해당 조건은 무시됩니다.
+    //    결과값이 null이면 where절에서 해당 조건은 무시됩니다.
     private BooleanExpression searchSellStatusEq(ItemSellStatus searchSellStatus){
         return searchSellStatus == null ? null : QItem.item.itemSellStatus.eq(searchSellStatus);
     }
@@ -76,7 +76,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                  .where(regDtsAfter(itemSearchDto.getSearchDateType()),
                          searchSellStatusEq(itemSearchDto.getItemSellStatus()),
                          searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
-                 .fetchOne() // 카운터 결과를 단일 값으로 반환
+                 .fetchOne();// 카운터 결과를 단일 값으로 반환
          //Wildcard.count - QueryDsl 에서 제공하는 쿼리 결과의 행수
 
 
@@ -84,10 +84,5 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
          //PageImpl 를 사용하여 페이징된 결과를 Page<Item> 형태로 반환
 
      }
-     @Override
-    public Page<MainItemDto> getMainItemPage()
-
-
-
 
 }
