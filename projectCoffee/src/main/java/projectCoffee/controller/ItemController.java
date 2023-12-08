@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +23,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-public class itemController {
+public class ItemController {
 
     private final ItemService itemService;
     @GetMapping(value = "/admin/item/new")
@@ -34,7 +33,8 @@ public class itemController {
     }
 
     @PostMapping(value = "/admin/item/new")
-    public String itemNew(@Valid ItemFormDto itemFormDto, BindingResult bindingResult, Model model, @RequestParam("itemImgFile") List<MultipartFile>
+    public String itemNew(@Valid ItemFormDto itemFormDto, BindingResult bindingResult,
+                          Model model, @RequestParam("itemImgFile") List<MultipartFile>
                           itemImgFileList){
 
         if(bindingResult.hasErrors()){
@@ -109,4 +109,6 @@ public class itemController {
         model.addAttribute("maxPage", 5);
         return "item/itemMng";
     }
+
+
 }

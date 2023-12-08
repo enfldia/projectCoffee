@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import projectCoffee.dto.ItemFormDto;
 import projectCoffee.dto.ItemImgDto;
 import projectCoffee.dto.ItemSearchDto;
+import projectCoffee.dto.MainItemDto;
 import projectCoffee.entity.Item;
 import projectCoffee.entity.ItemImg;
 import projectCoffee.repository.ItemImgRepository;
@@ -37,9 +38,9 @@ public class ItemService {
             ItemImg itemImg = new ItemImg();
             itemImg.setItem(item);
             if(i == 0)
-                itemImg.setRepimgYn("Y");
+                itemImg.setRepImgYn("Y");
             else
-                itemImg.setRepimgYn("n");
+                itemImg.setRepImgYn("n");
             itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
         }
         return item.getId();
@@ -97,5 +98,11 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getAdminItemPage(itemSearchDto,pageable);
+    }
+
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 }
