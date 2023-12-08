@@ -3,8 +3,10 @@ package projectCoffee.repository;
 import com.querydsl.core.Query;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 import projectCoffee.constant.ItemSellStatus;
@@ -14,6 +16,7 @@ import projectCoffee.entity.QItem;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 
@@ -57,7 +60,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
     }
      @Override
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
-         QueryResults<Item> results = queryFactory
+         List<Item> content = queryFactory
                  .selectFrom(QItem.item) //item 엔티티 데이터를 선택
                  .where(regDtsAfter(itemSearchDto.getSearchDateType()),
                          searchSellStatusEq(itemSearchDto.getItemSellStatus()),
@@ -66,7 +69,25 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                  .orderBy(QItem.item.id.desc())//아이템 id의 역순방향
                  .offset(pageable.getOffset())//페이지 시작 오프셋 설정
                  .limit(pageable.getPageSize())//페이지의 크기를 설정
-                 .fetchResults();// 쿼리를 실행하고 결과를 리스트로 반환
+                 .fetch();// 쿼리를 실행하고 결과를 리스트로 반환
+
+         //토탈 카운트 조회 - 상품의 총갯수를 조회
+         long total = queryFactory.select(Wildcard.count).from(QItem.item)// 테이블에서 카운터를 조회하는 쿼리
+                 .where(regDtsAfter(itemSearchDto.getSearchDateType()),
+                         searchSellStatusEq(itemSearchDto.getItemSellStatus()),
+                         searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
+                 .fetchOne() // 카운터 결과를 단일 값으로 반환
+         //Wildcard.count - QueryDsl 에서 제공하는 쿼리 결과의 행수
+
+
+         return  new PageImpl<>(content,pageable,total);
+         //PageImpl 를 사용하여 페이징된 결과를 Page<Item> 형태로 반환
 
      }
+     @Override
+    public Page<MainItemDto> getMainItemPage()
+
+
+
+
 }
