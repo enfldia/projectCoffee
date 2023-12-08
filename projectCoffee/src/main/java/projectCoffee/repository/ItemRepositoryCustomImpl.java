@@ -63,7 +63,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
          List<Item> content = queryFactory
                  .selectFrom(QItem.item) //item 엔티티 데이터를 선택
                  .where(regDtsAfter(itemSearchDto.getSearchDateType()),
-                         searchSellStatusEq(itemSearchDto.getItemSellStatus()),
+                         searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
                          searchByLike(itemSearchDto.getSearchBy(),itemSearchDto.getSearchQuery())
                          )
                  .orderBy(QItem.item.id.desc())//아이템 id의 역순방향
@@ -74,7 +74,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
          //토탈 카운트 조회 - 상품의 총갯수를 조회
          long total = queryFactory.select(Wildcard.count).from(QItem.item)// 테이블에서 카운터를 조회하는 쿼리
                  .where(regDtsAfter(itemSearchDto.getSearchDateType()),
-                         searchSellStatusEq(itemSearchDto.getItemSellStatus()),
+                         searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
                          searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
                  .fetchOne();// 카운터 결과를 단일 값으로 반환
          //Wildcard.count - QueryDsl 에서 제공하는 쿼리 결과의 행수

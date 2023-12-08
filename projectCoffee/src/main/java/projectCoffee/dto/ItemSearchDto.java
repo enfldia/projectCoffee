@@ -1,5 +1,6 @@
 package projectCoffee.dto;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import projectCoffee.constant.ItemSellStatus;
@@ -10,7 +11,7 @@ public class ItemSearchDto {
 
     private String searchDateType;
 
-    private ItemSellStatus itemSellStatus;
+    private ItemSellStatus searchSellStatus;
 
     private String searchBy;
 

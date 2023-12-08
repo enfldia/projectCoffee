@@ -93,20 +93,20 @@ public class itemController {
     }
 
     @GetMapping({"/admin/items","admin/items/{page}"})
-    public String itemManage(ItemSearchDto itemSearchDto,
-                             @PathVariable("page") Optional<Integer> page,Model model){
-        Pageable pageble  = PageRequest.of(page.isPresent() ? page.get() : 0,3);//
+    public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model){
+
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);//
         // PageRequest - Data jpa에서 사용하는 페이지 요청객체
         // of() 메서드를 사용하여 페이지 번화와 페이지당 항목수 지정하여 페이지 요청 정보생성
         // 0 은 url 경로에서 받아온 페이지 번호를 확인하고 , 값이 없으면 0 = 보고 있던 페이지가 없으면 첫번째 페이지를 보여줌
         // 3 은 한 페이지 당 보여줄 항목수
 
 
-        Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageble);
+        Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
         //itemSearchDto를 사용하여 페이지 네이션 된 테이터를 조회
-        model.addAttribute("items",items); //조회된 페이지 네이션된 데이터를 모델에 추가
+        model.addAttribute("items", items); //조회된 페이지 네이션된 데이터를 모델에 추가
         model.addAttribute("itemSearchDto", itemSearchDto); //검색 조건 모델에 추가
-        model.addAttribute("MaxPage",5);
+        model.addAttribute("maxPage", 5);
         return "item/itemMng";
     }
 }
