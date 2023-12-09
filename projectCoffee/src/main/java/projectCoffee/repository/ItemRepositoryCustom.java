@@ -2,6 +2,7 @@ package projectCoffee.repository;
 
 
 import projectCoffee.dto.ItemSearchDto;
+import projectCoffee.dto.MainItemDto;
 import projectCoffee.entity.Item;
 
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 public interface ItemRepositoryCustom {
     Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
 
+    Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
+                                      Pageable pageable);
 
 }
 //상품 조회 조건을 담고있는 itemSearchDto 객체와

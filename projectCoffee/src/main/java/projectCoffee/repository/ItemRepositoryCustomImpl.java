@@ -11,8 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 import projectCoffee.constant.ItemSellStatus;
 import projectCoffee.dto.ItemSearchDto;
+import projectCoffee.dto.MainItemDto;
+import projectCoffee.dto.QMainItemDto;
 import projectCoffee.entity.Item;
 import projectCoffee.entity.QItem;
+import projectCoffee.entity.QItemImg;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
@@ -83,6 +86,46 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
          return  new PageImpl<>(content,pageable,total);
          //PageImpl 를 사용하여 페이징된 결과를 Page<Item> 형태로 반환
 
+     }
+
+     private BooleanExpression itemNmLike(String searchQuery){
+        return StringUtils.isEmpty(searchQuery) ?
+                null : QItem.item.itemNm.like("%" + searchQuery + "%");
+     }
+
+    @Override
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
+                                              Pageable pageable){
+        QItem item = QItem.item;
+         QItemImg itemImg = QItemImg.itemImg;
+        //QItem과 QitemImg를 사용해서 QueryDsl에서 사용할 수 있는 객체 정의
+         List<MainItemDto> content = queryFactory
+                 .select(
+                         new QMainItemDto(
+                                 item.id,
+                                 item.itemNm,
+                                 item.itemDetail,
+                                 itemImg.imgUrl,
+                                 item.price)
+                 )
+                 .from(itemImg)
+                 .join(itemImg.item, item) //itemImg /item 조인하여
+                 .where(itemImg.repImgYn.eq("y")) // 대표이미지 와
+                 .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
+                 .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
+                 .offset(pageable.getOffset())
+                 .limit(pageable.getPageSize()) //페이지 네이션처리
+                 .fetch(); //쿼리 결과를 리스트로 반환
+         long total = queryFactory
+                 .select(Wildcard.count) //전체 갯수 확인
+                 .from(itemImg) //itemImg 테이블에서
+                 .join(itemImg.item, item) //itemImg 와 item 조인해서
+                 .where(itemImg.repImgYn.eq("Y")) //대표이미지와
+                 .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
+                 .fetchOne() //궈리 결과를 단일 값으로 반환
+                 ; //전체 갯수를 조회
+         return  new PageImpl<>(content, pageable, total);
+         //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
      }
 
 }
