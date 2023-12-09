@@ -123,6 +123,7 @@
                             없다면 '상품 이미지 + 번호' 출력     -->
                 </div>
             </div>
+            <!-- 수정시 목록이 등록된 이미지 만큼 만나와서 총 5개가 나오도록 만들어 보는 중-->
             <div class="form-group" th:each="num: ${#numbers.sequence(1,5-itemFormDto.itemImgDtoList.size())}">
                 <!-- 이미지 갯수를 최대 5개로 하겠습니다. -->
                 <div class="custom-file img-div">

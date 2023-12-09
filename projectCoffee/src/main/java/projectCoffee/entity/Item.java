@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import projectCoffee.constant.ItemSellStatus;
 import projectCoffee.dto.ItemFormDto;
+import projectCoffee.exception.OutOfStockException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -49,4 +50,18 @@ public class Item extends BaseEntity{
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
     }
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock<0){
+            throw new OutOfStockException("상품의 재고가 부족 합니다. (현재 재고 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
+    }
+
+    public void addStock(int stockNumber){
+        this.stockNumber += stockNumber;
+    }
+
 }
+
+

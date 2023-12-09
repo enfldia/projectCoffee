@@ -43,6 +43,8 @@ public class ItemService {
                 itemImg.setRepImgYn("n");
             itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
         }
+        System.out.println("register time : " + item.getRegTime());
+        System.out.println("update time : " + item.getUpdateTime());
         return item.getId();
     }
 
@@ -92,6 +94,8 @@ public class ItemService {
         //get(0) 첫번째 요소
         //상품이미지 업데이트를 통해 updateItemImg 메소드
         //상품이미지 아이디, 상품이미지 파일정보를 파라메타로 전달
+        System.out.println("register time : " + item.getRegTime());
+        System.out.println("update time : " + item.getUpdateTime());
         return item.getId();
     }
 

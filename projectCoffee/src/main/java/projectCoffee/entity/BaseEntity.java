@@ -1,7 +1,9 @@
 package projectCoffee.entity;
 
+
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -22,4 +24,4 @@ public class BaseEntity extends BaseTimeEntity {
     private String modifiedBy;
 }
 //BaseTimeEntity 상속 받고 있으므로 등록일, 수정일, 등록자, 수정자를
-//모두 갖는 BaseEntity를  완성, 이를 상속받아 사용
+//모두 갖는 BaseEntity를  완성, 이를 이를 상속받아 사용
