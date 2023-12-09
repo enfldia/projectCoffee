@@ -10,17 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "orders")
-//Auditing 기능을 적용하기 위해 BaseEntity 상속시킴 12/6 상현
-public class Order extends BaseEntity{
+@Getter @Setter
+public class Order extends BaseEntity {
 
     @Id
+    @GeneratedValue
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -29,9 +28,8 @@ public class Order extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus; //주문상태
 
-
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true) //orderItems의 order에 의해 관리된다.
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
     //외래키가(order_id)가 order_item 테이블에 있으므로
     //연관관계 주인은 OrderItem
@@ -56,7 +54,7 @@ public class Order extends BaseEntity{
 
     public int getTotalPrice() {
         int totalPrice = 0;
-        for(OrderItem orderItem : orderItems) {
+        for (OrderItem orderItem : orderItems) {
             totalPrice += orderItem.getTotalPrice();
         }
         return totalPrice;
@@ -64,9 +62,9 @@ public class Order extends BaseEntity{
 
     public void cancelOrder() {
         this.orderStatus = OrderStatus.CANCEL; //order => CANCEL
-        for(OrderItem orderItem : orderItems) {
+        for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
     }
-
 }
+

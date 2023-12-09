@@ -124,13 +124,13 @@
                 </div>
             </div>
             <!-- 수정시 목록이 등록된 이미지 만큼 만나와서 총 5개가 나오도록 만들어 보는 중-->
-            <div class="form-group" th:each="num: ${#numbers.sequence(1,5-itemFormDto.itemImgDtoList.size())}">
-                <!-- 이미지 갯수를 최대 5개로 하겠습니다. -->
-                <div class="custom-file img-div">
-                    <input type="file" class="custom-file-input" name="itemImgFile">
-                    <label class="custom-file-label" th:text="상품이미지 + ${num+itemFormDto.itemImgDtoList.size()}"></label>
-                </div>
-            </div>
+<!--            <div class="form-group" th:each="num: ${#numbers.sequence(1,5-itemFormDto.itemImgDtoList.size())}">-->
+<!--                &lt;!&ndash; 이미지 갯수를 최대 5개로 하겠습니다. &ndash;&gt;-->
+<!--                <div class="custom-file img-div">-->
+<!--                    <input type="file" class="custom-file-input" name="itemImgFile">-->
+<!--                    <label class="custom-file-label" th:text="상품이미지 + ${num+itemFormDto.itemImgDtoList.size()}"></label>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
         <div th:if="${#strings.isEmpty(itemFormDto.id)}" style="text-align: center">
