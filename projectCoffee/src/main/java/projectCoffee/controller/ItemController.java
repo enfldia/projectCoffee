@@ -59,12 +59,9 @@ public class ItemController {
     //상품 수정하기
     @GetMapping(value = "/admin/item/{itemId}")
     public String itemDtl(@PathVariable("itemId") Long itemId, Model model){
-        System.out.println("12112222211111222" + itemId.toString());
         try{
             ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
-            System.out.println("212121212121" + itemFormDto);
             model.addAttribute("itemFormDto", itemFormDto);
-            System.out.println("3232232323232323" + itemFormDto.toString());
         } catch (Exception e){
             model.addAttribute("errorMessage","존재하지 않는 상품 입니다.");
             model.addAttribute("itemFormDto",new ItemFormDto());
@@ -110,5 +107,10 @@ public class ItemController {
         return "item/itemMng";
     }
 
-
+    @GetMapping("/item/{itemId}")
+    public String itemDtl(Model model, @PathVariable("itemId")Long itemId){
+        ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
+        model.addAttribute("item",itemFormDto);
+        return "item/ItemDtl";
+    }
 }

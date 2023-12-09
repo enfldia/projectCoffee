@@ -110,7 +110,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                  )
                  .from(itemImg)
                  .join(itemImg.item, item) //itemImg /item 조인하여
-                 .where(itemImg.repImgYn.eq("y")) // 대표이미지 와
+                 .where(itemImg.repImgYn.eq("Y")) // 대표이미지 와
                  .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
                  .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
                  .offset(pageable.getOffset())

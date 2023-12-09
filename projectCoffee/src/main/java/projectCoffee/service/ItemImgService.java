@@ -21,7 +21,7 @@ public class ItemImgService {
 
     private final ItemImgRepository itemImgRepository;
 
-    private  final FileService fileService;
+    private final FileService fileService;
 
     public void saveItemImg(ItemImg itemImg, MultipartFile itemImgFile) throws Exception{
         String oriImgName = itemImgFile.getOriginalFilename();
@@ -35,8 +35,8 @@ public class ItemImgService {
             imgUrl = "/images/item/" + imgName;
 
         //상품 이미지 정보 저장
-        itemImg.updateItemImg(oriImgName,imgName,imgUrl);
-        itemImgRepository.save(itemImg);
+            itemImg.updateItemImg(oriImgName, imgName, imgUrl);
+            itemImgRepository.save(itemImg);
     }
     } //6장  47페이지
 
