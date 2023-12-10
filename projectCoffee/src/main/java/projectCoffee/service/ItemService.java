@@ -43,8 +43,8 @@ public class ItemService {
                 itemImg.setRepImgYn("n");
             itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
         }
-        System.out.println("register time : " + item.getRegTime());
-        System.out.println("update time : " + item.getUpdateTime());
+        System.out.println("121212121212121212121212121register time : " + item.getRegTime());
+        System.out.println("121212121212121212121212121update time : " + item.getUpdateTime());
         return item.getId();
     }
 
