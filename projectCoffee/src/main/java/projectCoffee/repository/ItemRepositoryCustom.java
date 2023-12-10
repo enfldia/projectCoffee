@@ -1,8 +1,7 @@
 package projectCoffee.repository;
 
 
-import projectCoffee.dto.ItemSearchDto;
-import projectCoffee.dto.MainItemDto;
+import projectCoffee.dto.*;
 import projectCoffee.entity.Item;
 
 import org.springframework.data.domain.Page;
@@ -13,6 +12,15 @@ public interface ItemRepositoryCustom {
 
     Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
                                       Pageable pageable);
+
+    Page<CoffeeItemDto> getCoffeeItemPage(ItemSearchDto itemSearchDto,
+                                        Pageable pageable);
+
+    Page<ToolsItemDto> getToolsItemPage(ItemSearchDto itemSearchDto,
+                                        Pageable pageable);
+
+    Page<EtcItemDto> getEtcItemPage(ItemSearchDto itemSearchDto,
+                                    Pageable pageable);
 
 }
 //상품 조회 조건을 담고있는 itemSearchDto 객체와

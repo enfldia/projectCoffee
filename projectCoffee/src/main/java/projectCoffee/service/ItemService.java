@@ -6,10 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import projectCoffee.dto.ItemFormDto;
-import projectCoffee.dto.ItemImgDto;
-import projectCoffee.dto.ItemSearchDto;
-import projectCoffee.dto.MainItemDto;
+import projectCoffee.dto.*;
 import projectCoffee.entity.Item;
 import projectCoffee.entity.ItemImg;
 import projectCoffee.repository.ItemImgRepository;
@@ -43,8 +40,6 @@ public class ItemService {
                 itemImg.setRepImgYn("n");
             itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
         }
-        System.out.println("121212121212121212121212121register time : " + item.getRegTime());
-        System.out.println("121212121212121212121212121update time : " + item.getUpdateTime());
         return item.getId();
     }
 
@@ -107,5 +102,20 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CoffeeItemDto> getCoffeeItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getCoffeeItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ToolsItemDto> getToolsItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getToolsItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EtcItemDto> getEtcItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getEtcItemPage(itemSearchDto, pageable);
     }
 }

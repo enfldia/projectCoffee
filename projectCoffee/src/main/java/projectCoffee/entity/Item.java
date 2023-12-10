@@ -8,7 +8,6 @@ import projectCoffee.dto.ItemFormDto;
 import projectCoffee.exception.OutOfStockException;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "item")
@@ -39,6 +38,8 @@ public class Item extends BaseEntity{
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
 
+    private String itemCategory; // 상품 분류
+
 
     public void updateItem(ItemFormDto itemFormDto){
         this.itemNm = itemFormDto.getItemNm();
@@ -46,6 +47,7 @@ public class Item extends BaseEntity{
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+        this.itemCategory = itemFormDto.getItemCategory();
     }
     public void removeStock(int stockNumber){
         int restStock = this.stockNumber - stockNumber;

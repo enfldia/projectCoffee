@@ -10,9 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 import projectCoffee.constant.ItemSellStatus;
-import projectCoffee.dto.ItemSearchDto;
-import projectCoffee.dto.MainItemDto;
-import projectCoffee.dto.QMainItemDto;
+import projectCoffee.dto.*;
 import projectCoffee.entity.Item;
 import projectCoffee.entity.QItem;
 import projectCoffee.entity.QItemImg;
@@ -127,5 +125,112 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
          return  new PageImpl<>(content, pageable, total);
          //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
      }
+    @Override
+    public Page<CoffeeItemDto> getCoffeeItemPage(ItemSearchDto itemSearchDto,
+                                                 Pageable pageable){
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+        //QItem과 QitemImg를 사용해서 QueryDsl에서 사용할 수 있는 객체 정의
+        List<CoffeeItemDto> content = queryFactory
+                .select(
+                        new QCoffeeItemDto(
+                                item.id,
+                                item.itemNm,
+                                item.itemDetail,
+                                itemImg.imgUrl,
+                                item.price)
+                )
+                .from(itemImg)
+                .join(itemImg.item, item) //itemImg /item 조인하여
+                .where(itemImg.repImgYn.eq("Y")) // 대표이미지 와
+                .where(itemImg.item.itemCategory.like("COFFEE")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
+                                                                     // 아이템 엔티티의 필드값인 아이템 카테고리의 값을 검색
+                .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize()) //페이지 네이션처리
+                .fetch(); //쿼리 결과를 리스트로 반환
+        long total = queryFactory
+                .select(Wildcard.count) //전체 갯수 확인
+                .from(itemImg) //itemImg 테이블에서
+                .join(itemImg.item, item) //itemImg 와 item 조인해서
+                .where(itemImg.repImgYn.eq("Y")) //대표이미지와
+                .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
+                .fetchOne() //궈리 결과를 단일 값으로 반환
+                ; //전체 갯수를 조회
+        return  new PageImpl<>(content, pageable, total);
+        //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
+    }
+
+    @Override
+    public Page<EtcItemDto> getEtcItemPage(ItemSearchDto itemSearchDto,
+                                                 Pageable pageable){
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+        //QItem과 QitemImg를 사용해서 QueryDsl에서 사용할 수 있는 객체 정의
+        List<EtcItemDto> content = queryFactory
+                .select(
+                        new QEtcItemDto(
+                                item.id,
+                                item.itemNm,
+                                item.itemDetail,
+                                itemImg.imgUrl,
+                                item.price)
+                )
+                .from(itemImg)
+                .join(itemImg.item, item) //itemImg /item 조인하여
+                .where(itemImg.repImgYn.eq("Y")) // 대표이미지 와
+                .where(itemImg.item.itemCategory.like("ETC")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
+                // 아이템 엔티티의 필드값인 아이템 카테고리의 값을 검색
+                .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize()) //페이지 네이션처리
+                .fetch(); //쿼리 결과를 리스트로 반환
+        long total = queryFactory
+                .select(Wildcard.count) //전체 갯수 확인
+                .from(itemImg) //itemImg 테이블에서
+                .join(itemImg.item, item) //itemImg 와 item 조인해서
+                .where(itemImg.repImgYn.eq("Y")) //대표이미지와
+                .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
+                .fetchOne() //궈리 결과를 단일 값으로 반환
+                ; //전체 갯수를 조회
+        return  new PageImpl<>(content, pageable, total);
+        //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
+    }
+
+    @Override
+    public Page<ToolsItemDto> getToolsItemPage(ItemSearchDto itemSearchDto,
+                                                 Pageable pageable){
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+        //QItem과 QitemImg를 사용해서 QueryDsl에서 사용할 수 있는 객체 정의
+        List<ToolsItemDto> content = queryFactory
+                .select(
+                        new QToolsItemDto(
+                                item.id,
+                                item.itemNm,
+                                item.itemDetail,
+                                itemImg.imgUrl,
+                                item.price)
+                )
+                .from(itemImg)
+                .join(itemImg.item, item) //itemImg /item 조인하여
+                .where(itemImg.repImgYn.eq("Y")) // 대표이미지 와
+                .where(itemImg.item.itemCategory.like("TOOLS")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
+                // 아이템 엔티티의 필드값인 아이템 카테고리의 값을 검색
+                .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize()) //페이지 네이션처리
+                .fetch(); //쿼리 결과를 리스트로 반환
+        long total = queryFactory
+                .select(Wildcard.count) //전체 갯수 확인
+                .from(itemImg) //itemImg 테이블에서
+                .join(itemImg.item, item) //itemImg 와 item 조인해서
+                .where(itemImg.repImgYn.eq("Y")) //대표이미지와
+                .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
+                .fetchOne() //궈리 결과를 단일 값으로 반환
+                ; //전체 갯수를 조회
+        return  new PageImpl<>(content, pageable, total);
+        //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
+    }
 
 }
