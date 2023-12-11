@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import projectCoffee.dto.ItemFormDto;
-import projectCoffee.dto.ItemSearchDto;
+import projectCoffee.dto.*;
 import projectCoffee.entity.Item;
 import projectCoffee.service.ItemService;
 
@@ -110,7 +109,28 @@ public class ItemController {
     @GetMapping("/item/{itemId}")
     public String itemDtl(Model model, @PathVariable("itemId")Long itemId){
         ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
+        System.out.println("1234123412341234123412341" +itemFormDto.getItemImgDtoList().get(0).getImgUrl());
         model.addAttribute("item",itemFormDto);
         return "item/ItemDtl";
+    }
+
+    @GetMapping("/shopItem")
+    public String shopItemShow(ItemSearchDto itemSearchDto, Optional<Integer> page,
+                       Model model){
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,12);
+        Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+        Page<CoffeeItemDto> coffeeitems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
+        Page<ToolsItemDto> toolsitems = itemService.getToolsItemPage(itemSearchDto, pageable);
+        Page<EtcItemDto> etcitems = itemService.getEtcItemPage(itemSearchDto, pageable);
+
+        model.addAttribute("items", items);
+        model.addAttribute("coffeeItems", coffeeitems);
+        model.addAttribute("toolsItems", toolsitems);
+        model.addAttribute("etcItems", etcitems);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage",5);
+
+
+        return "/item/shopItem";
     }
 }
