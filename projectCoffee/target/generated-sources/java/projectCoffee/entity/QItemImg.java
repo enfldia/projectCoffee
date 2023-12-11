@@ -32,7 +32,7 @@ public class QItemImg extends EntityPathBase<ItemImg> {
 
     public final StringPath oriImgName = createString("oriImgName");
 
-    public final StringPath repimgYn = createString("repimgYn");
+    public final StringPath repImgYn = createString("repImgYn");
 
     public QItemImg(String variable) {
         this(ItemImg.class, forVariable(variable), INITS);

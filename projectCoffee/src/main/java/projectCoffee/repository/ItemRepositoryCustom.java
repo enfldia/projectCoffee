@@ -1,11 +1,19 @@
 package projectCoffee.repository;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 import projectCoffee.dto.ItemSearchDto;
+import projectCoffee.dto.MainItemDto;
 import projectCoffee.entity.Item;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface ItemRepositoryCustom {
-    // 사용자 정의 인터페이스 작성
     Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
+
+    Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
+                                      Pageable pageable);
+
 }
+//상품 조회 조건을 담고있는 itemSearchDto 객체와
+//페이지정보 pageable 객체를 파라미터로 받는 getAdminItemPage 정의
