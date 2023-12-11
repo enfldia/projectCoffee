@@ -14,6 +14,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item" >
+                            <a class="nav-link" href="/shopItem">상품 목록</a>
+                        </li>
                         <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                             <a class="nav-link" href="/admin/item/new">상품 등록</a>
                         </li>
@@ -25,6 +28,12 @@
                         </li>
                         <li class="nav-item" sec:authorize="isAuthenticated()">
                             <a class="nav-link" href="/orders">구매이력</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a class="nav-link" href="/CsCenter/faq">FAQ</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                            <a class="nav-link" href="/admin/notices">ADMIN</a>
                         </li>
                         <li class="nav-item" sec:authorize="isAnonymous()">
                             <a class="nav-link" href="/members/login">로그인</a>
