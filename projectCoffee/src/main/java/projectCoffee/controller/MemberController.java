@@ -23,11 +23,6 @@ public class MemberController {
     private final PasswordEncoder passwordEncoder;
 
 
-//    public MemberController() {
-//        kakaoapi = new KakaoAPI();
-//    }
-
-
     @GetMapping(value = "/new")
     public String memberForm(Model model) {
         model.addAttribute("memberFormDto", new MemberFormDto());
@@ -53,26 +48,6 @@ public class MemberController {
     public String loginMember(){
         return "/member/memberLoginForm";
     }
-
-
-/*
-    @RequestMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String accessToken = (String)session.getAttribute("access_token");
-
-        if (accessToken != null && !"".equals(accessToken)) {
-            kakaoapi.logout(accessToken);
-            session.removeAttribute("access_token");
-            session.removeAttribute("user");
-
-//            log.info("logout success");
-        }
-
-        return "redirect:/";
-    }
-    */
-
 
 
     @GetMapping(value = "/login/error")
