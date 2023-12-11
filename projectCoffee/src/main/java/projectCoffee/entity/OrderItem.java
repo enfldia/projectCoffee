@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 
-public class OrderItem {
+public class OrderItem extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,4 +31,20 @@ public class OrderItem {
 //    private LocalDateTime regTime;
 //      Auditing 으로 시간 관련된 것 들 삭제
 //    private LocalDateTime updateTime;
+public static OrderItem createOderItem(Item item, int count) {
+    OrderItem orderItem = new OrderItem();
+    orderItem.setItem(item);
+    orderItem.setCount(count);
+    orderItem.setOrderPrice(item.getPrice());
+    item.removeStock(count);
+    return orderItem;
+}
+
+    public int getTotalPrice() {
+        return orderPrice*count;
+    }
+
+    public void cancel() {
+        this.getItem().addStock(count);
+    }
 }
