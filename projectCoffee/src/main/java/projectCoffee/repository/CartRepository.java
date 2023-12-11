@@ -5,4 +5,5 @@ import projectCoffee.entity.Cart;
 
 public interface CartRepository extends JpaRepository<Cart,Long> {
 
+    Cart findByMemberId(Long memberId);
 }

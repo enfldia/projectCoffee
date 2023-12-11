@@ -30,17 +30,24 @@ public class ItemFormDto {
 
     private ItemSellStatus itemSellStatus;
 
+//    아이템 카테고
+    private String itemCategory;
+
     private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 
-    private  List<Long> itemImgIds = new ArrayList<>();
+    private List<Long> itemImgIds = new ArrayList<>();
 
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public Item createItem(){
-        return modelMapper.map(this,Item.class);
+    public Item createItem() {
+        return modelMapper.map(this, Item.class);
+    }
+    //현재 ItemFormDto 객체를 사용해서 Item 엔티티를 생성
+
+    public static ItemFormDto of(Item item) {
+        return modelMapper.map(item, ItemFormDto.class);
+    }
+    //주어진 Item 엔티티를 사용하여 ItemFormDto를 생성하는 정적 메서드입니다.
+    //엔티티의 필드 값을 DTO로 매핑합니다.
     }
 
-    public static ItemFormDto of(Item item){
-        return  modelMapper.map(item,ItemFormDto.class);
-    }
-}

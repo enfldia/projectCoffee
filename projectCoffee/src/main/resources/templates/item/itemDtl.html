@@ -145,6 +145,9 @@
     <div class="d-flex">
         <div class="repImgDiv">
             <img th:src="${item.itemImgDtoList[0].imgUrl}" class = "rounded repImg" th:alt="${item.itemNm}">
+            <img th:src="@{/images/item/7fde6209-4103-459b-a80b-84bd05840591.jpg}" class = "rounded repImg" th:alt="${item.itemNm}">
+            <img th:src="@{/item/7fde6209-4103-459b-a80b-84bd05840591.jpg}" class = "rounded repImg" th:alt="${item.itemNm}">
+            <span th:text="${item.itemImgDtoList[0].imgUrl}"></span>
         </div>
         <div class="wd50">
             <span th:if="${item.itemSellStatus == T(projectCoffee.constant.ItemSellStatus).SELL}" class="badge badge-primary mgb-15">
