@@ -39,7 +39,10 @@ public class SecurityConfig {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
-                .clearAuthentication(true)
+//                .logoutSuccessHandler(customLogoutSuccessHandler)
+                .invalidateHttpSession(true) // 로그아웃 이후 세션 전체 삭제 여부
+                .deleteCookies("JSESSIONID", "remember-me")
+
         ;
 
         http.authorizeHttpRequests()
@@ -61,23 +64,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
-    // OAuth2
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http
-//                .httpBasic().disable()
-//                .csrf().disable()
-//                .cors().and()
-//                .authorizeRequests()
-//                .requestMatchers(new AntPathRequestMatcher("/members/**")).authenticated()
-//                .anyRequest().permitAll() //나머지 uri는 모든 접근 허용
-//                .and().oauth2Login()
-//                .loginPage("/members/login") //로그인이 필요한데 로그인을 하지 않았다면 이동할 uri 설정
-//                .defaultSuccessUrl("/") //OAuth 구글 로그인이 성공하면 이동할 uri 설정
-//                .userInfoEndpoint()//로그인 완료 후 회원 정보 받기
-//                .userService(oAuth2MemberService).and().and().build(); //로그인 후 받아온 유저 정보 처리
-//    }
 
 
 }
