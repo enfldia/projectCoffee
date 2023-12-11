@@ -48,7 +48,7 @@ public class ArticleRepositoryCustomImpl implements ArticleRepositoryCustom {
         if(StringUtils.equals("title", searchBy)) {
             return QArticle.article.title.like("%"+searchQuery+"%");
         } else if(StringUtils.equals("createBy", searchBy)) {
-            return QArticle.article.createBy.like("%"+searchQuery+"%");
+            return QArticle.article.createdBy.like("%"+searchQuery+"%");
         }
         return null;
     }
