@@ -50,7 +50,7 @@ public class ArticleController {
         Article article = articleRepository.findById(id).orElse(null);
         //model.addAttribute("headerImg", "/images/header.jpg");
         model.addAttribute("article", article);
-        model.addAttribute("createdBy", article.getCreateBy());
+        model.addAttribute("createdBy", article.getCreatedBy());
         return "article/show";
     }
     //관리자 공지사항 게시판
@@ -71,7 +71,7 @@ public class ArticleController {
         Article article = articleRepository.findById(id).orElse(null);
         //model.addAttribute("headerImg", "/images/header.jpg");
         model.addAttribute("article", article);
-        model.addAttribute("createBy", article.getCreateBy());
+        model.addAttribute("createBy", article.getCreatedBy());
         return "article/adminShow";
     }
     //관리자 페이지에서 공지 작성 페이지
