@@ -125,12 +125,9 @@
         .repImgDiv{
             margin-right:15px;
             height:auto;
-            width:50%;
+            width:470px;
         }
-        .repImg{
-            width:100%;
-            height:400px;
-        }
+
         .wd50{
             height:auto;
             width:50%;
@@ -144,8 +141,7 @@
 
     <div class="d-flex">
         <div class="repImgDiv">
-            <img th:src="${item.itemImgDtoList[0].imgUrl}" class = "rounded repImg" th:alt="${item.itemNm}">
-            <span th:text="${item.itemImgDtoList[0].imgUrl}"></span>
+            <img th:src="${item.itemImgDtoList[0].imgUrl}" class = "rounded repImg" th:alt="${item.itemNm}" width="470">
         </div>
         <div class="wd50">
             <span th:if="${item.itemSellStatus == T(projectCoffee.constant.ItemSellStatus).SELL}" class="badge badge-primary mgb-15">
@@ -154,6 +150,8 @@
             <span th:unless="${item.itemSellStatus == T(projectCoffee.constant.ItemSellStatus).SELL}" class="badge btn-danger mgb-15" >
                 품절
             </span>
+            <div th:text="'카테고리 ' + ${item.itemCategory}"></div>
+            <br>
             <div class="h4" th:text="${item.itemNm}"></div>
             <hr class="my-4">
 
