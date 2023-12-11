@@ -4,6 +4,7 @@ package projectCoffee.dto;
 import lombok.Getter;
 import lombok.Setter;
 import projectCoffee.constant.ItemSellStatus;
+import projectCoffee.entity.Item;
 
 @Getter
 @Setter
@@ -16,6 +17,8 @@ public class ItemSearchDto {
     private String searchBy;
 
     private String searchQuery = "";
+
+    private String category;
 }
 //1. 현재시간과 상품 등록일을 비교해서 상품 데이터 조회
 //all 상품등록일 전체

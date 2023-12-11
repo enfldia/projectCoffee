@@ -6,10 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import projectCoffee.dto.ItemFormDto;
-import projectCoffee.dto.ItemImgDto;
-import projectCoffee.dto.ItemSearchDto;
-import projectCoffee.dto.MainItemDto;
+import projectCoffee.dto.*;
 import projectCoffee.entity.Item;
 import projectCoffee.entity.ItemImg;
 import projectCoffee.repository.ItemImgRepository;
@@ -92,6 +89,8 @@ public class ItemService {
         //get(0) 첫번째 요소
         //상품이미지 업데이트를 통해 updateItemImg 메소드
         //상품이미지 아이디, 상품이미지 파일정보를 파라메타로 전달
+        System.out.println("11111111111111111111111111111register time : " + item.getRegTime());
+        System.out.println("11111111111111111111111111111update time : " + item.getUpdateTime());
         return item.getId();
     }
 
@@ -103,5 +102,20 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CoffeeItemDto> getCoffeeItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getCoffeeItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ToolsItemDto> getToolsItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getToolsItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EtcItemDto> getEtcItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getEtcItemPage(itemSearchDto, pageable);
     }
 }

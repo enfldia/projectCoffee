@@ -5,9 +5,9 @@ import lombok.Setter;
 import lombok.ToString;
 import projectCoffee.constant.ItemSellStatus;
 import projectCoffee.dto.ItemFormDto;
+import projectCoffee.exception.OutOfStockException;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "item")
@@ -37,9 +37,8 @@ public class Item extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
-    private LocalDateTime regTime; //등록시간
 
-    private LocalDateTime updateTime; //수정시간
+    private String itemCategory; // 상품 분류
 
 
     public void updateItem(ItemFormDto itemFormDto){
@@ -48,5 +47,20 @@ public class Item extends BaseEntity{
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+        this.itemCategory = itemFormDto.getItemCategory();
     }
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock<0){
+            throw new OutOfStockException("상품의 재고가 부족 합니다. (현재 재고 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
+    }
+
+    public void addStock(int stockNumber){
+        this.stockNumber += stockNumber;
+    }
+
 }
+
+
