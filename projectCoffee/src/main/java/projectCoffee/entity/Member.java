@@ -5,9 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import projectCoffee.constant.Role;
-import projectCoffee.dto.MemberEditDto;
 import projectCoffee.dto.MemberFormDto;
-import projectCoffee.repository.MemberRepository;
+import projectCoffee.dto.MemberUpdateDto;
 
 import javax.persistence.*;
 
@@ -41,16 +40,35 @@ public class Member extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
     public static  Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setName(memberFormDto.getName());
+        member.setEmail(memberFormDto.getEmail());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setEmail(memberFormDto.getEmail());
+        member.setPhoneNum(memberFormDto.getPhoneNum());
+        member.setBirthday(memberFormDto.getBirthday());
         member.setAddress(memberFormDto.getAddress());
+        member.setStreetAddress(memberFormDto.getStreetAddress());
+        member.setDetailAddress(memberFormDto.getDetailAddress());
         member.setRole(Role.ADMIN);
         return member;
     }
+
+
+    public void updateMember(MemberUpdateDto memberUpdateDto) {
+
+        this.name = memberUpdateDto.getName();
+        this.birthday = memberUpdateDto.getBirthday();
+        this.phoneNum = memberUpdateDto.getPhoneNum();
+        this.address = memberUpdateDto.getAddress();
+        this.streetAddress = memberUpdateDto.getStreetAddress();
+        this.detailAddress = memberUpdateDto.getDetailAddress();
+
+
+    }
+
 
 
 

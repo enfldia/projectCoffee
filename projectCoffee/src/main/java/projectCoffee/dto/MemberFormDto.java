@@ -1,13 +1,12 @@
 package projectCoffee.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import projectCoffee.entity.Member;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -21,6 +20,8 @@ public class MemberFormDto {
     private String email;
 
     @NotBlank
+    @Pattern(regexp = "^[0-9]*$", message = "정수만 가능합니다.")
+    @Size(min = 10, max = 11, message = "다시 한 번 확인해주세요.")
     private String phoneNum;
 
     @NotEmpty
@@ -37,4 +38,6 @@ public class MemberFormDto {
     private String streetAddress;		// 지번 주소
 
     private String detailAddress;		// 상세 주소
+
+
 }

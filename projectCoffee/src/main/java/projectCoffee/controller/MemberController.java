@@ -10,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import projectCoffee.dto.MemberEditDto;
+import projectCoffee.dto.MemberUpdateDto;
 import projectCoffee.dto.MemberFormDto;
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
@@ -30,8 +30,7 @@ public class MemberController {
     private final PasswordEncoder passwordEncoder;
 
 
-
-
+    // 회원 가입
     @GetMapping(value = "/new")
     public String memberForm(Model model) {
         model.addAttribute("memberFormDto", new MemberFormDto());
@@ -53,20 +52,35 @@ public class MemberController {
         return "redirect:/";
     }
 
+
+    // 회원 정보 변경 폼 (GET)
     @GetMapping(value = "/info")
-        public String memberInfo(Principal principal, ModelMap modelMap){
-            String loginId = principal.getName();
-            Member member = memberRepository.findByEmail(loginId);
-            modelMap.addAttribute("member", member);
-        return "member/memberInfo";
+    public String updateMemberForm(Principal principal, Model model) {
+        if (principal != null) {
+            String user = principal.getName();
+            Member memberInfo = memberRepository.findByEmail(user);
+            MemberUpdateDto memberUpdateDto = memberService.getMemberDtl(memberInfo.getId());
+            model.addAttribute("memberUpdateDto", memberUpdateDto);
+        }
+            return "member/memberUpdateForm";
     }
 
+    // 회원 정보 변경 (POST)
     @PostMapping(value = "/update")
-        public String updateMember(@Valid MemberEditDto memberEditDto, BindingResult bindingResult, Model model) {
-
-
-
-        return "member/memberInfo";
+    public String updateMember(@Valid MemberUpdateDto memberUpdateDto, BindingResult bindingResult, Principal principal, Model model) {
+        if (bindingResult.hasErrors()){
+            return "member/memberUpdateForm";
+        }
+        try {
+            if (principal.getName().equals(memberUpdateDto.getEmail())) {
+                memberService.updateMember((memberUpdateDto));
+                model.addAttribute("successMsg", "회원 정보 수정이 완료되었습니다.");
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", "오류가 발생했습니다.");
+            return "member/memberUpdateForm";
+        }
+        return "/";
     }
 
     @GetMapping(value = "/login")
