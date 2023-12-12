@@ -5,7 +5,9 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import projectCoffee.constant.Role;
+import projectCoffee.dto.MemberEditDto;
 import projectCoffee.dto.MemberFormDto;
+import projectCoffee.repository.MemberRepository;
 
 import javax.persistence.*;
 
@@ -22,13 +24,19 @@ public class Member extends BaseEntity{
 
     private String name;
 
-    private String userId;
+    private String email;
 
     private String password;
 
-    private String email;
+    private String phoneNum;
 
-    private String address;
+    private String birthday;
+
+    private String address;				// 우편 번호
+
+    private String streetAddress;		// 지번 주소
+
+    private String detailAddress;		// 상세 주소
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -36,7 +44,6 @@ public class Member extends BaseEntity{
     public static  Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setName(memberFormDto.getName());
-        member.setUserId(memberFormDto.getUserId());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
         member.setEmail(memberFormDto.getEmail());
@@ -44,5 +51,7 @@ public class Member extends BaseEntity{
         member.setRole(Role.ADMIN);
         return member;
     }
+
+
 
 }
