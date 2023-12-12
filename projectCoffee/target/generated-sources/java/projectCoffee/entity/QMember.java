@@ -23,8 +23,12 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath address = createString("address");
 
+    public final StringPath birthday = createString("birthday");
+
     //inherited
     public final StringPath createdBy = _super.createdBy;
+
+    public final StringPath detailAddress = createString("detailAddress");
 
     public final StringPath email = createString("email");
 
@@ -37,15 +41,17 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath password = createString("password");
 
+    public final StringPath phoneNum = createString("phoneNum");
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regTime = _super.regTime;
 
     public final EnumPath<projectCoffee.constant.Role> role = createEnum("role", projectCoffee.constant.Role.class);
 
+    public final StringPath streetAddress = createString("streetAddress");
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updateTime = _super.updateTime;
-
-    public final StringPath userId = createString("userId");
 
     public QMember(String variable) {
         super(Member.class, forVariable(variable));
