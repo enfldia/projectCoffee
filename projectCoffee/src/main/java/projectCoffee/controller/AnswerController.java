@@ -39,7 +39,7 @@ public class AnswerController {
         Member member = this.memberRepository.findByEmail(principal.getName());
         if (bindingResult.hasErrors()) {
             model.addAttribute("question", question);
-            return "question_detail";
+            return "question/detail";
         }
         this.answerService.create(question, answerForm.getContent(), member);
         return String.format("redirect:/question/detail/%s", id);

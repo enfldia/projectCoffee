@@ -2,21 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
+<th:block layout:fragment="css">
+    <link th:href="@{/css/question.css}" rel="stylesheet">
+</th:block>
 <div layout:fragment="content">
-    <div class="container my-3">
-        <table class="table">
-            <thead class="table-dark">
+    <div class="cscenter">
+        <div class="text-center">
+            <h2 class="display-5 mb-3">고객 센터</h2>
+            <p style="color:#777;font-size:15px;">고객님의 질문에 성심껏 답변해 드리겠습니다.</p>
+            <div class="cusSub">
+                <ul class="customerTab cf">
+                    <li class="on"><a href="/CsCenter/faq">FAQ</a></li>
+                    <li><a href="/CsCenter/notices">공지사항</a></li>
+                    <li><a href="/question/list">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <table class="articleList cf table" style="border:0;">
+            <colgroup>
+                <col class="col1">
+                <col class="col2">
+                <col class="col3">
+                <col class="col4">
+            </colgroup>
+            <thead>
             <tr class="text-center">
                 <th>번 호</th>
                 <th style="width:50%">제 목</th>
-                <th>글 쓴 이</th>
+                <th>작 성 자</th>
                 <th>작 성 일 시</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tbl_alist">
             <tr class="text-center" th:each="question, loop : ${paging}">
             <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-                <td class="text-start">
+                <td class="sub">
                     <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
                     <span class="text-danger small ms-2"
                           th:if="${#lists.size(question.answerList) > 0}"
@@ -33,19 +53,19 @@
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
                     <a class="page-link"
-                       th:href="@{|?page=${paging.number-1}|}">
+                       th:href="@{|?page=${(paging.number)-1}|}">
                         <span>이 전</span>
                     </a>
                 </li>
-                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                <li th:each="page: ${#numbers.sequence(0, (paging.totalPages)-1)}"
+                    th:if="${page >= (paging.number)-5 and page <= (paging.number)+5}"
                     th:classappend="${page == paging.number} ? 'active'"
                     class="page-item">
                     <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}">
                     </a>
                 </li>
                 <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                    <a class="page-link" th:href="@{|?page=${(paging.number)+1}|}">
                         <span>다 음</span>
                     </a>
                 </li>
@@ -53,6 +73,12 @@
         </div>
         <!-- 페 이 징 처 리 끝 -->
         <a th:href="@{/question/create}" class="btn btn-primary">질 문 등 록 하 기</a>
+        <div class="cusCenter cf">
+            <div class="cs">
+                <span>고객센터<em>1234-1234</em></span>
+                <p>평일 9시-17시 / 토요일, 일요일, 공휴일 휴무</p>
+            </div>
+        </div>
     </div>
 </div>
 </html>

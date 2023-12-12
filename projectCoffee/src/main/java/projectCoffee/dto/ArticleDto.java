@@ -2,6 +2,7 @@ package projectCoffee.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import projectCoffee.ValidEnum;
 import projectCoffee.constant.ArticleType;
 import projectCoffee.entity.Article;
 
@@ -18,7 +19,7 @@ public class ArticleDto {
     private String title;
     @NotEmpty(message = "내용은 필수 입력값입니다.")
     private String content;
-    @Enumerated(EnumType.STRING)
+    @ValidEnum(enumClass = ArticleType.class)
     private ArticleType articleType;
 
     public Article toEntity() {

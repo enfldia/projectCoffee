@@ -2,6 +2,7 @@ package projectCoffee.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import projectCoffee.entity.Answer;
 import projectCoffee.entity.Member;
 import projectCoffee.entity.Question;
@@ -10,7 +11,7 @@ import projectCoffee.repository.AnswerRepository;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class AnswerService {
@@ -25,6 +26,7 @@ public class AnswerService {
         answer.setMember(member);
         this.answerRepository.save(answer);
     }
+    @Transactional(readOnly = true)
     public Answer getAnswer(Integer id) {
         Optional<Answer> answer = this.answerRepository.findById(id);
         if (answer.isPresent()) {

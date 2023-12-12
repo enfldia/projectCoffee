@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import projectCoffee.entity.Member;
 import projectCoffee.entity.Question;
 import projectCoffee.exception.DateNotFoundException;
@@ -15,17 +16,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
-
+    @Transactional(readOnly = true)
     public List<Question> getList() {
         return this.questionRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Question getQuestion(Integer id) {
         Optional<Question> question = this.questionRepository.findById(id);
         if(question.isPresent()) {
@@ -34,6 +36,7 @@ public class QuestionService {
             throw new DateNotFoundException("question not found");
         }
     }
+
     public void create(String subject, String content, Member member) {
         Question q = new Question();
         q.setSubject(subject);
@@ -42,6 +45,7 @@ public class QuestionService {
         q.setMember(member);
         this.questionRepository.save(q);
     }
+    @Transactional(readOnly = true)
     public Page<Question> getList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));

@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import projectCoffee.DataNotFoundException;
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
 
@@ -44,17 +43,4 @@ public class MemberService implements UserDetailsService {
                 .roles(member.getRole().toString())
                 .build();
     }
-
-    //게시판 조회용
-    public Member getUser(String userId) {
-        Optional<Member> member = this.memberRepository.findByUserId(userId);
-        if (member.isPresent()) {
-            return member.get();
-        } else {
-            throw new DataNotFoundException("member not found");
-        }
-    }
-
-
-
 }

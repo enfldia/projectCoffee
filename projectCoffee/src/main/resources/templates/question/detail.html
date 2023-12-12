@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layouts/layout1}">
 <th:block layout:fragment="script">
     <script th:inline="javascript">
-        const delete_elements = document.getElementsByClassName("delete");
-        Array.from(delete_elements).forEach(function(element) {
-            element.addEventListener('click', function() {
-                if(confirm("정 말 로 삭 제 하 시 겠 습 니 까?")) {
-                    location.href = this.dataset.uri;
-                };
-            });
+        $(document).ready(function (){
+           $(".delete").on("click", function (){
+               if(window.confirm("정 말 로 삭 제 하 시 겠 습 니 까?")) {
+                   location.href = this.dataset.uri;
+               }
+           });
         });
+        // const delete_elements = document.getElementsByClassName("delete");
+        // Array.from(delete_elements).forEach(function(element) {
+        //     element.addEventListener('click', function() {
+        //         if(window.confirm("정 말 로 삭 제 하 시 겠 습 니 까?")) {
+        //             location.href = this.dataset.uri;
+        //         }
+        //     });
+        // });
     </script>
 </th:block>
     <div layout:fragment="content">
@@ -75,6 +82,7 @@
                 <textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" rows="10" class="form-control"></textarea>
                 <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
                 <input type="submit" value="답 변 등 록" class="btn btn-primary my-2">
+                <a href="/question/list" class="btn btn-primary my-2">목록</a>
         </form>
     </div>
 </div>
