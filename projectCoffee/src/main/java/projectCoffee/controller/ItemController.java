@@ -80,6 +80,7 @@ public class ItemController {
             return "item/itemForm";
         }
         try{
+            System.out.println("1111111111111111111111111111111111111111111 itemImgFileList"+itemImgFileList.toString());
             itemService.updateItem(itemFormDto, itemImgFileList);
         } catch (Exception e){
             model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");

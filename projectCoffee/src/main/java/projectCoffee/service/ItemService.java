@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 import projectCoffee.dto.*;
 import projectCoffee.entity.Item;
 import projectCoffee.entity.ItemImg;
@@ -68,6 +69,7 @@ public class ItemService {
 
     public Long updateItem(ItemFormDto itemFormDto,
                            List<MultipartFile> itemImgFileList) throws Exception {
+        System.out.println("4444444444444444444444444itemImgFileList : "+itemImgFileList.size());
         //상품 수정
         Item item = itemRepository.findById(itemFormDto.getId())
                 .orElseThrow(EntityNotFoundException::new);
@@ -75,13 +77,24 @@ public class ItemService {
         item.updateItem(itemFormDto);
         //2. 상품등록 화면으로부터 전달받은 itemFormDto 통해 상품 엔티티 업데이트
         List<Long> itemImgIds = itemFormDto.getItemImgIds();
+
+        System.out.println("2222222222222222222222222222" + itemImgIds.toString());
         //itemFormDto에서 항목 이미지 Id 목록을 가져옵니다.
         //(상품이미지 아이디 리스트를 조회)
         //이미지 등록
         for(int i=0;i<itemImgFileList.size();i++) {
-            //if(!StringUtils.isEmpty(itemImgFileList.get(i).getOriginalFilename())) {
-            itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
-            //}
+            System.out.println("111111111111111111111111itemImgFileList.size()" + itemImgFileList.size());
+
+                if(itemImgIds.get(i) ==null){
+                    ItemImg itemImg = new ItemImg();
+                    itemImg.setItem(item);
+                    itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
+                }
+            System.out.println("111111111111111111111111itemImgIds.get(i)" + itemImgIds.get(i));
+                itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
+
+
+
         }
         //itemImgFileList를 반복하면서 각 이미지에 대해
         //itemService의 updateItemImg 메서드를 호출합니다.

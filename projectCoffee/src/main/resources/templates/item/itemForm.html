@@ -181,7 +181,7 @@
             <div class="form-group file_list " >
                 <div class="row g-2 input-group">
                     <div class="file_input col-auto">
-                        <input class="form-control" type="file" name="itemImgFile" onchange="selectFile(this);" >
+                        <input class="form-control custom-file-input" type="file" name="itemImgFile" onchange="selectFile(this);" >
                     </div>
                     <button type="button" onclick="removeFile(this);" class="btn btn-light btn-outline-secondary del_btn col-auto text-black rounded"><span>삭제</span></button>
                 </div>
@@ -207,16 +207,16 @@
 
         <!--이미지 업로드 인풋 방식 변경 중-->
         <div th:if = "${not #lists.isEmpty(itemFormDto.itemImgDtoList)}">
-            <!--상품 이미지 정보를 담고있는 리스트가 비어있지 않다면 상품을 수정하는 경우 입니다.-->
-            <div class="form-group" th:each="itemImgDto, status: ${itemFormDto.itemImgDtoList}">
-                <div class="file_list " >
+            <div class="file_list " >
+                <!--상품 이미지 정보를 담고있는 리스트가 비어있지 않다면 상품을 수정하는 경우 입니다.-->
+                <div class="form-group file_list" th:each="itemImgDto, status: ${itemFormDto.itemImgDtoList}">
                     <div class="row g-2 input-group">
                         <div class="file_input col-auto">
+                            <input class="form-control custom-file-input" type="file" name="itemImgFile" onchange="selectFile(this);">
                             <div class="row">
-                                <div class="col">기존 파일명</div>
+                                <div class="col">기존 파일 : </div>
                                 <span class="col" th:text="${itemImgDto.oriImgName} "></span>
                             </div>
-                            <input class="form-control" type="file" name="itemImgFile" onchange="selectFile(this);">
                             <input type="hidden" name="itemImgIds" th:value="${itemImgDto.id}">
                         </div>
                         <button type="button" onclick="removeFile(this);" class="btn btn-light btn-outline-secondary del_btn col-auto text-black rounded"><span>삭제</span></button>
