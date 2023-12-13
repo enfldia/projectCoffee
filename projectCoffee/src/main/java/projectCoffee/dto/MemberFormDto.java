@@ -12,6 +12,8 @@ import javax.validation.constraints.*;
 @Setter
 public class MemberFormDto {
 
+    private Long id;
+
     @NotBlank
     private String name;
 
