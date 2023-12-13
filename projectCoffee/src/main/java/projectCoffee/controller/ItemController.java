@@ -52,7 +52,7 @@ public class ItemController {
                     return "item/itemForm";
         }
 
-        return "redirect:/";
+        return "redirect:http://localhost:8080/admin/items";
     }
 
     //상품 수정하기
@@ -68,6 +68,14 @@ public class ItemController {
         }
         return "item/itemForm";
     }
+
+    @PostMapping("/admin/item/delete/{itemId}")
+    public String itemDelete(@PathVariable("itemId") Long itemId){
+        itemService.deleteItem(itemId);
+        return "redirect:http://localhost:8080/admin/items";
+    }
+
+
 
     @PostMapping(value = "/admin/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDto itemFormDto, BindingResult bindingResult,
@@ -86,7 +94,7 @@ public class ItemController {
             model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
             return "item/itemForm";
         }
-        return "redirect:/";
+        return "redirect:http://localhost:8080/admin/items";
     }
 
     @GetMapping({"/admin/items","admin/items/{page}"})
@@ -118,7 +126,7 @@ public class ItemController {
     @GetMapping("/shopItem")
     public String shopItemShow(ItemSearchDto itemSearchDto, Optional<Integer> page,
                        Model model){
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,12);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,9);
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
         Page<CoffeeItemDto> coffeeitems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
         Page<ToolsItemDto> toolsitems = itemService.getToolsItemPage(itemSearchDto, pageable);

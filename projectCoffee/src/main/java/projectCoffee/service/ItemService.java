@@ -17,6 +17,8 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static projectCoffee.entity.QItemImg.itemImg;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -131,5 +133,13 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<EtcItemDto> getEtcItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getEtcItemPage(itemSearchDto, pageable);
+    }
+
+    public void deleteItem(Long itemId) {
+
+       Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+       itemRepository.delete(item);
+
+
     }
 }
