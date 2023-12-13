@@ -57,7 +57,6 @@ public class MemberService implements UserDetailsService {
     public Long updateMember (MemberUpdateDto memberUpdateDto) {
         Member member = memberRepository.findByEmail(memberUpdateDto.getEmail());
         member.updateMember(memberUpdateDto);
-
         return member.getId();
     }
 }

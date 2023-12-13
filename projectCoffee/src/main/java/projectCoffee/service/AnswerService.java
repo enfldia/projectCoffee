@@ -18,13 +18,14 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
-    public void create(Question question, String content, Member member) {
+    public Answer create(Question question, String content, Member member) {
         Answer answer = new Answer();
         answer.setContent(content);
         answer.setCreateDate(LocalDateTime.now());
         answer.setQuestion(question);
         answer.setMember(member);
         this.answerRepository.save(answer);
+        return answer;
     }
     @Transactional(readOnly = true)
     public Answer getAnswer(Integer id) {
@@ -42,5 +43,10 @@ public class AnswerService {
     }
     public void delete(Answer answer) {
         this.answerRepository.delete(answer);
+    }
+
+    public void vote(Answer answer, Member member) {
+        answer.getVoter().add(member);
+        this.answerRepository.save(answer);
     }
 }

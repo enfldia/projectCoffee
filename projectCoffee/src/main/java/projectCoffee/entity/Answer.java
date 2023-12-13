@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter @Setter
 @Entity
@@ -26,4 +27,7 @@ public class Answer {
     private Member member;
 
     private LocalDateTime modifyDate;
+
+    @ManyToMany
+    Set<Member> voter;
 }

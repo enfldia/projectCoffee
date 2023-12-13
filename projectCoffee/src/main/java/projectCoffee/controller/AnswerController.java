@@ -34,15 +34,16 @@ public class AnswerController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create/{id}")
     public String createAnswer(Model model, @PathVariable("id") Integer id,
-                               @Valid AnswerDto answerForm, BindingResult bindingResult, Principal principal) {
+                               @Valid AnswerDto answerDto, BindingResult bindingResult, Principal principal) {
         Question question = this.questionService.getQuestion(id);
         Member member = this.memberRepository.findByEmail(principal.getName());
         if (bindingResult.hasErrors()) {
             model.addAttribute("question", question);
             return "question/detail";
         }
-        this.answerService.create(question, answerForm.getContent(), member);
-        return String.format("redirect:/question/detail/%s", id);
+        Answer answer = this.answerService.create(question, answerDto.getContent(), member);
+        return String.format("redirect:/question/detail/%s#answer_%s",
+                answer.getQuestion().getId(), answer.getId());
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
@@ -66,7 +67,7 @@ public class AnswerController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수 정 권 한 이 없 습 니 다.");
         }
         this.answerService.modify(answer, answerDto.getContent());
-        return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+        return String.format("redirect:/question/detail/%s#answer_%s", answer.getQuestion().getId(), answer.getId());
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{id}")
@@ -78,6 +79,15 @@ public class AnswerController {
         }
         this.answerService.delete(answer);
         return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String answerVote(Principal principal, @PathVariable("id") Integer id) {
+        Answer answer = this.answerService.getAnswer(id);
+        Member member = memberRepository.findByEmail(principal.getName());
+        this.answerService.vote(answer, member);
+        return String.format("redirect:/question/detail/%s#answer_%s", answer.getQuestion().getId(), answer.getId());
     }
 }
 

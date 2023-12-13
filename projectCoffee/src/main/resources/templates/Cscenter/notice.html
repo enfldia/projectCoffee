@@ -109,7 +109,7 @@
                                     </a>
                                 </li>
                                 <!--                번호-->
-                                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${articleList.number eq page-1}?'active':''">
+                                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${articleList.number eq (page)-1}?'active':''">
                                     <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
                                 </li>
                                 <!--                다음버튼-->
@@ -122,10 +122,7 @@
                             </ul>
                         </div>
                     </div>
-
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 </form>
-
                 <div class="cusCenter cf">
                     <div class="cs">
                         <span>고객센터<em>1234-1234</em></span>

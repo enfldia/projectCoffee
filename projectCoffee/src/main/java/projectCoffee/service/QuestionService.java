@@ -5,17 +5,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import projectCoffee.entity.Answer;
 import projectCoffee.entity.Member;
 import projectCoffee.entity.Question;
 import projectCoffee.exception.DateNotFoundException;
 import projectCoffee.repository.QuestionRepository;
 
+import javax.persistence.criteria.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -62,5 +67,8 @@ public class QuestionService {
         this.questionRepository.delete(question);
     }
 
-
+    public void vote(Question question, Member member) {
+        question.getVoter().add(member);
+        this.questionRepository.save(question);
+    }
 }
