@@ -51,11 +51,12 @@ public class QuestionService {
         this.questionRepository.save(q);
     }
     @Transactional(readOnly = true)
-    public Page<Question> getList(int page) {
+    public Page<Question> getList(int page, String kw) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-        return this.questionRepository.findAll(pageable);
+        Specification<Question> spec = search(kw);
+        return this.questionRepository.findAll(spec, pageable);
     }
     public void modify(Question question, String subject, String content) {
         question.setSubject(subject);
@@ -70,5 +71,23 @@ public class QuestionService {
     public void vote(Question question, Member member) {
         question.getVoter().add(member);
         this.questionRepository.save(question);
+    }
+
+    private Specification<Question> search(String kw) {
+        return new Specification<>() {
+            private static final long serialVersionUID = 1L;
+            @Override
+            public Predicate toPredicate(Root<Question> q, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                query.distinct(true); // 중 복 을 제 거
+                Join<Question, Member> u1 = q.join("member", JoinType.LEFT);
+                Join<Question, Answer> a = q.join("answerList", JoinType.LEFT);
+                Join<Answer, Member> u2 = a.join("member", JoinType.LEFT);
+                return cb.or(cb.like(q.get("subject"), "%" + kw + "%"), // 제 목
+                        cb.like(q.get("content"), "%" + kw + "%"), // 내 용
+                        cb.like(u1.get("email"), "%" + kw + "%"), // 질 문 작 성 자
+                        cb.like(a.get("content"), "%" + kw + "%"), // 답 변 내 용
+                        cb.like(u2.get("email"), "%" + kw + "%")); // 답 변 작 성 자
+            }
+        };
     }
 }

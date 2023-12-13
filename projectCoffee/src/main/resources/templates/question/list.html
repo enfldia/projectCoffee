@@ -5,6 +5,23 @@
 <th:block layout:fragment="css">
     <link th:href="@{/css/question.css}" rel="stylesheet">
 </th:block>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+    $(document).ready(function() {
+        $(".page-link").on("click", function(event) {
+            event.preventDefault();
+            $("#page").val($(this).data("page"));
+            $("#searchForm").submit();
+        });
+        $("#btn_search").on("click", function(event) {
+            event.preventDefault();
+            $("#kw").val($("#search_kw").val());
+            $("#page").val(0);
+            $("#searchForm").submit();
+        });
+    });
+    </script>
+</th:block>
 <div layout:fragment="content">
     <div class="cscenter">
         <div class="text-center">
@@ -18,7 +35,19 @@
                 </ul>
             </div>
         </div>
-        <a th:href="@{/question/create}" class="btn btn-primary" sec:authorize="isAuthenticated()">질문 등록하기</a>
+        <div class="row my-3">
+            <div class="col-6">
+                <a th:href="@{/question/create}" class="btn btn-primary" sec:authorize="isAuthenticated()">질 문 등 록 하 기</a>
+            </div>
+            <div class="col-6">
+                <div class="input-group">
+                    <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+                    <button class="btn btn-outline-secondary" type="button" id="btn_search">찾 기</button>
+                </div>
+            </div>
+        </div>
+
+        <a th:href="@{/question/create}" class="btn btn-primary" >질문 등록하기</a>
         <table class="articleList cf table" style="border:0;">
             <colgroup>
                 <col class="col1">
@@ -60,10 +89,10 @@
                 <li th:each="page: ${#numbers.sequence(0, (paging.totalPages)-1)}"
                     th:if="${page >= (paging.number)-5 and page <= (paging.number)+5}"
                     th:classappend="${page == paging.number} ? 'active'" class="page-item">
-                    <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
                 </li>
                 <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                    <a class="page-link" th:href="@{|?page=${(paging.number)+1}|}">
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${(paging.number)+1}">
                         <span>다 음</span>
                     </a>
                 </li>
