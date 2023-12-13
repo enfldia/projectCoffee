@@ -16,6 +16,7 @@ import javax.persistence.*;
 @ToString
 @Table(name = "member")
 public class Member extends BaseEntity{
+
     @Id
     @Column(name = "member_num")
     @GeneratedValue(strategy = GenerationType.AUTO)
