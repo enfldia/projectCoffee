@@ -26,7 +26,8 @@ public class ItemService {
     private final ItemImgService itemImgService;
     private final ItemImgRepository itemImgRepository;
 
-    public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
+    public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList)
+            throws Exception{
         //상품 등록
         Item item = itemFormDto.createItem();
         itemRepository.save(item);
@@ -69,32 +70,34 @@ public class ItemService {
 
     public Long updateItem(ItemFormDto itemFormDto,
                            List<MultipartFile> itemImgFileList) throws Exception {
-        System.out.println("4444444444444444444444444itemImgFileList : "+itemImgFileList.size());
         //상품 수정
         Item item = itemRepository.findById(itemFormDto.getId())
                 .orElseThrow(EntityNotFoundException::new);
         //1. 상품등록 화면으로부터 전달받은 상품 아이디를 이용하여 상품엔티티 조회
+
         item.updateItem(itemFormDto);
         //2. 상품등록 화면으로부터 전달받은 itemFormDto 통해 상품 엔티티 업데이트
         List<Long> itemImgIds = itemFormDto.getItemImgIds();
+        if(itemImgIds.size() != itemImgFileList.size()){
 
-        System.out.println("2222222222222222222222222222" + itemImgIds.toString());
+            List<Long> newItemImgIds = new ArrayList<>();
+            //이미지 등록
+            for(int i= itemImgIds.size();i<itemImgFileList.size();i++){
+                ItemImg itemImg = new ItemImg();
+                itemImg.setItem(item);
+                itemImg.setRepImgYn("n");
+                itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
+                newItemImgIds.add(itemImg.getId());
+            }
+            itemImgIds.addAll(newItemImgIds);
+            //addAll로 앞에 리스트 안에 () 가로 속 리스트를 병합시킴.
+        }
+
         //itemFormDto에서 항목 이미지 Id 목록을 가져옵니다.
         //(상품이미지 아이디 리스트를 조회)
         //이미지 등록
         for(int i=0;i<itemImgFileList.size();i++) {
-            System.out.println("111111111111111111111111itemImgFileList.size()" + itemImgFileList.size());
-
-                if(itemImgIds.get(i) ==null){
-                    ItemImg itemImg = new ItemImg();
-                    itemImg.setItem(item);
-                    itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
-                }
-            System.out.println("111111111111111111111111itemImgIds.get(i)" + itemImgIds.get(i));
                 itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
-
-
-
         }
         //itemImgFileList를 반복하면서 각 이미지에 대해
         //itemService의 updateItemImg 메서드를 호출합니다.
@@ -102,8 +105,6 @@ public class ItemService {
         //get(0) 첫번째 요소
         //상품이미지 업데이트를 통해 updateItemImg 메소드
         //상품이미지 아이디, 상품이미지 파일정보를 파라메타로 전달
-        System.out.println("11111111111111111111111111111register time : " + item.getRegTime());
-        System.out.println("11111111111111111111111111111update time : " + item.getUpdateTime());
         return item.getId();
     }
 
