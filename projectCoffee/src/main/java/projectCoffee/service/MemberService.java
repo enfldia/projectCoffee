@@ -7,7 +7,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+<<<<<<< Updated upstream
 import projectCoffee.dto.MemberUpdateDto;
+=======
+import projectCoffee.exception.DataNotFoundException;
+>>>>>>> Stashed changes
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
 
@@ -46,6 +50,7 @@ public class MemberService implements UserDetailsService {
                 .build();
     }
 
+<<<<<<< Updated upstream
     public MemberUpdateDto getMemberDtl (Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(EntityNotFoundException::new);
         // member 정보를 memberUpdateDto로 변환합니다.
@@ -59,4 +64,6 @@ public class MemberService implements UserDetailsService {
         member.updateMember(memberUpdateDto);
         return member.getId();
     }
+=======
+>>>>>>> Stashed changes
 }
