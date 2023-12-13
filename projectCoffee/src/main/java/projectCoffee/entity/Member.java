@@ -16,6 +16,7 @@ import javax.persistence.*;
 @ToString
 @Table(name = "member")
 public class Member extends BaseEntity{
+
     @Id
     @Column(name = "member_num")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,7 +66,6 @@ public class Member extends BaseEntity{
         this.address = memberUpdateDto.getAddress();
         this.streetAddress = memberUpdateDto.getStreetAddress();
         this.detailAddress = memberUpdateDto.getDetailAddress();
-
 
     }
 

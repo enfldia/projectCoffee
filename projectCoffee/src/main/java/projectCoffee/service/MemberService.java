@@ -11,7 +11,9 @@ import projectCoffee.dto.MemberUpdateDto;
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 
 @Service
 @Transactional
@@ -19,6 +21,10 @@ import javax.persistence.EntityNotFoundException;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     public Member saveMember(Member member) {
         validateDuplicateMember(member);
@@ -54,10 +60,20 @@ public class MemberService implements UserDetailsService {
     }
 
     // 회원 정보 수정
-    public Long updateMember (MemberUpdateDto memberUpdateDto) {
-        Member member = memberRepository.findByEmail(memberUpdateDto.getEmail());
-        member.updateMember(memberUpdateDto);
+    public Member updateMember(Long memberId, MemberUpdateDto memberUpdateDto) {
+        Member member = memberRepository.findById(memberId).orElse(null);
 
-        return member.getId();
+        if (member != null) {
+            member.updateMember(memberUpdateDto);
+
+            // 변경 감지를 활성화하기 위해 엔터티를 업데이트합니다.
+            entityManager.flush();
+            entityManager.clear();
+
+            return member;
+        }
+
+        return null;
     }
+
 }
