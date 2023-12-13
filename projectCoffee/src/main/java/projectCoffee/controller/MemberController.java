@@ -86,28 +86,40 @@ public class MemberController {
 
     // 회원 정보 조회, 변경 (POST)
     @PostMapping(value = "/update")
-    public String updateMember(@Valid MemberUpdateDto memberUpdateDto,  Principal principal, Model model) {
-
+    public String updateMember(@Valid MemberUpdateDto memberUpdateDto, Principal principal, Model model) {
         try {
             if (principal.getName().equals(memberUpdateDto.getEmail())) {
-                Member updatedMember = memberService.updateMember(memberUpdateDto.getId(), memberUpdateDto);
-
-            if (updatedMember != null) {
+                memberService.updateMember((memberUpdateDto));
                 model.addAttribute("successMsg", "회원 정보 수정이 완료되었습니다.");
-            } else {
-                model.addAttribute("errorMsg", "회원 정보를 찾을 수 없습니다.");
-                return "member/memberUpdateForm";
             }
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", "오류가 발생했습니다.");
+            return "member/memberUpdateForm";
         }
-    } catch (Exception e) {
-        e.printStackTrace(); // 예외를 로그에 기록합니다.
-        model.addAttribute("errorMsg", "오류가 발생했습니다.");
-        return "member/memberUpdateForm";
+        return "redirect:/";
     }
 
-        return "redirect:/"; // 리다이렉트를 통해 홈 페이지로 이동합니다.
-}
-
     // 회원 삭제
+    @GetMapping("/delete/{memberId}")
+    public String userDelete(@PathVariable("memberId") Long memberId,
+                             Authentication authentication, HttpServletRequest request,
+                             HttpServletResponse response, Principal principal, Model model) {
 
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(EntityNotFoundException::new);
+        try {
+            if (principal.getName().equals(member.getEmail())) {
+                memberRepository.delete(member);
+
+                // 회원 탈퇴 후 로그아웃
+                new SecurityContextLogoutHandler().logout(request, response, authentication);
+
+                return "redirect:/";
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorDelete", "탈퇴 중 에러가 발생하였습니다");
+            return "/member/memberUpdateForm";
+        }
+        return "redirect:/";
+    }
 }

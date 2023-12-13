@@ -17,6 +17,7 @@
 
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script th:inline="javascript">
+        // 경고창
         $(document).ready(function(){
             var errorMessage = [[${errorMessage}]];
             if(errorMessage != null) {
@@ -24,6 +25,7 @@
             }
         });
 
+        // 주소 검색
         function execPostCode() {
             new daum.Postcode({
                 oncomplete: function(data) {
