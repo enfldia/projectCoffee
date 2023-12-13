@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import projectCoffee.dto.MemberUpdateDto;
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
@@ -60,6 +59,7 @@ public class MemberService implements UserDetailsService {
     }
 
     // 회원 정보 수정
+
     public Member updateMember(Long memberId, MemberUpdateDto memberUpdateDto) {
         Member member = memberRepository.findById(memberId).orElse(null);
 
@@ -74,6 +74,7 @@ public class MemberService implements UserDetailsService {
         }
 
         return null;
+
     }
 
 }

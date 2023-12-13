@@ -3,6 +3,7 @@ package projectCoffee.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,7 @@ import projectCoffee.service.OAuth2MemberService;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private final OAuth2MemberService oAuth2MemberService;
@@ -44,7 +46,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests()
                 .mvcMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                .mvcMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
+                .mvcMatchers("/", "/members/**", "/item/**", "/images/**", "/CsCenter/**", "/question/**").permitAll()
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/shopItem").permitAll()
                 .anyRequest().authenticated();

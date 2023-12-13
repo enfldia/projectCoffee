@@ -59,14 +59,12 @@ public class Member extends BaseEntity{
 
 
     public void updateMember(MemberUpdateDto memberUpdateDto) {
-
         this.name = memberUpdateDto.getName();
         this.birthday = memberUpdateDto.getBirthday();
         this.phoneNum = memberUpdateDto.getPhoneNum();
         this.address = memberUpdateDto.getAddress();
         this.streetAddress = memberUpdateDto.getStreetAddress();
         this.detailAddress = memberUpdateDto.getDetailAddress();
-
     }
 
 

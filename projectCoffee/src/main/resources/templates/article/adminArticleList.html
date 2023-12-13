@@ -68,7 +68,7 @@
                             <label for="searchBy"></label>
                             <select name="searchBy" id="searchBy" th:field="*{searchBy}">
                                 <option value="title">제목</option>
-                                <option value="createBy">작성자</option>
+                                <option value="createdBy">작성자</option>
                             </select>
                         </div>
                         <label for="searchQuery"></label>
@@ -86,7 +86,7 @@
                             <col class="col6">
                         </colgroup>
                         <thead>
-                        <tr>
+                        <tr class="text-center">
                             <td>#</td>
                             <td>no.</td>
                             <td>-</td>
@@ -101,11 +101,11 @@
                                 <input type="checkbox" name="selectedArticles" th:value="${article.id}"/>
                             </td>
                             <td th:text="${article.id}"></td>
-                            <td th:text="${article.articleType == T(projectCoffee.constant.ArticleType)} ? '언론보도' : '공지사항'"></td>
+                            <td th:text="${article.articleType == T(projectCoffee.constant.ArticleType).NEWS} ? '언론보도' : '공지사항'"></td>
                             <td>
                                 <a th:href="'/admin/notice/'+${article.id}" th:text="${article.title}" class="artiCon"></a>
                             </td>
-                            <td th:text="${article.createBy}"></td>
+                            <td th:text="${article.createdBy}"></td>
                             <td th:text="${#strings.substring(article.regTime, 0, 10)}"></td>
                         </tr>
                         </tbody>
@@ -123,7 +123,7 @@
                                 </a>
                             </li>
                             <!--                번호-->
-                            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${articleList.number eq page-1}?'active':''">
+                            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${articleList.number eq (page)-1}?'active':''">
                                 <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
                             </li>
                             <!--                다음버튼-->
