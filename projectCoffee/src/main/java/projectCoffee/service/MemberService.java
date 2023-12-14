@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import projectCoffee.dto.MemberUpdateDto;
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
@@ -74,7 +75,6 @@ public class MemberService implements UserDetailsService {
         }
 
         return null;
-
     }
 
 }

@@ -8,4 +8,5 @@ import javax.persistence.EntityManager;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Member findByEmail(String email);
+
 }
