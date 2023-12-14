@@ -1,5 +1,19 @@
--- insert into item (id, regTime, updateTime, createdBy, modifiedBy, itemNm, price, stockNumber, itemDetail, itemSellStatus, itemCategory)
--- values (1, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', '수제과일청 고농축 딸기청 1kg', 11900, 100, '신선한 맛과 향을 고스란히 다음 수제청', 'SELL', 'etc');
+-- CREATE TABLE ITEM
+-- (
+--         item_id bigint PK,
+--         reg_time datetime(6),
+--         update_time datetime(6),
+--         created_by varchar(255),
+--         modified_by varchar(255),
+--         item_category varchar(255),
+--         item_detail longtext,
+--         item_nm varchar(50),
+--         item_sell_status varchar(255),
+--         price int,
+--         stock_number int,
+-- )
+-- INSERT INTO ITEM (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+-- values (1, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'etc', '신선한 맛과 향을 고스란히 다음 수제청', '수제과일청 고농축 딸기청 1kg', 'SELL', 11900, 100);
 -- insert into item (id, imgName, oriImgName, imgUrl, repImgYn, item)
 -- values (1, '1', '/images/item/1.jpg', '수제청1.jpg', 'Y', 1),
 --        (2, '2', '/images/item/2.jpg', '수제청2.jpg', 'N', 1);
