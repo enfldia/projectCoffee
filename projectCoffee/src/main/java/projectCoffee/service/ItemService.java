@@ -80,8 +80,9 @@ public class ItemService {
         item.updateItem(itemFormDto);
         //2. 상품등록 화면으로부터 전달받은 itemFormDto 통해 상품 엔티티 업데이트
         List<Long> itemImgIds = itemFormDto.getItemImgIds();
-        if(itemImgIds.size() != itemImgFileList.size()){
 
+
+        if(itemImgIds.size() != itemImgFileList.size()){
             List<Long> newItemImgIds = new ArrayList<>();
             //이미지 등록
             for(int i= itemImgIds.size();i<itemImgFileList.size();i++){
