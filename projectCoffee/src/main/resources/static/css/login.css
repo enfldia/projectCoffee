@@ -1,0 +1,59 @@
+/*
+* {
+    outline: 1px solid #D26F64;
+}
+*/
+
+.loginWrap {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.loginWrap form {
+    width: 550px;
+    margin: 0 auto;
+}
+
+
+.form-group {
+    margin: 12px 0;
+}
+
+.error {
+    color: #bd2130;
+}
+
+.loginBtn, .joinBtn{
+    color: #ffffff;
+    width: 550px;
+    height: 45px;
+    text-align: center;
+    border: none;
+    display: block;
+    margin: 4px auto;
+}
+
+.loginBtn {
+    background: #222222;
+
+}
+
+.loginBtn:hover {
+    background: #D26F64;
+}
+
+.joinBtn {
+    background: #626262;
+    color: #ffffff;
+}
+
+.snsLogin {
+    width: 550px;
+    height: 64px;
+    margin: 40px auto;
+}
+
+.snsLogin a {
+    display: block;
+    margin:8px;
+}
