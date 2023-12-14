@@ -60,21 +60,11 @@ public class MemberService implements UserDetailsService {
     }
 
     // 회원 정보 수정
+    public Long updateMember (MemberUpdateDto memberUpdateDto) {
+        Member member = memberRepository.findByEmail(memberUpdateDto.getEmail());
+        member.updateMember(memberUpdateDto);
 
-    public Member updateMember(Long memberId, MemberUpdateDto memberUpdateDto) {
-        Member member = memberRepository.findById(memberId).orElse(null);
-
-        if (member != null) {
-            member.updateMember(memberUpdateDto);
-
-            // 변경 감지를 활성화하기 위해 엔터티를 업데이트합니다.
-            entityManager.flush();
-            entityManager.clear();
-
-            return member;
-        }
-
-        return null;
+        return member.getId();
     }
 
 }
