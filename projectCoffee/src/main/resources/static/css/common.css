@@ -1,0 +1,27 @@
+*, html, body{
+    margin: 0;
+    padding: 0;
+}
+ul, li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+
+/*hover 시 underline*/
+.underline::after{
+    width: 0%;
+    transition: width 0.3s;
+    transform: translateX(-50%);
+    position: absolute;
+    bottom: 33px;
+    left: 50%;
+    height: 2px;
+    background: black;
+    content: '';
+    display: block;
+}
+.underline:hover:after{
+    width:70%; transition: width 0.3s;
+}
