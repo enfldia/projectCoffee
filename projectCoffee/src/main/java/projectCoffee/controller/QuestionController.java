@@ -57,8 +57,7 @@ public class QuestionController {
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String questionModify(QuestionDto questionDto, @PathVariable("id")
-    Integer id, Principal principal) {
+    public String questionModify(QuestionDto questionDto, @PathVariable("id") Integer id, Principal principal) {
         Question question = this.questionService.getQuestion(id);
         if(!question.getMember().getEmail().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수 정 권 한 이 없 습 니 다.");
@@ -73,7 +72,7 @@ public class QuestionController {
             bindingResult,
                                  Principal principal, @PathVariable("id") Integer id) {
         if (bindingResult.hasErrors()) {
-            return "question_form";
+            return "question/form";
         }
         Question question = this.questionService.getQuestion(id);
         if (!question.getMember().getEmail().equals(principal.getName())) {
