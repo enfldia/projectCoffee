@@ -65,6 +65,7 @@ public class Member extends BaseEntity{
         this.address = memberUpdateDto.getAddress();
         this.streetAddress = memberUpdateDto.getStreetAddress();
         this.detailAddress = memberUpdateDto.getDetailAddress();
+
     }
 
 
