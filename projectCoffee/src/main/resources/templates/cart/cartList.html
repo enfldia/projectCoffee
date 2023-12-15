@@ -6,8 +6,6 @@
 <head>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
@@ -249,7 +247,7 @@
         </h2>
 
         <div class="text-center mt-3">
-            <button type="button" class="btn btn-primary btn-lg" onclick="location.href = '/payments/complete' ">주문하기</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>
         </div>
     </div>
 </div>
