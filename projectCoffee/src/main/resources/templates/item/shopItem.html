@@ -39,32 +39,54 @@
   <script th:inline="javascript">
 
     $(function(){
+ if (location.hash == "#list-coffee"){
 
-       if (location.hash == "#list-coffee"){
+            $('.list-group').find('a').eq(1).addClass('active').siblings().removeClass('active');
 
-          $('.list-group').find('a').eq(1).addClass('active').siblings().removeClass('active');
+            $('.tab-content').find('#list-coffee').addClass('active in').siblings().removeClass('active in');
 
-          $('.tab-content').find('#list-coffee').addClass('active in').siblings().removeClass('active in');
+         } else if(location.hash == "#list-tools"){
 
-          $('html, body').animate({scrollTop : 0})return false;});
-       } else if(location.hash == "#list-tools"){
+           $('.list-group').find('a').eq(2).addClass('active').siblings().removeClass('active');
 
-         $('.list-group').find('a').eq(2).addClass('active').siblings().removeClass('active');
+           $('.tab-content').find('#list-tools').addClass('active in').siblings().removeClass('active in');
 
-         $('.tab-content').find('#list-tools').addClass('active in').siblings().removeClass('active in');
+         } else if(location.hash == "#list-etc"){
 
-         $('html, body').animate({scrollTop : 0})return false;});
-       } else if(location.hash == "#list-etc"){
+          $('.list-group').find('a').eq(3).addClass('active').siblings().removeClass('active');
 
-        $('.list-group').find('a').eq(3).addClass('active').siblings().removeClass('active');
+          $('.tab-content').find('#list-etc').addClass('active in').siblings().removeClass('active in');
 
-        $('.tab-content').find('#list-etc').addClass('active in').siblings().removeClass('active in');
+      }
 
-        $('html, body').animate({scrollTop : 0})return false;});
-    }
+});
 
 
-    })
+    $(window).on("hashchange", function() {
+
+
+         if (location.hash == "#list-coffee"){
+
+            $('.list-group').find('a').eq(1).addClass('active').siblings().removeClass('active');
+
+            $('.tab-content').find('#list-coffee').addClass('active in').siblings().removeClass('active in');
+
+         } else if(location.hash == "#list-tools"){
+
+           $('.list-group').find('a').eq(2).addClass('active').siblings().removeClass('active');
+
+           $('.tab-content').find('#list-tools').addClass('active in').siblings().removeClass('active in');
+
+         } else if(location.hash == "#list-etc"){
+
+          $('.list-group').find('a').eq(3).addClass('active').siblings().removeClass('active');
+
+          $('.tab-content').find('#list-etc').addClass('active in').siblings().removeClass('active in');
+
+      }
+
+
+      });
 
 
   </script>
