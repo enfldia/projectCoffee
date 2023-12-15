@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .and()
                 .oauth2Login()
                 .loginPage("/members/login") //로그인이 필요한데 로그인을 하지 않았다면 이동할 uri 설정
-                .defaultSuccessUrl("/") //OAuth 구글 로그인이 성공하면 이동할 uri 설정
+                .defaultSuccessUrl("/") //OAuth 로그인이 성공하면 이동할 uri 설정
                 .userInfoEndpoint()//로그인 완료 후 회원 정보 받기
                 .userService(oAuth2MemberService)//로그인 후 받아온 유저 정보 처리
                 // logout
@@ -41,7 +41,6 @@ public class SecurityConfig {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
-                .clearAuthentication(true)
         ;
 
         http.authorizeHttpRequests()
