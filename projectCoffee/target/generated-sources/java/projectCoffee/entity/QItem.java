@@ -18,8 +18,6 @@ public class QItem extends EntityPathBase<Item> {
 
     private static final long serialVersionUID = -1527492043L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QItem item = new QItem("item");
 
     public final QBaseEntity _super = new QBaseEntity(this);
@@ -33,7 +31,7 @@ public class QItem extends EntityPathBase<Item> {
 
     public final StringPath itemDetail = createString("itemDetail");
 
-    public final QItemImg itemImg;
+    public final ListPath<ItemImg, QItemImg> itemImgList = this.<ItemImg, QItemImg>createList("itemImgList", ItemImg.class, QItemImg.class, PathInits.DIRECT2);
 
     public final StringPath itemNm = createString("itemNm");
 
@@ -41,6 +39,8 @@ public class QItem extends EntityPathBase<Item> {
 
     //inherited
     public final StringPath modifiedBy = _super.modifiedBy;
+
+    public final ListPath<OrderItem, QOrderItem> orderItemList = this.<OrderItem, QOrderItem>createList("orderItemList", OrderItem.class, QOrderItem.class, PathInits.DIRECT2);
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);
 
@@ -53,24 +53,15 @@ public class QItem extends EntityPathBase<Item> {
     public final DateTimePath<java.time.LocalDateTime> updateTime = _super.updateTime;
 
     public QItem(String variable) {
-        this(Item.class, forVariable(variable), INITS);
+        super(Item.class, forVariable(variable));
     }
 
     public QItem(Path<? extends Item> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QItem(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QItem(PathMetadata metadata, PathInits inits) {
-        this(Item.class, metadata, inits);
-    }
-
-    public QItem(Class<? extends Item> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.itemImg = inits.isInitialized("itemImg") ? new QItemImg(forProperty("itemImg"), inits.get("itemImg")) : null;
+        super(Item.class, metadata);
     }
 
 }
