@@ -4,12 +4,12 @@
     margin-top: 2px;
 }
 
-.joinWrap {
+.updateWrap {
     width: 500px;
     margin: 60px auto 200px;
 }
 
-.joinWrap h2 {
+.updateWrap h2 {
     margin-bottom: 20px;
 }
 
@@ -21,13 +21,10 @@ label {
     margin: 16px 0 8px;
 }
 
-.joinWrap .form-control {
+.updateWrap .form-control {
     border-radius: 0;
 }
 
-.form-group p {
-
-}
 
 #address {
     width: 40%;
@@ -42,18 +39,17 @@ label {
 }
 
 .btnGroup {
-    /*border-radius: 0;*/
     width: 300px;
     display: flex;
     justify-content: space-between;
     margin: 40px auto;
-
 }
 
-.cancelBtn, .submitBtn {
+.editBtn, .cancelBtn, .deleteBtn {
     width: 145px;
     height: 45px;
     border: none;
+    border-radius: 0;
 }
 
 .cancelBtn {
@@ -64,7 +60,18 @@ label {
     height: 45px;
 }
 
-.submitBtn {
+.editBtn:hover {
+    color: #ffffff;
+    background-color: #626262;
+}
+
+.deleteBtn {
+    transform: translate(245%, 160%);
+    color: #ffffff;
+    background-color: #626262;
+}
+
+.deleteBtn:hover {
     color: #ffffff;
     background-color: #D26F64;
 }

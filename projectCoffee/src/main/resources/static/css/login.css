@@ -1,13 +1,15 @@
-.content {
-    margin-top: 150px;
+.error {
+    color: #D26F64;
+    font-size: 0.9rem;
+    margin-top: 2px;
 }
 
 .loginWrap {
     width: 500px;
-    margin: 0 auto;
+    margin: 120px auto 200px;
 }
 
-.loginWrap h4 {
+.loginWrap h2 {
     margin-left: 24px;
 }
 
@@ -20,13 +22,10 @@
     margin: 12px 0;
 }
 
-.form-control {
+.loginWrap .form-control {
     border-radius: 0;
 }
 
-.error {
-    color: #bd2130;
-}
 
 .loginBtn, .joinBtn {
     color: #ffffff;
@@ -67,7 +66,6 @@
     align-items: center;
     width: 470px;
     color: #555555;
-
 }
 
 .snsLogin {

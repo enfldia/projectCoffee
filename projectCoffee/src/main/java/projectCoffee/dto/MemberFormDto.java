@@ -22,12 +22,11 @@ public class MemberFormDto {
     private String email;
 
     @NotBlank
-    @Pattern(regexp = "^[0-9]*$", message = "정수만 가능합니다.")
-    @Size(min = 10, max = 11, message = "다시 한 번 확인해주세요.")
+    @Pattern(regexp = "^(01[1|6|7|8|9|0])-(\\d{3,4})-(\\d{4})$", message = "01x-xxxx-xxxx의 형식으로 작성해주세요")
     private String phoneNum;
 
     @NotEmpty
-    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*\\W)(?=\\S+$).{8,20}", message = "비밀번호는 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.")
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*\\W)(?=\\S+$).{8,20}", message = "비밀번호는 영어, 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.")
     private String password;
 
     @NotEmpty(message = "비밀번호를 입력해주세요.")
