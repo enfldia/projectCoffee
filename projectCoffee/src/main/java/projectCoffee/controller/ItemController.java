@@ -51,7 +51,7 @@ public class ItemController {
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
                     return "item/itemForm";
         }
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);//
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 10);//
         // PageRequest - Data jpa에서 사용하는 페이지 요청객체
         // of() 메서드를 사용하여 페이지 번화와 페이지당 항목수 지정하여 페이지 요청 정보생성
         // 0 은 url 경로에서 받아온 페이지 번호를 확인하고 , 값이 없으면 0 = 보고 있던 페이지가 없으면 첫번째 페이지를 보여줌
@@ -83,7 +83,7 @@ public class ItemController {
     @PostMapping("/admin/item/delete/{itemId}")
     public String itemDelete(@PathVariable("itemId") Long itemId,Optional<Integer> page, ItemSearchDto itemSearchDto, Model model){
         itemService.deleteItem(itemId);
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);//
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 10);//
         // PageRequest - Data jpa에서 사용하는 페이지 요청객체
         // of() 메서드를 사용하여 페이지 번화와 페이지당 항목수 지정하여 페이지 요청 정보생성
         // 0 은 url 경로에서 받아온 페이지 번호를 확인하고 , 값이 없으면 0 = 보고 있던 페이지가 없으면 첫번째 페이지를 보여줌
@@ -118,7 +118,7 @@ public class ItemController {
             model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
             return "item/itemForm";
         }
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);//
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 10);//
         // PageRequest - Data jpa에서 사용하는 페이지 요청객체
         // of() 메서드를 사용하여 페이지 번화와 페이지당 항목수 지정하여 페이지 요청 정보생성
         // 0 은 url 경로에서 받아온 페이지 번호를 확인하고 , 값이 없으면 0 = 보고 있던 페이지가 없으면 첫번째 페이지를 보여줌
@@ -136,7 +136,7 @@ public class ItemController {
     @GetMapping(value = {"/admin/items","admin/items/{page}"})
     public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model){
 
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);//
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 10);//
         // PageRequest - Data jpa에서 사용하는 페이지 요청객체
         // of() 메서드를 사용하여 페이지 번화와 페이지당 항목수 지정하여 페이지 요청 정보생성
         // 0 은 url 경로에서 받아온 페이지 번호를 확인하고 , 값이 없으면 0 = 보고 있던 페이지가 없으면 첫번째 페이지를 보여줌

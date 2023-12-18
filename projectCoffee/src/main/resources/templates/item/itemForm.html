@@ -220,12 +220,6 @@
                             </div>
                             <input type="hidden" name="itemImgIds" th:value="${itemImgDto.id}">
                         </div>
-                        <div>
-                            <!--이미지가 나오려나-->
-                            <!--                        <img th:src="@{D:/projectCoffee/projectCoffee/item} + ${itemImgDto.imgName}" alt="왜 안나옴?">-->
-                            <img th:src="@{/Users/sanghyuncho/Desktop/풀스텍 수업/projectCoffee/projectCoffee/item/} + ${itemImgDto.imgName}" alt="왜 안나옴?">
-                        </div>
-                        <button type="button" onclick="removeFile(this);" class="btn btn-light btn-outline-secondary del_btn col-auto text-black rounded"><span>삭제</span></button>
                     </div>
                 </div>
             </div>
