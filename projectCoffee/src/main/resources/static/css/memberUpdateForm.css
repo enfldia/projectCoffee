@@ -21,14 +21,30 @@ label {
     margin: 16px 0 8px;
 }
 
+.labelSub {
+    display: flex;
+    justify-content: space-between;
+}
+
+.note {
+    margin: 20px 0 4px;
+    display: inline-block;
+    font-size: 0.8rem;
+    color: #555555;
+    vertical-align: bottom;
+}
+
 .updateWrap .form-control {
     border-radius: 0;
 }
 
-
-#address {
+#zipCode {
     width: 40%;
     display: inline-block;
+}
+
+.streetAddress {
+    top: 5px;
 }
 
 .searchBtn {

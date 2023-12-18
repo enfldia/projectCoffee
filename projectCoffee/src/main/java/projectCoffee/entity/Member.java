@@ -50,10 +50,10 @@ public class Member extends BaseEntity{
         member.setPassword(password);
         member.setPhoneNum(memberFormDto.getPhoneNum());
         member.setBirthday(memberFormDto.getBirthday());
-        member.setAddress(memberFormDto.getAddress());
+        member.setAddress(memberFormDto.getZipCode());
         member.setStreetAddress(memberFormDto.getStreetAddress());
         member.setDetailAddress(memberFormDto.getDetailAddress());
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
         return member;
     }
 
@@ -62,7 +62,7 @@ public class Member extends BaseEntity{
         this.name = memberUpdateDto.getName();
         this.birthday = memberUpdateDto.getBirthday();
         this.phoneNum = memberUpdateDto.getPhoneNum();
-        this.address = memberUpdateDto.getAddress();
+        this.address = memberUpdateDto.getZipCode();
         this.streetAddress = memberUpdateDto.getStreetAddress();
         this.detailAddress = memberUpdateDto.getDetailAddress();
 
