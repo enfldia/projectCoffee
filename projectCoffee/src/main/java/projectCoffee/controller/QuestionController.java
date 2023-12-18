@@ -5,23 +5,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import projectCoffee.dto.AnswerDto;
 import projectCoffee.dto.QuestionDto;
-import projectCoffee.entity.Answer;
 import projectCoffee.entity.Member;
 import projectCoffee.entity.Question;
 import projectCoffee.repository.MemberRepository;
-import projectCoffee.repository.QuestionRepository;
 import projectCoffee.service.QuestionService;
-
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 @RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
@@ -31,9 +26,11 @@ public class QuestionController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-        Page<Question> paging = this.questionService.getList(page);
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Question> paging = this.questionService.getList(page, kw);
         model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
         return "question/list";
     }
     @GetMapping(value = "/detail/{id}")

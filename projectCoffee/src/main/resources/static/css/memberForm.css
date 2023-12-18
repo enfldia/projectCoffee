@@ -1,0 +1,70 @@
+.fieldError {
+    color: #D26F64;
+    font-size: 0.9rem;
+    margin-top: 2px;
+}
+
+.joinWrap {
+    width: 500px;
+    margin: 60px auto 200px;
+}
+
+.joinWrap h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 4px;
+}
+
+label {
+    margin: 16px 0 8px;
+}
+
+.joinWrap .form-control {
+    border-radius: 0;
+}
+
+.form-group p {
+
+}
+
+#address {
+    width: 40%;
+    display: inline-block;
+}
+
+.searchBtn {
+    width: 60px;
+    height: 38px;
+    border: 1px solid #bbbbbb;
+    background-color: #fff;
+}
+
+.btnGroup {
+    /*border-radius: 0;*/
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    margin: 40px auto;
+
+}
+
+.cancelBtn, .submitBtn {
+    width: 145px;
+    height: 45px;
+    border: none;
+}
+
+.cancelBtn {
+    border: 1px solid #bbbbbb;
+    background-color: #fff;
+    color: #222222;
+    width: 145px;
+    height: 45px;
+}
+
+.submitBtn {
+    color: #ffffff;
+    background-color: #D26F64;
+}

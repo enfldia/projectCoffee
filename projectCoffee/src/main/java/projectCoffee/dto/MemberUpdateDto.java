@@ -21,8 +21,7 @@ public class MemberUpdateDto {
     private String email;
 
     @NotBlank
-    @Pattern(regexp = "^[0-9]*$", message = "정수만 가능합니다.")
-    @Size(min = 10, max = 11, message = "다시 한 번 확인해주세요.")
+    @Pattern(regexp = "^(01[1|6|7|8|9|0])-(\\d{3,4})-(\\d{4})$", message = "01x-xxxx-xxxx의 형식으로 작성해주세요")
     private String phoneNum;
 
     private String birthday;
