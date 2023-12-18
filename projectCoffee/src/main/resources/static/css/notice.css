@@ -10,14 +10,14 @@ ul,li{list-style:none;padding-left:0 !important;}
     padding:0;
 }
 .customerTab{
-    width : 1500px;
+    width : 1550px;
 }
 .customerTab>li{
     float:left;
 }
 .customerTab>li>a{
     display:block;
-    width: 480px;
+    width: 500px;
     height : 60px;
     line-height : 60px;
     box-sizing: border-box;
@@ -31,6 +31,7 @@ ul,li{list-style:none;padding-left:0 !important;}
     color:#D26F64;
 
 }
+.on {font-weight: bold}
 fieldset {
     padding-bottom: 20px;
 }

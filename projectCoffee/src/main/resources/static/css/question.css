@@ -13,7 +13,7 @@ ul,li{list-style:none;padding-left:0 !important;}
 }
 .customerTab{
 
-    width : 1500px;
+    width : 1550px;
 
 }
 .customerTab>li{
@@ -21,7 +21,7 @@ ul,li{list-style:none;padding-left:0 !important;}
 }
 .customerTab>li>a{
     display:block;
-    width: 480px;
+    width: 500px;
     height : 60px;
     line-height : 60px;
     box-sizing: border-box;
@@ -35,7 +35,7 @@ ul,li{list-style:none;padding-left:0 !important;}
     color:#D26F64
 
 }
-
+.on {font-weight: bold}
 table.articleList {
     width: 100%;
     border: 2px solid #000;

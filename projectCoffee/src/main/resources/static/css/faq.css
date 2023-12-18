@@ -12,7 +12,7 @@ ul,li{list-style:none;padding-left:0 !important;}
 }
 .customerTab{
 
-    width : 1500px;
+    width : 1550px;
 
 }
 .customerTab>li{
@@ -20,7 +20,7 @@ ul,li{list-style:none;padding-left:0 !important;}
 }
 .customerTab>li>a{
     display:block;
-    width: 480px;
+    width: 500px;
     height : 60px;
     line-height : 60px;
     box-sizing: border-box;
@@ -34,9 +34,10 @@ ul,li{list-style:none;padding-left:0 !important;}
     color:#D26F64
 
 }
+.on {font-weight: bold}
 .faqTab{
     margin-top : 100px;
-    width : 1500px;
+    width : 1550px;
 
 }
 .faqTab>li{
@@ -47,7 +48,7 @@ ul,li{list-style:none;padding-left:0 !important;}
 
 .faqTab>li>a{
     display : block;
-    width : 480px;
+    width : 500px;
     height : 40px;
     line-height : 40px;
 
