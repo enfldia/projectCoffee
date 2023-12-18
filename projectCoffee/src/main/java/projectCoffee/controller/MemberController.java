@@ -43,6 +43,12 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
+    @GetMapping(value = "/login/error")
+    public String loginError(Model model) {
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
+        return "/member/memberLoginForm";
+    }
+
     // 회원 가입
     @GetMapping(value = "/new")
     public String memberForm(Model model) {
@@ -50,7 +56,7 @@ public class MemberController {
         return "member/memberForm";
     }
 
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/join")
     public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
@@ -66,11 +72,6 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/login/error")
-    public String loginError(Model model) {
-        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
-        return "/member/memberLoginForm";
-    }
 
 
     // 회원 정보 변경 폼 (GET)
@@ -87,14 +88,19 @@ public class MemberController {
 
     // 회원 정보 조회, 변경 (POST)
     @PostMapping(value = "/update")
-    public String updateMember(@Valid MemberUpdateDto memberUpdateDto, Principal principal, Model model) {
+    public String updateMember(@Valid MemberUpdateDto memberUpdateDto, BindingResult bindingResult, Principal principal, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errorMessage","회원 정보 수정을 실패했습니다.");
+            return "member/memberForm";
+        }
         try {
             if (principal.getName().equals(memberUpdateDto.getEmail())) {
                 memberService.updateMember((memberUpdateDto));
-                model.addAttribute("successMsg", "회원 정보 수정이 완료되었습니다.");
+                model.addAttribute("successMessage", "회원 정보 수정이 완료되었습니다.");
             }
         } catch (Exception e) {
-            model.addAttribute("errorMsg", "오류가 발생했습니다.");
+            model.addAttribute("errorMessage","회원 정보 수정 중 에러가 발생하였습니다");
             return "member/memberUpdateForm";
         }
         return "redirect:/";

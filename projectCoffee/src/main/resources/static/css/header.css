@@ -1,0 +1,121 @@
+#header {
+    width: 1920px;
+    height: 100px;
+}
+nav{
+    width: 1920px;
+}
+.inner::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 95px;
+    width: 1920px;
+    height: 0px;
+    background: beige;
+    z-index: 4;
+    transition: .5s;
+}
+.inner:hover {
+    transition: .5s;
+}
+.inner:hover::after {
+    height: 200px;
+}
+.inner {
+    height: 95px;
+}
+#logo {
+    padding: 0 260px 0 76px;
+}
+#logo img{
+    width: 250px;
+    height: 75px;
+    margin-top: 6px;
+}
+div.containerWrap {
+    width: 1920px;
+    background-color: beige;
+    display: flex;
+}
+.containerWrap .toggle{
+    display: none;
+}
+/* depth 1 */
+#gnb {
+    position: relative;
+    z-index: 5;
+    height: 95px;
+    overflow: hidden;
+    transition: .5s;
+    text-align: center;
+    margin-right: 150px;
+}
+.inner:hover #gnb {
+    height: 295px;
+}
+#gnb .main {
+    display: flex;
+    padding: 0px;
+}
+.main > li > a {
+    padding: 8px 12px;
+    /* margin: 4px 12px; */
+}
+#gnb .main > li {
+    line-height: 95px;
+    padding: 0 32px;
+}
+.nav-item > a{
+    font-weight: 700;
+    position: relative;
+}
+/* depth 2 */
+.main li:hover >.sub > li {
+    display: block;
+}
+.sub{
+    padding: 0px;
+}
+.sub li {
+    text-align: center;
+    line-height: 1.8;
+    /* display: none; */
+    /* margin: 4px 8px; */
+    padding:14px 0;
+}
+.sub a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+.sub a:hover{
+    color: #D26F64;
+}
+/* search */
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    margin-left: 116px;
+}
+.search li{
+    padding-right: 30px;
+}
+form{
+    position: relative;
+}
+.search-input{
+    border: none;
+    border-radius: 25px;
+    background: white;
+    width: 231px;
+    height: 40px;
+    padding: 20px;
+}
+.search-button{
+    position: absolute;
+    top: 6px;
+    left: 190px;
+}
