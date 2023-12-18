@@ -90,7 +90,7 @@
                         </thead>
                         <tbody id="tbl_alist">
                         <tr th:each="article, status: ${articleList.getContent()}">
-                            <td th:text="${article.articleType == T(projectCoffee.constant.ArticleType).NEWS} ? '언론보도' : '공지사항'"></td>
+                            <td th:text="${article.articleType == T(projectCoffee.constant.ArticleType)} ? '언론보도' : '공지사항'"></td>
                             <td class="sub">
                                 <a th:href="'/CsCenter/notice/'+${article.id}" th:text="${article.title}"></a>
                             </td>

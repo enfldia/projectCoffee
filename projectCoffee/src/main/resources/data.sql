@@ -189,3 +189,28 @@ INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by,
 VALUES (16, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '카페&베이커리페어 참가', '카페&베이커리페어 참가업체 선정');
 INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by, article_type, content, title)
 VALUES (17, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '대구커피&카페박람회', '대구커피&카페박람회 참가업체 선정');
+
+
+-- question
+INSERT INTO question(id, content, create_date, subject)
+VALUES (1, '문의사항1', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (2, '문의사항2', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (3, '문의사항3', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (4, '문의사항4', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (5, '문의사항5', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (6, '문의사항6', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (7, '문의사항7', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (8, '문의사항8', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (9, '문의사항9', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (10, '문의사항10', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (11, '문의사항11', '2023-12-13 15:50:19.335193', '문의사항1');

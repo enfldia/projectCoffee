@@ -36,12 +36,12 @@
             </div>
         </div>
         <div class="row my-3">
-            <div class="col-6">
+            <div class="col-9">
                 <a th:href="@{/question/create}" class="btn btn-info" sec:authorize="isAuthenticated()">문의사항등록</a>
             </div>
-            <div class="col-6">
+            <div class="col-3">
                 <div class="input-group">
-                    <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+                    <input type="text" id="search_kw" class="form-control" th:value="${kw}" placeholder="검색어를 입력해주세요.">
                     <button class="btn btn-dark" type="button" id="btn_search">검 색</button>
                 </div>
             </div>
@@ -84,10 +84,10 @@
                         <span>이 전</span>
                     </a>
                 </li>
-                <li th:each="page: ${#numbers.sequence(0, (paging.totalPages)-1)}"
+                <li th:each="page: ${#numbers.sequence(1, (paging.totalPages))}"
                     th:if="${page >= (paging.number)-5 and page <= (paging.number)+5}"
-                    th:classappend="${page == paging.number} ? 'active'" class="page-item">
-                    <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+                    th:classappend="${(page)-1 == paging.number} ? 'active'" class="page-item">
+                    <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}-1"></a>
                 </li>
                 <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
                     <a class="page-link" href="javascript:void(0)" th:data-page="${(paging.number)+1}">

@@ -118,6 +118,7 @@ ul,li{list-style:none;padding-left:0 !important;}
 }
 .cs em{
     padding : 0 10px;
+    color: #D26F64;
 }
 .cs p{
     color : #666;
