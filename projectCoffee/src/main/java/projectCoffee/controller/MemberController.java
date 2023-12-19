@@ -62,6 +62,12 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "member/memberForm";
         }
+        // 비밀번호 일치 확인
+        if (!memberFormDto.getPassword().equals(memberFormDto.getPasswordConfirm())) { bindingResult.rejectValue("passwordConfirm",
+                "password.mismatch", "비밀번호가 일치하지 않습니다.");
+            return "member/memberForm";
+
+        }
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
@@ -92,7 +98,7 @@ public class MemberController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errorMessage","회원 정보 수정을 실패했습니다.");
-            return "member/memberForm";
+            return "member/memberUpdateForm";
         }
         try {
             if (principal.getName().equals(memberUpdateDto.getEmail())) {

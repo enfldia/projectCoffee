@@ -26,7 +26,7 @@ public class MemberUpdateDto {
 
     private String birthday;
 
-    private String address;				// 우편 번호
+    private String zipCode;				// 우편 번호
 
     private String streetAddress;		// 지번 주소
 

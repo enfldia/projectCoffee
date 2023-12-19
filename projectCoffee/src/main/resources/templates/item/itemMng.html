@@ -14,7 +14,7 @@
             });
         });
 
-          function page(page){
+        function page(page){
             var searchDateType = $("#searchDateType").val();
             var searchSellStatus = $("#searchSellStatus").val();
             var category = $("#category").val();
@@ -22,10 +22,10 @@
             var searchQuery = $("#searchQuery").val();
 
             location.href="/admin/items/" + page + "?searchDateType=" + searchDateType
-            + "&searchSellStatus=" + searchSellStatus
-            + "&category=" + category
-            + "&searchBy=" + searchBy
-            + "&searchQuery=" + searchQuery;
+                + "&searchSellStatus=" + searchSellStatus
+                + "&category=" + category
+                + "&searchBy=" + searchBy
+                + "&searchQuery=" + searchQuery;
         }
 
     </script>
@@ -66,16 +66,16 @@
                 <td th:text="${item.itemSellStatus == T(projectCoffee.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
 
                 <td th:text="${item.createdBy}"></td>
-<!--                <td th:text="${item.regTime}"></td> localdatetiem 기본 형태로 나오는 걸  yyyy-MM-dd HH:mm 형태로 출력하기 위해
-                      타임리프의 형변환 및 날짜 포멧 변경을 사용했다.String 타입을 Date타입으로 포멧-->
+                <!--                <td th:text="${item.regTime}"></td> localdatetiem 기본 형태로 나오는 걸  yyyy-MM-dd HH:mm 형태로 출력하기 위해
+                                      타임리프의 형변환 및 날짜 포멧 변경을 사용했다.String 타입을 Date타입으로 포멧-->
                 <td th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             </tbody>
         </table>
 
         <div th:with="start=${(items.number/maxPage)*maxPage + 1},
-		end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) <
-		items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
+      end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) <
+      items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
             <ul class="pagination justify-content-center">
 
                 <li class="page-item" th:classappend="${items.first}?'disabled'">
