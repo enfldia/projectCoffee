@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URLEncoder;
 import java.security.Principal;
 
 
@@ -35,7 +33,6 @@ public class MemberController {
     private final MemberRepository memberRepository;
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
-
 
     // 로그인
     @GetMapping(value = "/login")
@@ -63,10 +60,10 @@ public class MemberController {
             return "member/memberForm";
         }
         // 비밀번호 일치 확인
-        if (!memberFormDto.getPassword().equals(memberFormDto.getPasswordConfirm())) { bindingResult.rejectValue("passwordConfirm",
-                "password.mismatch", "비밀번호가 일치하지 않습니다.");
+        if (!memberFormDto.getPassword().equals(memberFormDto.getPasswordConfirm())) {
+            bindingResult.rejectValue("passwordConfirm",
+                    "password.mismatch", "비밀번호가 일치하지 않습니다.");
             return "member/memberForm";
-
         }
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
@@ -77,7 +74,6 @@ public class MemberController {
         }
         return "redirect:/";
     }
-
 
 
     // 회원 정보 변경 폼 (GET)
@@ -92,12 +88,12 @@ public class MemberController {
         return "member/memberUpdateForm";
     }
 
-    // 회원 정보 조회, 변경 (POST)
+    // 회원 정보 수정 (POST)
     @PostMapping(value = "/update")
     public String updateMember(@Valid MemberUpdateDto memberUpdateDto, BindingResult bindingResult, Principal principal, Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("errorMessage","회원 정보 수정을 실패했습니다.");
+            model.addAttribute("errorMessage", "회원 정보 수정을 실패했습니다.");
             return "member/memberUpdateForm";
         }
         try {
@@ -106,7 +102,7 @@ public class MemberController {
                 model.addAttribute("successMessage", "회원 정보 수정이 완료되었습니다.");
             }
         } catch (Exception e) {
-            model.addAttribute("errorMessage","회원 정보 수정 중 에러가 발생하였습니다");
+            model.addAttribute("errorMessage", "회원 정보 수정 중 에러가 발생하였습니다");
             return "member/memberUpdateForm";
         }
         return "redirect:/";
