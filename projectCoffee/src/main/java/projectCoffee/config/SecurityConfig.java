@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .mvcMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 .mvcMatchers("/", "/members/**", "/item/**", "/images/**", "/CsCenter/**", "/question/**").permitAll()
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/shopItem").permitAll()
+                .antMatchers("/show/**" ,"/shopItem").permitAll()
                 .anyRequest().authenticated();
 
         http.exceptionHandling()

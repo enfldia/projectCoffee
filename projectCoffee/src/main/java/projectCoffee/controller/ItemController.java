@@ -164,22 +164,33 @@ public class ItemController {
                        Model model){
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,9);
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
-        Page<CoffeeItemDto> coffeeItems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
+//        Page<CoffeeItemDto> coffeeItems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
         Page<ToolsItemDto> toolsItems = itemService.getToolsItemPage(itemSearchDto, pageable);
         Page<EtcItemDto> etcItems = itemService.getEtcItemPage(itemSearchDto, pageable);
 
         model.addAttribute("items", items);
-        model.addAttribute("coffeeItems", coffeeItems);
+//        model.addAttribute("coffeeItems", coffeeItems);
         model.addAttribute("toolsItems", toolsItems);
         model.addAttribute("etcItems", etcItems);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage",5);
 
-        System.out.println("111111111111111111111111111111"+coffeeItems.getNumber());
-        System.out.println("111111111111111111111111111111"+coffeeItems.getTotalPages());
-        System.out.println("23111111111111111111111111111111"+items.getNumber());
-        System.out.println("23111111111111111111111111111111"+items.getTotalPages());
 
         return "/item/shopItem";
+    }
+
+    @GetMapping("/show/coffee")
+    public String showCoffee(ItemSearchDto itemSearchDto, Optional<Integer> page,
+                               Model model){
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() :0,12);
+        System.out.println("122222222222222222222222222" + page);
+        Page<CoffeeItemDto> coffeeItems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
+
+        model.addAttribute("coffeeItems", coffeeItems);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage",5);
+
+        System.out.println("111111111111111111111111111111" + coffeeItems.getTotalPages());
+        return "/item/showCoffee";
     }
 }
