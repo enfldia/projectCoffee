@@ -25,6 +25,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.formLogin()
                 .loginPage("/members/login")
+                .loginProcessingUrl("/members/login") // 로그인 주소가 호출되면 시큐리티가 낚아채서 대신 로그인을 진행해준다.
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")
                 .failureUrl("/members/login/error")

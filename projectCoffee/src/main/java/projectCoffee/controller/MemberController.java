@@ -75,8 +75,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-
-    // 회원 정보 변경 폼 (GET)
+    // 회원 정보 조회 (GET)
     @GetMapping(value = "/info")
     public String updateMemberForm(Principal principal, Model model) {
         if (principal != null) {

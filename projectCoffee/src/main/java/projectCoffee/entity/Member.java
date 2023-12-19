@@ -1,5 +1,6 @@
 package projectCoffee.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -41,6 +42,23 @@ public class Member extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String provider;            // 구글/네이버/카카오
+
+    private String providerId;
+
+
+    @Builder
+    public Member() {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNum = phoneNum;
+        this.birthday = birthday;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
+
+    }
 
     public static  Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
@@ -67,8 +85,6 @@ public class Member extends BaseEntity{
         this.detailAddress = memberUpdateDto.getDetailAddress();
 
     }
-
-
 
 
 }

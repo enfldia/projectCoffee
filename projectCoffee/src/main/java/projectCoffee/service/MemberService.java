@@ -45,6 +45,9 @@ public class MemberService implements UserDetailsService {
         if (member == null) {
             throw new UsernameNotFoundException(email);
         }
+//        if (member != null) {
+//            return new PrincipalDetails(member);
+//        }
         return User.builder()
                 .username(member.getEmail())
                 .password(member.getPassword())
