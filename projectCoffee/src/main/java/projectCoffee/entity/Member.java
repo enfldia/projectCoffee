@@ -1,9 +1,6 @@
 package projectCoffee.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import projectCoffee.constant.Role;
 import projectCoffee.dto.MemberFormDto;
@@ -16,6 +13,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Table(name = "member")
+@NoArgsConstructor
 public class Member extends BaseEntity{
 
     @Id
@@ -33,7 +31,7 @@ public class Member extends BaseEntity{
 
     private String birthday;
 
-    private String address;				// 우편 번호
+    private String zipCode;				// 우편 번호
 
     private String streetAddress;		// 지번 주소
 
@@ -42,21 +40,15 @@ public class Member extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private String provider;            // 구글/네이버/카카오
-
-    private String providerId;
-
 
     @Builder
-    public Member() {
+    public Member(Long id, String name, String email, String password,String phoneNum, Role role) {
+        this.id=id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNum = phoneNum;
-        this.birthday = birthday;
         this.role = role;
-        this.provider = provider;
-        this.providerId = providerId;
 
     }
 
@@ -68,7 +60,7 @@ public class Member extends BaseEntity{
         member.setPassword(password);
         member.setPhoneNum(memberFormDto.getPhoneNum());
         member.setBirthday(memberFormDto.getBirthday());
-        member.setAddress(memberFormDto.getZipCode());
+        member.setZipCode(memberFormDto.getZipCode());
         member.setStreetAddress(memberFormDto.getStreetAddress());
         member.setDetailAddress(memberFormDto.getDetailAddress());
         member.setRole(Role.ADMIN);
@@ -77,14 +69,24 @@ public class Member extends BaseEntity{
 
 
     public void updateMember(MemberUpdateDto memberUpdateDto) {
+        this.id= memberUpdateDto.getId();
         this.name = memberUpdateDto.getName();
         this.birthday = memberUpdateDto.getBirthday();
         this.phoneNum = memberUpdateDto.getPhoneNum();
-        this.address = memberUpdateDto.getZipCode();
+        this.zipCode = memberUpdateDto.getZipCode();
         this.streetAddress = memberUpdateDto.getStreetAddress();
         this.detailAddress = memberUpdateDto.getDetailAddress();
 
     }
 
+    public Member update(Long id){
+        this.id = id;
+
+        return this;
+    }
+
+    public String getRoleKey(){
+        return this.role.getKey();
+    }
 
 }
