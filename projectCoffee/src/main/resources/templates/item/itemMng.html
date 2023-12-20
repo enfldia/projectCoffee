@@ -17,13 +17,11 @@
         function page(page){
             var searchDateType = $("#searchDateType").val();
             var searchSellStatus = $("#searchSellStatus").val();
-            var category = $("#category").val();
             var searchBy = $("#searchBy").val();
             var searchQuery = $("#searchQuery").val();
 
             location.href="/admin/items/" + page + "?searchDateType=" + searchDateType
                 + "&searchSellStatus=" + searchSellStatus
-                + "&category=" + category
                 + "&searchBy=" + searchBy
                 + "&searchQuery=" + searchQuery;
         }
