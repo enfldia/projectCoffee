@@ -164,17 +164,21 @@ public class ItemController {
                        Model model){
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,9);
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
-        Page<CoffeeItemDto> coffeeitems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
-        Page<ToolsItemDto> toolsitems = itemService.getToolsItemPage(itemSearchDto, pageable);
-        Page<EtcItemDto> etcitems = itemService.getEtcItemPage(itemSearchDto, pageable);
+        Page<CoffeeItemDto> coffeeItems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
+        Page<ToolsItemDto> toolsItems = itemService.getToolsItemPage(itemSearchDto, pageable);
+        Page<EtcItemDto> etcItems = itemService.getEtcItemPage(itemSearchDto, pageable);
 
         model.addAttribute("items", items);
-        model.addAttribute("coffeeItems", coffeeitems);
-        model.addAttribute("toolsItems", toolsitems);
-        model.addAttribute("etcItems", etcitems);
+        model.addAttribute("coffeeItems", coffeeItems);
+        model.addAttribute("toolsItems", toolsItems);
+        model.addAttribute("etcItems", etcItems);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage",5);
 
+        System.out.println("111111111111111111111111111111"+coffeeItems.getNumber());
+        System.out.println("111111111111111111111111111111"+coffeeItems.getTotalPages());
+        System.out.println("23111111111111111111111111111111"+items.getNumber());
+        System.out.println("23111111111111111111111111111111"+items.getTotalPages());
 
         return "/item/shopItem";
     }

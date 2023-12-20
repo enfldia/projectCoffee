@@ -29,12 +29,12 @@ public class MemberFormDto {
     @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*\\W)(?=\\S+$).{8,20}", message = "비밀번호는 영어, 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.")
     private String password;
 
-    @NotEmpty(message = "비밀번호를 입력해주세요.")
-    private String password_confirm;
+    @NotEmpty
+    private String passwordConfirm;
 
     private String birthday;
 
-    private String address;				// 우편 번호
+    private String zipCode;				// 우편 번호
 
     private String streetAddress;		// 지번 주소
 
