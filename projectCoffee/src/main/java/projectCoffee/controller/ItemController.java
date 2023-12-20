@@ -183,14 +183,38 @@ public class ItemController {
     public String showCoffee(ItemSearchDto itemSearchDto, Optional<Integer> page,
                                Model model){
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() :0,12);
-        System.out.println("122222222222222222222222222" + page);
         Page<CoffeeItemDto> coffeeItems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
 
         model.addAttribute("coffeeItems", coffeeItems);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage",5);
 
-        System.out.println("111111111111111111111111111111" + coffeeItems.getTotalPages());
         return "/item/showCoffee";
+    }
+
+    @GetMapping("/show/tools")
+    public String showTools(ItemSearchDto itemSearchDto, Optional<Integer> page,
+                             Model model){
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() :0,12);
+        Page<ToolsItemDto> toolsItems = itemService.getToolsItemPage(itemSearchDto, pageable);
+
+        model.addAttribute("toolsItems", toolsItems);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage",5);
+
+        return "/item/showTools";
+    }
+
+    @GetMapping("/show/etc")
+    public String showetc(ItemSearchDto itemSearchDto, Optional<Integer> page,
+                             Model model){
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() :0,12);
+        Page<EtcItemDto> etcItems = itemService.getEtcItemPage(itemSearchDto, pageable);
+
+        model.addAttribute("etcItems", etcItems);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage",5);
+
+        return "/item/showEtc";
     }
 }

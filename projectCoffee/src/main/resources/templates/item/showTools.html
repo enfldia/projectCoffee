@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .carousel-inner > .item {
+            height: 350px;
+        }
+        .mt{
+            margin-top: 30px;
+        }
+        .margin{
+            margin-bottom:30px;
+        }
+        .banner{
+            height: 300px;
+        }
+        .card-text{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .mainText{
+            text-align:center;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+        .center{
+            text-align:center;
+        }
+        .banner{
+            position: absolute; top:0; left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</th:block>
+
+<th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+
+    </script>
+
+</th:block>
+
+
+<div layout:fragment="content">
+
+    <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
+    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색 결과'"></p>
+    </div>
+    <!--커피 목록-->
+    <h3 class="mainText bold">커피 용품</h3>
+    <hr>
+    <div class="row mt">
+        <th:block th:each="item, status: ${toolsItems.getContent()}">
+            <div class="col-md-3 margin">
+                <div class="card">
+                    <a th:href="'/item/' +${item.id}" class="text-dark">
+                        <img th:src="${item.imgUrl}" class="card-img-top " th:alt="${item.itemNm}"
+                             height="400">
+                        <div class="card-body">
+                            <h4 class="card-title">[[${item.itemNm}]]</h4>
+                            <p class="card-text">[[${item.itemDetail}]]</p>
+                            <h3 class="card-title text-danger">[[${item.price}]]원</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </th:block>
+    </div>
+    <!--페이징 버튼-->
+    <div th:with="start=${(toolsItems.getNumber()/maxPage)*maxPage + 1}, end=(${(toolsItems.getTotalPages() == 0) ? 1 : (start + (maxPage - 1) < toolsItems.getTotalPages() ? start + (maxPage - 1) : toolsItems.getTotalPages())})">
+
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item" th:classappend="${toolsItems.number eq 0}?'disabled':''">
+                <a th:href="@{'/show/tools' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${toolsItems.number-1}}"
+                   aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+                th:classappend="${toolsItems.number eq page-1}?'active':''">
+                <a th:href="@{'/show/tools' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${page-1}}"
+                   th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+
+            <li class="page-item"
+                th:classappend="${toolsItems.number+1 ge toolsItems.totalPages}?'disabled':''">
+                <a th:href="@{'/show/tools' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${toolsItems.number+1}}"
+                   aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
