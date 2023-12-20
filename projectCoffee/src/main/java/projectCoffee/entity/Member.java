@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import projectCoffee.constant.Role;
 import projectCoffee.dto.MemberFormDto;
 import projectCoffee.dto.MemberUpdateDto;
+import projectCoffee.dto.OAuthAttributes;
 
 import javax.persistence.*;
 
@@ -17,8 +18,8 @@ import javax.persistence.*;
 public class Member extends BaseEntity{
 
     @Id
-    @Column(name = "member_num")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "member_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -42,8 +43,7 @@ public class Member extends BaseEntity{
 
 
     @Builder
-    public Member(Long id, String name, String email, String password,String phoneNum, Role role) {
-        this.id=id;
+    public Member(String name, String email, String password,String phoneNum, Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -52,7 +52,7 @@ public class Member extends BaseEntity{
 
     }
 
-    public static  Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setName(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
@@ -79,11 +79,10 @@ public class Member extends BaseEntity{
 
     }
 
-    public Member update(Long id){
-        this.id = id;
-
-        return this;
-    }
+  //  public Member update(String email){
+  //      this.email = email;
+  //      return this;
+  //  }
 
     public String getRoleKey(){
         return this.role.getKey();

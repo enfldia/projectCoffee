@@ -12,19 +12,18 @@ public class OAuthAttributes {
 
     private final Map<String, Object> attributes;
     private final String nameAttributeKey;
-    private final Long id;
     private final String name;
     private final String email;
 
     @Builder
-    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, Long id, String name, String email) {
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey,  String name, String email) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
-        this.id=id;
         this.name = name;
         this.email = email;
     }
 
+    // OAuth2User 정보를 OAuthAttributes에 입력
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
         // kakao
         if("kakao".equals(registrationId)){
@@ -76,7 +75,9 @@ public class OAuthAttributes {
                 .build();
     }
 
+    // 처음 로그인할 때 OAuthAttributes 에서 엔티티를 생성
     public Member toEntity(){
+        Member member = new Member();
         return Member.builder()
                 .name(name)
                 .email(email)

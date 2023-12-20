@@ -12,6 +12,12 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
+
+import static java.util.Optional.empty;
+import static org.springframework.util.ClassUtils.isPresent;
 
 @EntityListeners(value = {AuditingEntityListener.class})
 //Auditing을 적용하기 위한 EntityListeners 어노테이션 추가
@@ -25,4 +31,7 @@ public abstract class BaseTimeEntity {
 
     @LastModifiedDate //변경할때 시간을 자동으로 저장
     private LocalDateTime updateTime;
+
+
+
 }

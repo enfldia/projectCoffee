@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import projectCoffee.dto.MemberUpdateDto;
 import projectCoffee.dto.MemberFormDto;
-import projectCoffee.dto.SessionMember;
+
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
 import projectCoffee.service.MemberService;

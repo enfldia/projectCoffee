@@ -14,10 +14,10 @@ import projectCoffee.dto.OAuthAttributes;
 import projectCoffee.dto.SessionMember;
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
-import projectCoffee.repository.UserRepository;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
+import java.util.Optional;
 
 
 @Service
@@ -25,7 +25,6 @@ import java.util.Collections;
 public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final HttpSession httpSession;
-    private final UserRepository userRepository;
     private final MemberRepository memberRepository;
 
     @Override
@@ -35,7 +34,7 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
 
         // OAuth 서비스 id
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        // OAuth2 로그인 진행 시 키가 되는 필드 값(PK)
+        // OAuth2 로그인 진행 시 키가 되는 필드 값
         String userNameAttributeName = userRequest.getClientRegistration()
                 .getProviderDetails()
                 .getUserInfoEndpoint()
@@ -45,6 +44,7 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
         Member member = saveOrUpdate(attributes);
         httpSession.setAttribute("member", new SessionMember(member));
+
 
         // 회원 정보 출력
         System.out.println("oAuth2User = " + oAuth2User.getAttributes());
@@ -56,10 +56,11 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
     }
 
     // 유저 생성 및 수정 서비스 로직
-    private Member saveOrUpdate(OAuthAttributes attributes){
-        Member member = userRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getId()))
+    private Member saveOrUpdate(OAuthAttributes attributes) {
+        Member member = Optional.ofNullable(this.memberRepository.findByEmail(attributes.getEmail()))
                 .orElse(attributes.toEntity());
-        return userRepository.save(member);
+        System.out.println("************************* 정보" + member.toString());
+        return memberRepository.save(member);
+
     }
 }
