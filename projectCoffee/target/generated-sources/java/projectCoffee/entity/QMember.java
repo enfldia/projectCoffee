@@ -21,8 +21,6 @@ public class QMember extends EntityPathBase<Member> {
 
     public final QBaseEntity _super = new QBaseEntity(this);
 
-    public final StringPath address = createString("address");
-
     public final StringPath birthday = createString("birthday");
 
     //inherited
@@ -52,6 +50,8 @@ public class QMember extends EntityPathBase<Member> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updateTime = _super.updateTime;
+
+    public final StringPath zipCode = createString("zipCode");
 
     public QMember(String variable) {
         super(Member.class, forVariable(variable));
