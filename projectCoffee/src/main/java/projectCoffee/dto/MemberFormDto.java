@@ -1,6 +1,7 @@
 package projectCoffee.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -39,6 +40,5 @@ public class MemberFormDto {
     private String streetAddress;		// 지번 주소
 
     private String detailAddress;		// 상세 주소
-
 
 }

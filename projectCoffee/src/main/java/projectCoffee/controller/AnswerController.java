@@ -21,6 +21,7 @@ import projectCoffee.service.QuestionService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Optional;
 
 @RequestMapping("/answer")
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class AnswerController {
     public String createAnswer(Model model, @PathVariable("id") Integer id,
                                @Valid AnswerDto answerDto, BindingResult bindingResult, Principal principal) {
         Question question = this.questionService.getQuestion(id);
-        Member member = this.memberRepository.findByEmail(principal.getName());
+        Member member =memberRepository.findByEmail(principal.getName());
         if (bindingResult.hasErrors()) {
             model.addAttribute("question", question);
             return "question/detail";
