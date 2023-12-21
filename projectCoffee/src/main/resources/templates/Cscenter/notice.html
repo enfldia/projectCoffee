@@ -2,9 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
-<th:block layout:fragment="css">
-    <link th:href="@{/css/notice.css}" rel="stylesheet">
-</th:block>
+
 <th:block layout:fragment="script">
     <script th:inline="javascript">
 
@@ -36,26 +34,25 @@
             <p style="color:#777;font-size:15px;">고객님의 질문에 성심껏 답변해 드리겠습니다.</p>
             <div class="cusSub">
                 <ul class="customerTab cf">
-                    <li><a href="/CsCenter/faq">FAQ</a></li>
-                    <li class="on"><a href="/CsCenter/notices">공지사항</a></li>
-                    <li><a href="/question/list">문의하기</a></li>
+                    <li class="on"><a href="/CsCenter/faq">FAQ</a></li>
+                    <li><a href="/CsCenter/notices">공지사항</a></li>
                 </ul>
                 <!--              폼 넣을 위치-->
                 <form th:action="@{'/CsCenter/notices/page=' + ${articleList.number}}" role="form" method="get" th:object="${articleList}">
-                    <fieldset id="search" class="cf mt-5">
+                    <fieldset class="cf mt-5">
                         <legend>공지사항 검색</legend>
                         <div th:object="${articleSearchDto}">
                             <div id="articleSelect1">
                                 <label for="searchArticleType"></label>
-                                <select name="searchArticleType" id="searchArticleType" onchange="searchNotice(1);" th:field="*{searchArticleType}" class="text-center">
-                                    <option value="">전 체</option>
+                                <select name="searchArticleType" id="searchArticleType" onchange="searchNotice(1);" th:field="*{searchArticleType}">
+                                    <option value="">전체</option>
                                     <option value="NEWS">언론보도</option>
                                     <option value="NOTI">공지사항</option>
                                 </select>
                             </div>
                             <div id="articleSelect2">
                                 <label for="searchDateType"></label>
-                                <select name="searchDateType" id="searchDateType" th:field="*{searchDateType}" class="text-center">
+                                <select name="searchDateType" id="searchDateType" th:field="*{searchDateType}">
                                     <option value="all">전체기간</option>
                                     <option value="1d">1일</option>
                                     <option value="1w">1주</option>
@@ -65,13 +62,13 @@
                             </div>
                             <div id="articleSelect3">
                                 <label for="searchBy"></label>
-                                <select name="searchBy" id="searchBy" th:field="*{searchBy}" class="text-center">
-                                    <option value="title">제 목</option>
+                                <select name="searchBy" id="searchBy" th:field="*{searchBy}">
+                                    <option value="title">제목</option>
                                 </select>
                             </div>
                             <label for="searchQuery"></label>
                             <input th:field="*{searchQuery}" id="searchQuery" type="text" placeholder="검색어를 입력해주세요">
-                            <button id="searchBtn" class="btn btn-dark" type="submit">검 색</button>
+                            <button id="searchBtn" type="submit">검색</button>
                         </div>
                     </fieldset>
 
@@ -105,30 +102,31 @@
                                 <!--                이전버튼-->
                                 <li class="page-item" th:classappend="${articleList.first}?'disabled'">
                                     <a th:onclick="'javascript:page(' + ${articleList.number - 1} + ')'" aria-label='Previous' class="page-link">
-                                        <span aria-hidden='true'>이전</span>
+                                        <span aria-hidden='true'>Pre</span>
                                     </a>
                                 </li>
                                 <!--                번호-->
-                                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${articleList.number eq (page)-1}?'active':''">
+                                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${articleList.number eq page-1}?'active':''">
                                     <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
                                 </li>
                                 <!--                다음버튼-->
                                 <li class="page-item" th:classappend="${articleList.last}?'disabled'">
                                     <a th:onclick="'javascript:page(' + ${articleList.number + 1} + ')'" aria-label='Next' class="page-link">
-                                        <span aria-hidden='true'>다음</span>
+                                        <span aria-hidden='true'>Next</span>
                                     </a>
                                 </li>
 
                             </ul>
                         </div>
                     </div>
+
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 </form>
+
                 <div class="cusCenter cf">
                     <div class="cs">
-                        <span>고객상담센터<em>051-123-4567</em></span>
-                        <p>cr@coffee.co.kr</p>
-                        <p>Holiday 토요일/일요일/법정공휴일</p>
-                        <p>Lunch PM 12:00 ~ 13:00</p>
+                        <span>고객센터<em>1899-1234</em></span>
+                        <p>평일 9시-17시 / 토요일, 일요일, 공휴일 휴무</p>
                     </div>
                 </div>
             </div>

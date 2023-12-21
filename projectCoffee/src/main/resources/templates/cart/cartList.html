@@ -6,7 +6,6 @@
 <head>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-<!--    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>-->
 </head>
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
@@ -214,7 +213,7 @@
                 </td>
                 <td class="d-flex">
                     <div class="repImgDiv align-self-center">
-                        <img th:src="${cartItem.imgUrl}" class="rounded repImg" th:alt="${cartItem.itemNm}">
+                        <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}">
                     </div>
                     <div class="align-self-center">
                         <span th:text="${cartItem.itemNm}" class="fs24 font-weight-bold"></span>
@@ -226,7 +225,7 @@
                     </span>
                     <input type="number" name="count" th:id="'count_' + ${cartItem.cartItemId}"
                            th:value="${cartItem.count}" min="1"
-                           onchange="changeCount(this)" class="form-control mr-2">
+                           onchange="changeCount(this)" class="form-control mr-2" >
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true" th:data-id="${cartItem.cartItemId}"
                               onclick="deleteCartItem(this)">&times;</span>
@@ -248,123 +247,8 @@
         </h2>
 
         <div class="text-center mt-3">
-<!--            <button type="button" class="btn btn-primary btn-lg" onclick="orders()" id="cash">주문하기</button>-->
-            <button type="button" class="btn btn-primary btn-lg" id="cash">주문하기</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>
         </div>
-
-            <script>
-
-                // 시큐리티 관련 csrf 공격 방지 토큰
-                var token = $("meta[name='_csrf']").attr("content");
-                var header = $("meta[name='_csrf_header']").attr("content");
-
-                // 가맹점 식별 코드 초기화
-                var IMP = window.IMP;
-                IMP.init('imp35246428');
-
-                // 결제 페이지로 input 값을 보내주기 위해 정의함 (객실 이름, 객실 가격 등)
-                // 검증단계에서 가격을 비교하기 위해 roomId를 보냄 (상품페이지의 가격을 조작할 수 있기 때문)
-                var cart = [[${cartItems.cartItemId}]];
-                    console.log("cart");
-<!--                var orderTotalPrice = $('input[name="orderTotalPrice"]').val();-->
-<!--                var memberName = $('input[name="memberName"]').val();-->
-<!--                var memberEmail = $('input[name="memberEmail"]').val();-->
-<!--                var memberPhoneNumber = $('input[name="memberPhoneNumber"]').val();-->
-<!--                var formSubmit = document.querySelector('.displayNone');-->
-
-<!--                // http 응답을 받기 위해 선언-->
-<!--                const requestHttp = new XMLHttpRequest();-->
-<!--                var url = `/reserv/reservationPay/${roomId}/${checkIn}/${checkOut}`;-->
-<!--                requestHttp.open("POST", url);-->
-
-
-<!--                 $('#cash').click(function () {-->
-<!--                        IMP.request_pay({-->
-<!--                            // 등록된 PG사가 여러개인 경우 inicis로 지정-->
-<!--                            // PG사: 온라인 쇼핑몰 - 신용카드사 와의 결제를 대행해주는 업체-->
-<!--                            pg: 'html5_inicis',-->
-<!--                            // card(신용카드), trans(실시간계좌이체), phone(휴대폰소액결제) 등등-->
-<!--                            pay_method: 'card',-->
-<!--                            // 상점에서 관리하는 주문 번호-->
-<!--                            merchant_uid: memberName + '_' + roomName + '_' + new Date().getTime(),-->
-
-<!--                            // 이니시스 결제창에서 등장하는 상품명-->
-<!--                            name: roomName,-->
-<!--                            // 실제 금액-->
-<!--                            amount: roomPrice,-->
-
-<!--                            // 구매자 항목-->
-<!--                            // 구매자 이메일 (필수입력)-->
-<!--                            buyer_email: memberEmail,-->
-<!--                            // 구매자 이름-->
-<!--                            buyer_name: memberName,-->
-<!--                            // 구매자 핸드폰 번호 (필수입력) <미설정시 이니시스 결제창에서 오류 발생>-->
-<!--                            buyer_tel: memberPhoneNumber-->
-
-<!--                        }, function (rsp) {-->
-<!--                            console.log(rsp);-->
-
-<!--                            if (rsp.success) {-->
-<!--                                // 서버 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기-->
-
-<!--                                var data = {-->
-<!--                                    room_id: room,-->
-<!--                                    checkIn: $("#checkIn").val(),-->
-<!--                                    checkOut: $("#checkOut").val(),-->
-<!--                                };-->
-
-<!--                                var paramData = JSON.stringify(data);-->
-<!--                                var roomId = $("#room").val();-->
-<!--                                var checkIn = $("#checkIn").val();-->
-<!--                                var checkOut = $("#checkOut").val();-->
-<!--                                var url = `/reserv/reservationPay/${roomId}/${checkIn}/${checkOut}`;-->
-
-<!--                                $.ajax({-->
-<!--                                    url: url,-->
-<!--                                    type: 'POST',-->
-<!--                                    dataType: 'json',-->
-<!--                                    data: paramData,-->
-<!--                                    contentType: "application/json",-->
-<!--                                    beforeSend: function (xhr) {-->
-
-<!--                                        /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */-->
-<!--                                        xhr.setRequestHeader(header, token);-->
-
-<!--                                        requestHttp.setRequestHeader(header, token);-->
-<!--                                        requestHttp.send(xhr);-->
-<!--                                    }-->
-<!--                                    , statusCode: {-->
-<!--                                        200: function () {-->
-<!--                                            var msg = '결제가 완료되었습니다.';-->
-<!--                                            alert(msg);-->
-
-<!--                                            saveReserv();-->
-<!--                                        },-->
-<!--                                        400: function () {-->
-<!--                                            alert('400 status code! server error');-->
-<!--                                            var msg = '결제에 실패하였습니다.';-->
-<!--                                            msg += '\n결제 금액 : ' + rsp.paid_amount;-->
-<!--                                            msg += '\n결제 처리가 이미 완료된 경우 판매자와 문의하십시오.'-->
-<!--                                            // 예약이 이미 잡힌 경우-->
-
-<!--                                            alert(msg);-->
-<!--                                        },-->
-<!--                                        500: function () {-->
-<!--                                            alert('500 status code! server error');-->
-<!--                                            var msg = '결제에 실패하였습니다.';-->
-<!--                                            msg += '에러내용 : ' + rsp.error_msg;-->
-<!--                                            alert(msg);-->
-<!--                                        }-->
-
-<!--                                    }-->
-<!--                                })-->
-<!--                            }-->
-<!--                        });-->
-<!--                    });-->
-
-            </script>
-
     </div>
-
 </div>
 </html>
