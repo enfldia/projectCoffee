@@ -17,13 +17,11 @@
         function page(page){
             var searchDateType = $("#searchDateType").val();
             var searchSellStatus = $("#searchSellStatus").val();
-            var category = $("#category").val();
             var searchBy = $("#searchBy").val();
             var searchQuery = $("#searchQuery").val();
 
             location.href="/admin/items/" + page + "?searchDateType=" + searchDateType
                 + "&searchSellStatus=" + searchSellStatus
-                + "&category=" + category
                 + "&searchBy=" + searchBy
                 + "&searchQuery=" + searchQuery;
         }
@@ -47,32 +45,32 @@
 <div layout:fragment="content">
 
     <form th:action="@{'/admin/items/' + ${items.number}}" role="form" method="get" th:object="${items}">
-        <table class="table">
+        <table class="table"  style="table-layout: fixed">
             <thead>
             <tr>
-                <td>상품아이디</td>
-                <td>카테고리</td>
-                <td>상품명</td>
-                <td>상태</td>
-                <td>등록자</td>
-                <td>등록일</td>
+                <td width="10%">상품아이디</td>
+                <td width="10%">카테고리</td>
+                <td width="35%">상품명</td>
+                <td width="20%">상태</td>
+                <td width="20%">등록자</td>
+                <td width="15%">등록일</td>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item, status: ${items.getContent()}">
                 <!--                아이템목록을 순환하면서 각 아이템에 대한 행을 생성합니다.-->
-                <td th:text="${item.id}"></td>
-                <td th:text="${item.itemCategory}"></td>
+                <td class="w-5" th:text="${item.id}"></td>
+                <td class="w-10" th:text="${item.itemCategory}"></td>
                 <td>
-                    <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a>
+                    <a  class="w-35" th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a>
                 </td>
                 <!--               상품명을 클릭하면 상품 수정페이지로 이동 -->
-                <td th:text="${item.itemSellStatus == T(projectCoffee.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
+                <td class="w-10" th:text="${item.itemSellStatus == T(projectCoffee.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
 
-                <td th:text="${item.createdBy}"></td>
+                <td class="w-20" th:text="${item.createdBy}"></td>
                 <!--                <td th:text="${item.regTime}"></td> localdatetiem 기본 형태로 나오는 걸  yyyy-MM-dd HH:mm 형태로 출력하기 위해
                                       타임리프의 형변환 및 날짜 포멧 변경을 사용했다.String 타입을 Date타입으로 포멧-->
-                <td th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td class="w-20"th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             </tbody>
         </table>
