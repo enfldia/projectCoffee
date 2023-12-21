@@ -1,52 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="ko"
->
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<link rel="stylesheet" href="/css/header.css" />
+<link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!--<link rel="stylesheet" href="../static/css/common.css">-->
+<!--<link rel="stylesheet" href="../static/css/main.css">-->
+<script src="../static/js/swiper-bundle.min.js"></script>
+<script src="../static/js/script.js" defer></script>
 
 
-    <div th:fragment="header">
 
-        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">ShopNav</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+    <div th:fragment="header" id="header">
+        <nav>
+            <div class="container">
+                <a href="/" id="logo">
+                    <img src="/img/logo.png">
+                </a>
+                <button class="toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">관리자</span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="inner">
+                <div id="gnb">
+                    <ul class="main">
                         <li class="nav-item" >
-                            <a class="nav-link" href="/shopItem">상품 목록</a>
+                            <a class="nav-link" href="/shopItem">원두커피</a>
+                            <ul class="sub">
+                                <li><a href="#">블렌드 커피</a></li>
+                                <li><a href="#">나라별 커피</a></li>
+                                <li><a href="#">디카페인 커피</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                            <a class="nav-link" href="/admin/item/new">상품 등록</a>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="/shopItem">콜드블루</a>
+                            <ul class="sub">
+                                <li><a href="#">페트형</a></li>
+                                <li><a href="#">스틱형</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                            <a class="nav-link" href="/admin/items">상품 관리</a>
-                        </li>
-                        <li class="nav-item" sec:authorize="isAuthenticated()">
-                            <a class="nav-link" href="/cart">장바구니</a>
-                        </li>
-                        <li class="nav-item" sec:authorize="isAuthenticated()">
-                            <a class="nav-link" href="/orders">구매이력</a>
-                        </li>
-                        <li class="nav-item" sec:authorize="isAuthenticated()">
-                            <a class="nav-link" href="/CsCenter/faq">FAQ</a>
-                        </li>
-                        <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                            <a class="nav-link" href="/admin/notices">ADMIN</a>
-                        </li>
-                        <li class="nav-item" sec:authorize="isAnonymous()">
-                            <a class="nav-link" href="/members/login">로그인</a>
-                        </li>
-                        <li class="nav-item" sec:authorize="isAuthenticated()">
-                            <a class="nav-link" href="/logout">로그아웃</a>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="/shopItem">커피용품</a>
+                            <ul class="sub">
+                                <li><a href="#">핸드드립용품</a></li>
+                                <li><a href="#">커피추출용품</a></li>
+                                <li><a href="#">카페용품</a></li>
+                            </ul>
                         </li>
                     </ul>
+                </div>
+                </div>
+
+                <div class="search">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a class="nav-link" href="/admin/item/new">상품 등록</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a class="nav-link" href="/admin/items">상품 관리</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/cart">장바구니</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/orders">구매이력</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/CsCenter/faq">FAQ</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a class="nav-link" href="/admin/notices">ADMIN</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" href="/members/login">로그인</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" href="/members/new">회원가입</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/members/info">회원정보</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </li>
+                    <div class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" href="/cart"><img src="/img/icon_cart.png"></a>
+                    </div>
                     <form class="d-flex" role="search" th:action="@{/}" method="get">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-warning" type="submit">Search</button>
                     </form>
                 </div>
+
             </div>
         </nav>
     </div>
