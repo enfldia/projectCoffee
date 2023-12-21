@@ -5,10 +5,73 @@
 <div class="footer" th:fragment="footer">
 
   <footer class="page-footer font-small cyan darken-3">
-    <div class="footer-copyright text-center py-3">
-      2023 shopping Mall Example WebSite
+    <div id="footer">
+      <div class="footer_all inline">
+        <!-- 하단정보 -->
+        <div class="f_info">
+          <ul class="inline">
+            <li><a href="../service/agreement.php">이용약관</a></li>
+            <li class="w"><a href="../service/private.php"><strong>개인정보처리방침</strong></a></li>
+            <li><a href="../service/guide.php">이용안내</a></li>
+            <li><a href="#" class="btn_licensee_info" onclick="gd_popup_bizInfo('2208784283'); return false;">사업자정보확인</a></li>
+          </ul>
+          <p>
+            <span>상호명 : 주식회사 커피콩</span>
+            <span>대표 : 김성주</span>
+            <span>사업자번호 : 220-87-12345</span>
+            <span>통신판매업신고 : 2016-12345</span>
+          </p>
+          <p>
+            <span>개인정보관리책임 : 김성주</span>
+            <span>이메일 : info@coffeecong.co.kr</span>
+            <span>주소 : 서울특별시 마포구 독막길</span>
+          </p>
+          <p>
+            <span>대표번호 : 02-6204-1234</span>
+          </p>
+          <p class="copy">COPYRIGHT(C)  COfFEECONG. ALL RIGHTS RESERVED. HOSTING BY 엔에이치엔커머스(주).</p>
+        </div>
+        <!--// 하단정보 -->
+        <!-- 고객문의 -->
+        <div class="f_cs">
+          <h6>고객 문의</h6>
+          <div class="f_cont">
+            <h1>02-6204-1234</h1>
+            <p>평일 09:00 - 18:00</p>
+            <a href="/" target="_blank"><img src="https://cdn-pro-web-210-60.cdn-nhncommerce.com/ablestory_godomall_com/data/skin/front/designwib_C_C_C_C/wib/img/icon/icon_kakao_w.png" alt="커피콩">커피콩</a>
+          </div>
+        </div>
+        <!--// 고객문의 -->
+        <!-- 비즈니스 -->
+        <div class="f_bs">
+          <h6>비즈니스</h6>
+          <div class="f_cont">
+            <h3>원두 납품 및 컨설팅 문의</h3>
+            <p>010-8767-4709</p>
+            <a href="/" target="_blank"><img src="https://cdn-pro-web-210-60.cdn-nhncommerce.com/ablestory_godomall_com/data/skin/front/designwib_C_C_C_C/wib/img/icon/icon_kakao_w.png" alt="커피콩 파트너스">커피콩 파트너스</a>
+            <div class="f_mail">
+              <h3>제휴 및 입점문의</h3>
+              <p>info@coffeecong.co.kr</p>
+            </div>
+          </div>
+        </div>
+        <!--// 비즈니스 -->
+        <!-- 커뮤니티 -->
+        <div class="f_cm">
+          <h6>커뮤니티</h6>
+          <div class="f_cont">
+            <ul>
+              <li><a href="/" target="_blank">매장안내</a></li>
+              <li><a href="/" target="_blank">납품안내</a></li>
+              <li><a href="/">공지사항</a></li>
+              <li><a href="/" target="_blank">채용</a></li>
+              <li class="insta"><a href="/" target="_blank">인스타그램</a></li>
+            </ul>
+          </div>
+        </div>
+        <!--// 커뮤니티 -->
+      </div>
     </div>
-
   </footer>
 </div>
 </html>
