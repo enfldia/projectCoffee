@@ -49,6 +49,20 @@ VALUES (10, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529
 INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
 VALUES (19, 'etc19.jpg', '/images/item/etc19.jpg', 'etc19.jpg', 'Y', 10), (20, 'etc20.jpg', '/images/item/etc20.jpg', 'etc20.jpg', 'N', 10);
 
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (31, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'etc', '신선한 맛과 향을 고스란히 담은 수제청', '수제과일청 고농축 청11', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (61, 'etc21.jpg', '/images/item/etc21.jpg', 'etc21.jpg', 'Y', 31), (62, 'etc22.jpg', '/images/item/etc22.jpg', 'etc22.jpg', 'N', 31);
+
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (32, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'etc', '신선한 맛과 향을 고스란히 담은 수제청', '수제과일청 고농축 청12', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (63, 'etc23.jpg', '/images/item/etc23.jpg', 'etc23.jpg', 'Y', 32), (64, 'etc24.jpg', '/images/item/etc24.jpg', 'etc24.jpg', 'N', 32);
+
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (33, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'etc', '신선한 맛과 향을 고스란히 담은 수제청', '수제과일청 고농축 청13', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (65, 'etc25.jpg', '/images/item/etc25.jpg', 'etc25.jpg', 'Y', 33), (66, 'etc26.jpg', '/images/item/etc26.jpg', 'etc26.jpg', 'N', 33);
 -- tool
 
 INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
@@ -100,6 +114,21 @@ INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_
 VALUES (20, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'tools', '클래식하고 고급스러운', '커피용품10', 'SELL', 11900, 100);
 INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
 VALUES (39, 'tool19.jpg', '/images/item/tool19.jpg', 'tool19.jpg', 'Y', 20), (40, 'tool20.jpg', '/images/item/tool20.jpg', 'tool20.jpg', 'N', 20);
+
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (34, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'tools', '클래식하고 고급스러운', '커피용품11', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (67, 'tool21.jpg', '/images/item/tool21.jpg', 'tool21.jpg', 'Y', 34), (68, 'tool22.jpg', '/images/item/tool22.jpg', 'tool22.jpg', 'N', 34);
+
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (35, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'tools', '클래식하고 고급스러운', '커피용품12', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (69, 'tool23.jpg', '/images/item/tool23.jpg', 'tool23.jpg', 'Y', 35), (70, 'tool24.jpg', '/images/item/tool24.jpg', 'tool24.jpg', 'N', 35);
+
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (36, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'tools', '클래식하고 고급스러운', '커피용품13', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (71, 'tool25.jpg', '/images/item/tool25.jpg', 'tool25.jpg', 'Y', 36), (72, 'tool26.jpg', '/images/item/tool26.jpg', 'tool26.jpg', 'N', 36);
 
 -- coffee
 
@@ -153,6 +182,20 @@ VALUES (30, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529
 INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
 VALUES (59, 'coffee19.jpg', '/images/item/coffee19.jpg', 'coffee19.jpg', 'Y', 30), (60, 'coffee20.jpg', '/images/item/coffee20.jpg', 'coffee20.jpg', 'N', 30);
 
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (37, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'coffee', '#와이니함과 은은한 초콜릿의 단맛', '커피11', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (73, 'coffee21.jpg', '/images/item/coffee21.jpg', 'coffee21.jpg', 'Y', 37), (74, 'coffee22.jpg', '/images/item/coffee22.jpg', 'coffee22.jpg', 'N', 37);
+
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (38, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'coffee', '#와이니함과 은은한 초콜릿의 단맛', '커피12', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (75, 'coffee23.jpg', '/images/item/coffee23.jpg', 'coffee23.jpg', 'Y', 38), (76, 'coffee24.jpg', '/images/item/coffee24.jpg', 'coffee24.jpg', 'N', 38);
+
+INSERT INTO item (item_id, reg_time, update_time, created_by, modified_by, item_category, item_detail, item_nm, item_sell_status, price, stock_number)
+VALUES (39, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'coffee', '#와이니함과 은은한 초콜릿의 단맛', '커피13', 'SELL', 11900, 100);
+INSERT INTO item_img (item_img_id, img_name, img_url, ori_img_name, rep_img_yn, item_id)
+VALUES (77, 'coffee25.jpg', '/images/item/coffee25.jpg', 'coffee25.jpg', 'Y', 39), (78, 'coffee26.jpg', '/images/item/coffee26.jpg', 'coffee26.jpg', 'N', 39);
 -- article
 
 INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by, article_type, content, title)
@@ -189,3 +232,37 @@ INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by,
 VALUES (16, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '카페&베이커리페어 참가', '카페&베이커리페어 참가업체 선정');
 INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by, article_type, content, title)
 VALUES (17, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '대구커피&카페박람회', '대구커피&카페박람회 참가업체 선정');
+INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by, article_type, content, title)
+VALUES (18, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '뉴스18', '뉴스18');
+INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by, article_type, content, title)
+VALUES (19, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '뉴스19', '뉴스19');
+INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by, article_type, content, title)
+VALUES (20, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '뉴스20', '뉴스20');
+INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by, article_type, content, title)
+VALUES (21, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '뉴스21', '뉴스21');
+INSERT INTO article (article_id, reg_time, update_time, created_by, modified_by, article_type, content, title)
+VALUES (22, '2023-12-13 15:50:19.335193', '2023-12-13 15:50:19.335193', 'dong529@naver.com', 'dong529@naver.com', 'NEWS', '뉴스22', '뉴스22');
+
+-- question
+INSERT INTO question(id, content, create_date, subject)
+VALUES (1, '문의사항1', '2023-12-13 15:50:19.335193', '문의사항1');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (2, '문의사항2', '2023-12-13 15:50:19.335193', '문의사항2');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (3, '문의사항3', '2023-12-13 15:50:19.335193', '문의사항3');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (4, '문의사항4', '2023-12-13 15:50:19.335193', '문의사항4');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (5, '문의사항5', '2023-12-13 15:50:19.335193', '문의사항5');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (6, '문의사항6', '2023-12-13 15:50:19.335193', '문의사항6');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (7, '문의사항7', '2023-12-13 15:50:19.335193', '문의사항7');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (8, '문의사항8', '2023-12-13 15:50:19.335193', '문의사항8');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (9, '문의사항9', '2023-12-13 15:50:19.335193', '문의사항9');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (10, '문의사항10', '2023-12-13 15:50:19.335193', '문의사항10');
+INSERT INTO question(id, content, create_date, subject)
+VALUES (11, '문의사항11', '2023-12-13 15:50:19.335193', '문의사항11');

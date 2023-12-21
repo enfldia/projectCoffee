@@ -164,18 +164,57 @@ public class ItemController {
                        Model model){
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0,9);
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
-        Page<CoffeeItemDto> coffeeitems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
-        Page<ToolsItemDto> toolsitems = itemService.getToolsItemPage(itemSearchDto, pageable);
-        Page<EtcItemDto> etcitems = itemService.getEtcItemPage(itemSearchDto, pageable);
+//        Page<CoffeeItemDto> coffeeItems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
+        Page<ToolsItemDto> toolsItems = itemService.getToolsItemPage(itemSearchDto, pageable);
+        Page<EtcItemDto> etcItems = itemService.getEtcItemPage(itemSearchDto, pageable);
 
         model.addAttribute("items", items);
-        model.addAttribute("coffeeItems", coffeeitems);
-        model.addAttribute("toolsItems", toolsitems);
-        model.addAttribute("etcItems", etcitems);
+//        model.addAttribute("coffeeItems", coffeeItems);
+        model.addAttribute("toolsItems", toolsItems);
+        model.addAttribute("etcItems", etcItems);
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage",5);
 
 
         return "/item/shopItem";
+    }
+
+    @GetMapping("/show/coffee")
+    public String showCoffee(ItemSearchDto itemSearchDto, Optional<Integer> page,
+                               Model model){
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() :0,12);
+        Page<CoffeeItemDto> coffeeItems = itemService.getCoffeeItemPage(itemSearchDto, pageable);
+
+        model.addAttribute("coffeeItems", coffeeItems);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage",5);
+
+        return "/item/showCoffee";
+    }
+
+    @GetMapping("/show/tools")
+    public String showTools(ItemSearchDto itemSearchDto, Optional<Integer> page,
+                             Model model){
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() :0,12);
+        Page<ToolsItemDto> toolsItems = itemService.getToolsItemPage(itemSearchDto, pageable);
+
+        model.addAttribute("toolsItems", toolsItems);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage",5);
+
+        return "/item/showTools";
+    }
+
+    @GetMapping("/show/etc")
+    public String showetc(ItemSearchDto itemSearchDto, Optional<Integer> page,
+                             Model model){
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() :0,12);
+        Page<EtcItemDto> etcItems = itemService.getEtcItemPage(itemSearchDto, pageable);
+
+        model.addAttribute("etcItems", etcItems);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage",5);
+
+        return "/item/showEtc";
     }
 }

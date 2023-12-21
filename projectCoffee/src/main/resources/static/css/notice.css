@@ -10,14 +10,14 @@ ul,li{list-style:none;padding-left:0 !important;}
     padding:0;
 }
 .customerTab{
-    width : 1500px;
+    width : 1550px;
 }
 .customerTab>li{
     float:left;
 }
 .customerTab>li>a{
     display:block;
-    width: 480px;
+    width: 500px;
     height : 60px;
     line-height : 60px;
     box-sizing: border-box;
@@ -31,6 +31,7 @@ ul,li{list-style:none;padding-left:0 !important;}
     color:#D26F64;
 
 }
+.on {font-weight: bold}
 fieldset {
     padding-bottom: 20px;
 }
@@ -58,21 +59,21 @@ div#articleSelect1 #searchArticleType{
     display: inline-block;
     position: relative;
     width: 108px;
-    height: 28px;
+    height: 36px;
     border: 1px solid #dedede;
 }
 div#articleSelect2 #searchDateType{
     display: inline-block;
     position: relative;
     width: 108px;
-    height: 28px;
+    height: 36px;
     border: 1px solid #dedede;
 }
 div#articleSelect3 #searchBy{
     display: inline-block;
     position: relative;
     width: 108px;
-    height: 28px;
+    height: 36px;
     border: 1px solid #dedede;
 }
 fieldset > div input[type=text] {
@@ -80,7 +81,7 @@ fieldset > div input[type=text] {
 }
 input[type=text] {
     padding: 0 15px;
-    height: 28px;
+    height: 36px;
     border: 1px solid #dedede;
     color: #777;
     line-height: 28px;
@@ -94,18 +95,19 @@ fieldset > div > a {
     line-height: 30px;
     text-align: center;
 }
-fieldset > div > button {
-    width: 71px;
-    height: 30px;
-    background: #000;
-    color: #fff;
-    line-height: 30px;
-    text-align: center;
-}
+
 table.articleList {
     width: 100%;
     border: 2px solid #000;
     border-width: 2px 0;
+}
+
+table.articleList .col1 {
+    width: 260px;
+}
+
+table.articleList .col2 {
+    width: 900px;
 }
 
 table.articleList .col3 {
@@ -179,6 +181,7 @@ table.articleList thead{
 }
 .cs em{
     padding : 0 10px;
+    color: #D26F64;
 }
 .cs p{
     color : #666;
