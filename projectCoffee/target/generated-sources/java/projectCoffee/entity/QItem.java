@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -30,12 +31,16 @@ public class QItem extends EntityPathBase<Item> {
 
     public final StringPath itemDetail = createString("itemDetail");
 
+    public final ListPath<ItemImg, QItemImg> itemImgList = this.<ItemImg, QItemImg>createList("itemImgList", ItemImg.class, QItemImg.class, PathInits.DIRECT2);
+
     public final StringPath itemNm = createString("itemNm");
 
     public final EnumPath<projectCoffee.constant.ItemSellStatus> itemSellStatus = createEnum("itemSellStatus", projectCoffee.constant.ItemSellStatus.class);
 
     //inherited
     public final StringPath modifiedBy = _super.modifiedBy;
+
+    public final ListPath<OrderItem, QOrderItem> orderItemList = this.<OrderItem, QOrderItem>createList("orderItemList", OrderItem.class, QOrderItem.class, PathInits.DIRECT2);
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);
 

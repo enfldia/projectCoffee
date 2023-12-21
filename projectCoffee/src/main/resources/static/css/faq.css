@@ -1,0 +1,128 @@
+a{text-decoration:none;color:#000;}
+ul,li{list-style:none;padding-left:0 !important;}
+.cf:after{
+    display:block;
+    content:'';
+    clear:both;
+}
+
+.cusSub{
+    margin:0;
+    padding:0;
+}
+.customerTab{
+
+    width : 1550px;
+
+}
+.customerTab>li{
+    float:left;
+}
+.customerTab>li>a{
+    display:block;
+    width: 500px;
+    height : 60px;
+    line-height : 60px;
+    box-sizing: border-box;
+    border : 1px solid #ddd;
+    font-size : 20px;
+    color : #666;
+    margin-top : 50px;
+}
+.customerTab>li>a:hover{
+    background-color : #ddd;
+    color:#D26F64
+
+}
+.on {font-weight: bold}
+.faqTab{
+    margin-top : 100px;
+    width : 1550px;
+
+}
+.faqTab>li{
+    float:left;
+    border : 1px solid #aaa;
+    border-bottom : 2px solid #555;
+}
+
+.faqTab>li>a{
+    display : block;
+    width : 500px;
+    height : 40px;
+    line-height : 40px;
+
+}
+.faqTab>li.active{
+      border : 1px solid #555;
+      border-bottom : none;
+      color:#333;
+      font-weight : bold;
+  }
+.faqTab>li>a:hover{
+     border : 2px solid #555;
+     border-bottom : none;
+     color:#D26F64;
+     font-weight : bold;
+}
+
+.faqCon{
+    width : 1500px;
+    margin : 0 auto;
+}
+.faqCon>dl{
+    width : 1500px;
+    margin : 80px 0;
+    border : 1px solid #ddd;
+}
+.faqCon .con1 dt,.faqCon .con2 dt,.faqCon .con3 dt{
+    height : 30px;
+    line-height : 30px;
+    font-size : 14px;
+    color : #666;
+    text-align : left;
+    text-indent : 3em;
+    margin : 10px 0;
+    border-bottom : 1px solid #ddd;
+}
+.faqCon dt>span{
+    color : #444;
+    margin : 0 5px;
+    font-size : 15px;
+
+}
+.faqCon .con1 dd,.faqCon .con2 dd,.faqCon .con3 dd{
+    border-bottom : 1px solid #ddd;
+    font-size : 12px;
+    color : #888;
+    text-align : left;
+    padding : 30px;
+}
+.faqCon dd>span{
+    color : #777;
+    font-size : 14px;
+    font-weight : bold;
+    float : left;
+}
+.faqCon dd p{
+    line-height: 20px;
+    text-indent : 1em;
+}
+.cusCenter{
+    border-top : 1px solid #ddd;
+    border-bottom :  1px solid #ddd;
+    padding : 100px 0;
+}
+.cusCenter .cs{
+    color : #222;
+    font-size : 20px;
+}
+.cs em{
+    padding : 0 10px;
+    color: #D26F64;
+}
+.cs p{
+    color : #666;
+    font-size : 14px;
+}
+
