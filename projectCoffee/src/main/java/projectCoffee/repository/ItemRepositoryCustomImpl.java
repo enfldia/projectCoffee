@@ -48,11 +48,11 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
         }
         return QItem.item.regTime.after(dateTime);
     }
-    private BooleanExpression searchByLike (String searchBy,String searchQuery){
+    private BooleanExpression searchByLike(String searchBy, String searchQuery){
 
-        if(StringUtils.equals("itemNm",searchBy)){
+        if(StringUtils.equals("itemNm", searchBy)){ //상품명을 검색하는 조건
             return QItem.item.itemNm.like("%" + searchQuery + "%");
-        } else if(StringUtils.equals("createdBy",searchQuery)){
+        } else if(StringUtils.equals("createdBy", searchBy)){ //작성자 검색조건
             return QItem.item.createdBy.like("%" + searchQuery + "%");
         }
         return null;
