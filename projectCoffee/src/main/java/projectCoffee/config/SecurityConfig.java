@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import projectCoffee.service.OAuth2MemberService;
+import projectCoffee.service.CustomOAuthService;
 
 
 @Configuration
@@ -19,7 +19,7 @@ import projectCoffee.service.OAuth2MemberService;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    private final OAuth2MemberService oAuth2MemberService;
+    private final CustomOAuthService customOAuthService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .loginPage("/members/login") //로그인이 필요한데 로그인을 하지 않았다면 이동할 uri 설정
                 .defaultSuccessUrl("/") //OAuth 로그인이 성공하면 이동할 uri 설정
                 .userInfoEndpoint()//로그인 완료 후 회원 정보 받기
-                .userService(oAuth2MemberService)//로그인 후 받아온 유저 정보 처리
+                .userService(customOAuthService)//로그인 후 받아온 유저 정보 처리
                 // logout
                 .and()
                 .and()

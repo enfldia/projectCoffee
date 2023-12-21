@@ -57,8 +57,11 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
 
     // 유저 생성 및 수정 서비스 로직
     private Member saveOrUpdate(OAuthAttributes attributes) {
-        Member member = Optional.ofNullable(this.memberRepository.findByEmail(attributes.getEmail()))
-                .orElse(attributes.toEntity());
+        Member member = memberRepository.findByEmail(attributes.getEmail());
+
+        if (member == null) {
+            member = attributes.toEntity();
+        }
         System.out.println("************************* 정보" + member.toString());
         return memberRepository.save(member);
 

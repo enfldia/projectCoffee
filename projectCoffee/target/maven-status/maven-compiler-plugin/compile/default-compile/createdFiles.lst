@@ -19,6 +19,7 @@ projectCoffee\constant\Role.class
 projectCoffee\service\ItemImgService.class
 projectCoffee\constant\OrderStatus.class
 projectCoffee\entity\QOrder.class
+projectCoffee\service\CartService.class
 projectCoffee\dto\ArticleDto.class
 projectCoffee\repository\ItemRepositoryCustomImpl.class
 projectCoffee\entity\Item.class

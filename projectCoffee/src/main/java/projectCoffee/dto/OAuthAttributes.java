@@ -45,8 +45,7 @@ public class OAuthAttributes {
 
         return OAuthAttributes.builder()
                 .name((String) kakaoProfile.get("nickname"))
-                .email((String) kakaoAccount.get("email"))
-
+                .email(String.valueOf((Long) attributes.get("id"))) // 멤버 식별을 위해 id값 주입
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -59,7 +58,7 @@ public class OAuthAttributes {
 
         return OAuthAttributes.builder()
                 .name((String) response.get("name"))
-                .email((String) response.get("email"))
+                .email((String) response.get("id")) // 멤버 식별을 위해 id값 주입
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -82,7 +81,6 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .role(Role.USER)
-                .phoneNum("SNS 가입자입니다.")
                 .build();
     }
 

@@ -28,6 +28,7 @@ public class MemberService implements UserDetailsService {
 
     public Member saveMember(Member member) {
         validateDuplicateMember(member);
+        System.out.println("******************멤버 이메일"+member.getEmail());
         return memberRepository.save(member);
     }
 

@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URLEncoder;
 import java.security.Principal;
 
 
@@ -88,7 +86,23 @@ public class MemberController {
     // 회원 정보 조회, 변경 (POST)
     @PostMapping(value = "/update")
     public String updateMember(@Valid MemberUpdateDto memberUpdateDto, BindingResult bindingResult, Principal principal, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errorMsg", "회원 정보 수정에 실패했습니다.");
+            return "member/memberUpdateForm";
+        }
         try {
+            if (principal.getName().equals(memberUpdateDto.getEmail())) {
+                memberService.updateMember((memberUpdateDto));
+                model.addAttribute("successMsg", "회원 정보 수정이 완료되었습니다.");
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", "오류가 발생했습니다.");
+            return "member/memberUpdateForm";
+        }
+        return "redirect:/";
+
+        /*
+          try {
             if (principal.getName().equals(memberUpdateDto.getEmail())) {
                 memberService.updateMember((memberUpdateDto));
                 if (bindingResult.hasErrors()) {
@@ -101,7 +115,7 @@ public class MemberController {
             model.addAttribute("errorMsg", "오류가 발생했습니다.");
             return "member/memberUpdateForm";
         }
-        return "redirect:/";
+        return "redirect:/";*/
     }
 
     // 회원 삭제

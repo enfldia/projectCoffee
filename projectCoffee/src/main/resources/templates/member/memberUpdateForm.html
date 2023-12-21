@@ -12,7 +12,35 @@
 <th:block layout:fragment="script">
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script type="text/javascript" th:src="@{/js/address.js}"></script>
-    <script type="text/javascript" th:src="@{/js/memberUpdateForm.js}"></script>
+    <script th:inline="javascript">
+        // 알림창
+        function showAlert() {
+            const successMsg = [[${successMsg}]];
+            const errorMsg = [[${errorMsg}]];
+
+            if (successMsg) {
+                alert(successMsg);
+            }
+            if (errorMsg) {
+                alert(errorMsg);
+            }
+        }
+
+        // showAlert 함수를 페이지 로딩 시 호출
+            $(document).ready(function() {
+                  showAlert();
+              });
+
+        // 회원 탈퇴 확인
+        function deleteMember() {
+            if (confirm('삭제하시면 복구할수 없습니다. \n 정말로 삭제하시겠습니까?')) {
+                window.location.href = "/members/delete/[[${memberUpdateDto.id}]]";
+            } else {
+                return false;
+            }
+        }
+    </script>
+
 </th:block>
 
 <div layout:fragment="content">
@@ -66,7 +94,7 @@
 
             <div class="btnGroup">
                 <button type="button" class="cancelBtn" onclick="location.href='/'">취소</button>
-                <button type="submit" class="editBtn">수정하기</button>
+                <button type="submit" class="editBtn" th:formaction="@{/members/update}">수정하기</button>
             </div>
 
             <button type="button" class="deleteBtn" onclick="deleteMember()">탈퇴하기</button>
