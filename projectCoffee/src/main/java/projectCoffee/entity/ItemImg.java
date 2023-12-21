@@ -2,17 +2,20 @@ package projectCoffee.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "item_img")
 @Getter
 @Setter
+@ToString
 public class ItemImg {
     @Id
     @Column(name = "item_img_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String imgName; //이미지 파일명

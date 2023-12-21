@@ -8,6 +8,8 @@ import projectCoffee.dto.ItemFormDto;
 import projectCoffee.exception.OutOfStockException;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -18,7 +20,7 @@ public class Item extends BaseEntity{
 
     @Id
     @Column(name = "item_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; //상품코드
 
     @Column(nullable = false, length = 50)
@@ -37,9 +39,14 @@ public class Item extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
-
     private String itemCategory; // 상품 분류
 
+
+    @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
+    List<ItemImg> itemImgList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
+    List<OrderItem> orderItemList = new ArrayList<>();
 
     public void updateItem(ItemFormDto itemFormDto){
         this.itemNm = itemFormDto.getItemNm();
@@ -62,5 +69,4 @@ public class Item extends BaseEntity{
     }
 
 }
-
 

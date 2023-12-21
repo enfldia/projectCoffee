@@ -1,0 +1,189 @@
+a{text-decoration:none;color:#000;}
+ul,li{list-style:none;padding-left:0 !important;}
+.cf:after{
+    display:block;
+    content:'';
+    clear:both;
+}
+.cusSub{
+    margin:0;
+    padding:0;
+}
+.customerTab{
+    width : 1550px;
+}
+.customerTab>li{
+    float:left;
+}
+.customerTab>li>a{
+    display:block;
+    width: 500px;
+    height : 60px;
+    line-height : 60px;
+    box-sizing: border-box;
+    border : 1px solid #ddd;
+    font-size : 20px;
+    color : #666;
+    margin-top : 50px;
+}
+.customerTab>li>a:hover{
+    background-color : #ddd;
+    color:#D26F64;
+
+}
+.on {font-weight: bold}
+fieldset {
+    padding-bottom: 20px;
+}
+legend {
+    position: absolute;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    text-indent: -5000px;
+}
+fieldset > div {
+    float: right;
+}
+fieldset > div > * {
+    float: left;
+    margin-left: 10px;
+}
+
+#search{height: 36px;}
+
+div#articleSelect1 #searchArticleType{
+    display: inline-block;
+    position: relative;
+    width: 108px;
+    height: 36px;
+    border: 1px solid #dedede;
+}
+div#articleSelect2 #searchDateType{
+    display: inline-block;
+    position: relative;
+    width: 108px;
+    height: 36px;
+    border: 1px solid #dedede;
+}
+div#articleSelect3 #searchBy{
+    display: inline-block;
+    position: relative;
+    width: 108px;
+    height: 36px;
+    border: 1px solid #dedede;
+}
+fieldset > div input[type=text] {
+    font-weight: 300;
+}
+input[type=text] {
+    padding: 0 15px;
+    height: 36px;
+    border: 1px solid #dedede;
+    color: #777;
+    line-height: 28px;
+    font-size: 13px;
+}
+fieldset > div > a {
+    width: 71px;
+    height: 30px;
+    background: #000;
+    color: #fff;
+    line-height: 30px;
+    text-align: center;
+}
+
+table.articleList {
+    width: 100%;
+    border: 2px solid #000;
+    border-width: 2px 0;
+}
+
+table.articleList .col1 {
+    width: 260px;
+}
+
+table.articleList .col2 {
+    width: 900px;
+}
+
+table.articleList .col3 {
+    width: 260px;
+}
+table.articleList th {
+    height: 50px;
+    color: #000;
+    font-size: 13px;
+    font-weight: 400;
+    vertical-align: middle;
+}
+table.articleList td.sub {
+    padding-left: 20px;
+    text-align: left;
+}
+table.articleList #tbl_alist td.sub {
+    padding-left:50px;
+    text-align: left;
+}
+table.articleList td a {
+    font-size: 14px;
+    color : #333;
+}
+table.articleList #tbl_alist tr:last-child{
+    border-bottom :  1px solid #ddd;
+}
+table.articleList td {
+    height: 50px;
+    border-top: 1px solid #dedede;
+    font-size: 13px;
+    vertical-align: middle;
+    text-align: center;
+}
+table.articleList thead{
+    border-bottom :  1px solid #ddd;
+}
+
+
+
+
+
+
+
+.paging {
+    clear: both;
+    text-align: center;
+}
+.paging > div {
+    display: inline-block;
+    padding-top: 17px;
+}
+.paging #div_pageNavi .pagination li{
+    border: 1px solid #dedede;
+}
+.paging #div_pageNavi .pagination li a span{
+     height : 15px;
+     line-height : 15px;
+     font-size : 14px;
+}
+
+
+.cusCenter{
+    border-top : 1px solid #ddd;
+    border-bottom :  1px solid #ddd;
+    padding : 100px 0;
+}
+.cusCenter .cs{
+    color : #222;
+    font-size : 20px;
+}
+.cs em{
+    padding : 0 10px;
+    color: #D26F64;
+}
+.cs p{
+    color : #666;
+    font-size : 14px;
+}

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 import projectCoffee.dto.*;
 import projectCoffee.entity.Item;
 import projectCoffee.entity.ItemImg;
@@ -16,6 +17,8 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static projectCoffee.entity.QItemImg.itemImg;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -25,7 +28,8 @@ public class ItemService {
     private final ItemImgService itemImgService;
     private final ItemImgRepository itemImgRepository;
 
-    public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
+    public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList)
+            throws Exception{
         //상품 등록
         Item item = itemFormDto.createItem();
         itemRepository.save(item);
@@ -72,16 +76,31 @@ public class ItemService {
         Item item = itemRepository.findById(itemFormDto.getId())
                 .orElseThrow(EntityNotFoundException::new);
         //1. 상품등록 화면으로부터 전달받은 상품 아이디를 이용하여 상품엔티티 조회
+
         item.updateItem(itemFormDto);
         //2. 상품등록 화면으로부터 전달받은 itemFormDto 통해 상품 엔티티 업데이트
         List<Long> itemImgIds = itemFormDto.getItemImgIds();
+
+
+        if(itemImgIds.size() != itemImgFileList.size()){
+            List<Long> newItemImgIds = new ArrayList<>();
+            //이미지 등록
+            for(int i= itemImgIds.size();i<itemImgFileList.size();i++){
+                ItemImg itemImg = new ItemImg();
+                itemImg.setItem(item);
+                itemImg.setRepImgYn("n");
+                itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
+                newItemImgIds.add(itemImg.getId());
+            }
+            itemImgIds.addAll(newItemImgIds);
+            //addAll로 앞에 리스트 안에 () 가로 속 리스트를 병합시킴.
+        }
+
         //itemFormDto에서 항목 이미지 Id 목록을 가져옵니다.
         //(상품이미지 아이디 리스트를 조회)
         //이미지 등록
         for(int i=0;i<itemImgFileList.size();i++) {
-            //if(!StringUtils.isEmpty(itemImgFileList.get(i).getOriginalFilename())) {
-            itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
-            //}
+                itemImgService.updateItemImg(itemImgIds.get(i), itemImgFileList.get(i));
         }
         //itemImgFileList를 반복하면서 각 이미지에 대해
         //itemService의 updateItemImg 메서드를 호출합니다.
@@ -89,8 +108,6 @@ public class ItemService {
         //get(0) 첫번째 요소
         //상품이미지 업데이트를 통해 updateItemImg 메소드
         //상품이미지 아이디, 상품이미지 파일정보를 파라메타로 전달
-        System.out.println("11111111111111111111111111111register time : " + item.getRegTime());
-        System.out.println("11111111111111111111111111111update time : " + item.getUpdateTime());
         return item.getId();
     }
 
@@ -117,5 +134,13 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<EtcItemDto> getEtcItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getEtcItemPage(itemSearchDto, pageable);
+    }
+
+    public void deleteItem(Long itemId) {
+
+       Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
+       itemRepository.delete(item);
+
+
     }
 }

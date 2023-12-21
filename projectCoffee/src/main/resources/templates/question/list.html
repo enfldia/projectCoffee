@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<th:block layout:fragment="css">
+    <link th:href="@{/css/question.css}" rel="stylesheet">
+</th:block>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+    $(document).ready(function() {
+        $(".page-link").on("click", function(event) {
+            event.preventDefault();
+            $("#page").val($(this).data("page"));
+            $("#searchForm").submit();
+        });
+        $("#btn_search").on("click", function(event) {
+            event.preventDefault();
+            $("#kw").val($("#search_kw").val());
+            $("#page").val(0);
+            $("#searchForm").submit();
+        });
+    });
+    </script>
+</th:block>
+<div layout:fragment="content">
+    <div class="cscenter">
+        <div class="text-center">
+            <h2 class="display-5 mb-3">고객 센터</h2>
+            <p style="color:#777;font-size:15px;">고객님의 질문에 성심껏 답변해 드리겠습니다.</p>
+            <div class="cusSub">
+                <ul class="customerTab cf">
+                    <li><a href="/CsCenter/faq">FAQ</a></li>
+                    <li><a href="/CsCenter/notices">공지사항</a></li>
+                    <li class="on"><a href="/question/list">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-9">
+                <a th:href="@{/question/create}" class="btn btn-info" sec:authorize="isAuthenticated()">문의사항등록</a>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <input type="text" id="search_kw" class="form-control" th:value="${kw}" placeholder="검색어를 입력해주세요.">
+                    <button class="btn btn-dark" type="button" id="btn_search">검 색</button>
+                </div>
+            </div>
+        </div>
+        <table class="articleList cf table" style="border:0;">
+            <colgroup>
+                <col class="col1">
+                <col class="col2">
+                <col class="col3">
+                <col class="col4">
+            </colgroup>
+            <thead>
+            <tr class="text-center">
+                <th>번 호</th>
+                <th style="width:50%">제 목</th>
+                <th>작 성 자</th>
+                <th>작 성 일 시</th>
+            </tr>
+            </thead>
+            <tbody id="tbl_alist">
+            <tr class="text-center" th:each="question, loop : ${paging}">
+            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+                <td class="sub">
+                    <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+                    <span class="text-danger small ms-2"
+                          th:if="${#lists.size(question.answerList) > 0}"
+                          th:text="${#lists.size(question.answerList)}">
+                    </span>
+                </td>
+                <td><span th:if="${question.member != null}" th:text="${question.member.email}"></span></td>
+                <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 페 이 징 처 리 시 작 -->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${(paging.number)-1}">
+                        <span>이 전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(1, (paging.totalPages))}"
+                    th:if="${page >= (paging.number)-5 and page <= (paging.number)+5}"
+                    th:classappend="${(page)-1 == paging.number} ? 'active'" class="page-item">
+                    <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}-1"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${(paging.number)+1}">
+                        <span>다 음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 페 이 징 처 리 끝 -->
+        <form th:action="@{/question/list}" method="get" id="searchForm">
+        <input type="hidden" id="kw" name="kw" th:value="${kw}">
+        <input type="hidden" id="page" name="page" th:value="${paging.number}">
+        </form>
+        <div class="cusCenter cf">
+            <div class="cs">
+                <span>고객상담센터<em>051-123-4567</em></span>
+                <p>cr@coffee.co.kr</p>
+                <p>Holiday 토요일/일요일/법정공휴일</p>
+                <p>Lunch PM 12:00 ~ 13:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -7,8 +7,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import projectCoffee.dto.MemberUpdateDto;
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 
 @Service
 @Transactional
@@ -16,6 +21,10 @@ import projectCoffee.repository.MemberRepository;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     public Member saveMember(Member member) {
         validateDuplicateMember(member);
@@ -29,6 +38,7 @@ public class MemberService implements UserDetailsService {
 
         }
     }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email);
@@ -42,7 +52,19 @@ public class MemberService implements UserDetailsService {
                 .build();
     }
 
+    public MemberUpdateDto getMemberDtl (Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(EntityNotFoundException::new);
+        // member 정보를 memberUpdateDto로 변환합니다.
+        MemberUpdateDto memberUpdateDto = MemberUpdateDto.of(member);
+        return memberUpdateDto;
+    }
 
+    // 회원 정보 수정
+    public Long updateMember (MemberUpdateDto memberUpdateDto) {
+        Member member = memberRepository.findByEmail(memberUpdateDto.getEmail());
+        member.updateMember(memberUpdateDto);
 
+        return member.getId();
+    }
 
 }

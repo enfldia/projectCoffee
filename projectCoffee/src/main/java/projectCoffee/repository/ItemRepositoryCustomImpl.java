@@ -1,7 +1,5 @@
 package projectCoffee.repository;
 
-import com.querydsl.core.Query;
-import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -50,11 +48,11 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
         }
         return QItem.item.regTime.after(dateTime);
     }
-    private BooleanExpression searchByLike (String searchBy,String searchQuery){
+    private BooleanExpression searchByLike(String searchBy, String searchQuery){
 
-        if(StringUtils.equals("itemNm",searchBy)){
+        if(StringUtils.equals("itemNm", searchBy)){ //상품명을 검색하는 조건
             return QItem.item.itemNm.like("%" + searchQuery + "%");
-        } else if(StringUtils.equals("createBy",searchQuery)){
+        } else if(StringUtils.equals("createdBy", searchBy)){ //작성자 검색조건
             return QItem.item.createdBy.like("%" + searchQuery + "%");
         }
         return null;
@@ -93,7 +91,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
 
     @Override
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,
-                                              Pageable pageable){
+                                              Pageable mainPageable){
         QItem item = QItem.item;
          QItemImg itemImg = QItemImg.itemImg;
         //QItem과 QitemImg를 사용해서 QueryDsl에서 사용할 수 있는 객체 정의
@@ -111,8 +109,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                  .where(itemImg.repImgYn.eq("Y")) // 대표이미지 와
                  .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
                  .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
-                 .offset(pageable.getOffset())
-                 .limit(pageable.getPageSize()) //페이지 네이션처리
+                 .offset(mainPageable.getOffset())
+                 .limit(mainPageable.getPageSize()) //페이지 네이션처리
                  .fetch(); //쿼리 결과를 리스트로 반환
          long total = queryFactory
                  .select(Wildcard.count) //전체 갯수 확인
@@ -122,12 +120,12 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                  .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
                  .fetchOne() //궈리 결과를 단일 값으로 반환
                  ; //전체 갯수를 조회
-         return  new PageImpl<>(content, pageable, total);
+         return  new PageImpl<>(content, mainPageable, total);
          //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
      }
     @Override
     public Page<CoffeeItemDto> getCoffeeItemPage(ItemSearchDto itemSearchDto,
-                                                 Pageable pageable){
+                                                 Pageable coffeePageable){
         QItem item = QItem.item;
         QItemImg itemImg = QItemImg.itemImg;
         //QItem과 QitemImg를 사용해서 QueryDsl에서 사용할 수 있는 객체 정의
@@ -138,32 +136,41 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                                 item.itemNm,
                                 item.itemDetail,
                                 itemImg.imgUrl,
-                                item.price)
+                                item.price,
+                                item.itemCategory
+                        )
                 )
                 .from(itemImg)
                 .join(itemImg.item, item) //itemImg /item 조인하여
-                .where(itemImg.repImgYn.eq("Y")) // 대표이미지 와
-                .where(itemImg.item.itemCategory.like("COFFEE")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
+                .where(
+                        itemImg.repImgYn.eq("Y"),
+                        itemImg.item.itemCategory.like("COFFEE")
+                )// 대표이미지 와
+//                .where(itemImg.item.itemCategory.like("COFFEE")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
                                                                      // 아이템 엔티티의 필드값인 아이템 카테고리의 값을 검색
                 .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize()) //페이지 네이션처리
+                .offset(coffeePageable.getOffset())
+                .limit(coffeePageable.getPageSize()) //페이지 네이션처리
                 .fetch(); //쿼리 결과를 리스트로 반환
         long total = queryFactory
                 .select(Wildcard.count) //전체 갯수 확인
                 .from(itemImg) //itemImg 테이블에서
                 .join(itemImg.item, item) //itemImg 와 item 조인해서
-                .where(itemImg.repImgYn.eq("Y")) //대표이미지와
+                .where(
+                        itemImg.repImgYn.eq("Y"),
+                        itemImg.item.itemCategory.like("COFFEE")
+                ) //대표이미지와
+//                .where(itemImg.item.itemCategory.like("COFFEE"))
                 .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
                 .fetchOne() //궈리 결과를 단일 값으로 반환
                 ; //전체 갯수를 조회
-        return  new PageImpl<>(content, pageable, total);
+        return  new PageImpl<>(content, coffeePageable, total);
         //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
     }
 
     @Override
     public Page<EtcItemDto> getEtcItemPage(ItemSearchDto itemSearchDto,
-                                                 Pageable pageable){
+                                                 Pageable etcPageable){
         QItem item = QItem.item;
         QItemImg itemImg = QItemImg.itemImg;
         //QItem과 QitemImg를 사용해서 QueryDsl에서 사용할 수 있는 객체 정의
@@ -174,32 +181,41 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                                 item.itemNm,
                                 item.itemDetail,
                                 itemImg.imgUrl,
-                                item.price)
+                                item.price,
+                                item.itemCategory
+                        )
                 )
                 .from(itemImg)
                 .join(itemImg.item, item) //itemImg /item 조인하여
-                .where(itemImg.repImgYn.eq("Y")) // 대표이미지 와
-                .where(itemImg.item.itemCategory.like("ETC")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
+                .where(
+                        itemImg.repImgYn.eq("Y"),
+                        itemImg.item.itemCategory.like("ETC")
+                ) // 대표이미지 와
+//                .where(itemImg.item.itemCategory.like("ETC")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
                 // 아이템 엔티티의 필드값인 아이템 카테고리의 값을 검색
                 .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize()) //페이지 네이션처리
+                .offset(etcPageable.getOffset())
+                .limit(etcPageable.getPageSize()) //페이지 네이션처리
                 .fetch(); //쿼리 결과를 리스트로 반환
         long total = queryFactory
                 .select(Wildcard.count) //전체 갯수 확인
                 .from(itemImg) //itemImg 테이블에서
                 .join(itemImg.item, item) //itemImg 와 item 조인해서
-                .where(itemImg.repImgYn.eq("Y")) //대표이미지와
+                .where(
+                        itemImg.repImgYn.eq("Y"),
+                        itemImg.item.itemCategory.like("ETC")
+                )//대표이미지와
+//                .where(itemImg.item.itemCategory.like("ETC"))
                 .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
                 .fetchOne() //궈리 결과를 단일 값으로 반환
                 ; //전체 갯수를 조회
-        return  new PageImpl<>(content, pageable, total);
+        return  new PageImpl<>(content, etcPageable, total);
         //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
     }
 
     @Override
     public Page<ToolsItemDto> getToolsItemPage(ItemSearchDto itemSearchDto,
-                                                 Pageable pageable){
+                                                 Pageable toolsPageable){
         QItem item = QItem.item;
         QItemImg itemImg = QItemImg.itemImg;
         //QItem과 QitemImg를 사용해서 QueryDsl에서 사용할 수 있는 객체 정의
@@ -210,26 +226,35 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                                 item.itemNm,
                                 item.itemDetail,
                                 itemImg.imgUrl,
-                                item.price)
+                                item.price,
+                                item.itemCategory
+                        )
                 )
                 .from(itemImg)
                 .join(itemImg.item, item) //itemImg /item 조인하여
-                .where(itemImg.repImgYn.eq("Y")) // 대표이미지 와
-                .where(itemImg.item.itemCategory.like("TOOLS")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
+                .where(
+                        itemImg.repImgYn.eq("Y"),
+                        itemImg.item.itemCategory.like("TOOLS")
+                ) // 대표이미지 와
+//                .where(itemImg.item.itemCategory.like("TOOLS")) //아이템이미지에 있는 아이템 필드를 이용해서 아이템 엔티티에 접근.
                 // 아이템 엔티티의 필드값인 아이템 카테고리의 값을 검색
                 .orderBy(item.id.desc()) //상품id를 기준으로 내림차순 정렬(최신이 위로)
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize()) //페이지 네이션처리
+                .offset(toolsPageable.getOffset())
+                .limit(toolsPageable.getPageSize()) //페이지 네이션처리
                 .fetch(); //쿼리 결과를 리스트로 반환
         long total = queryFactory
                 .select(Wildcard.count) //전체 갯수 확인
                 .from(itemImg) //itemImg 테이블에서
                 .join(itemImg.item, item) //itemImg 와 item 조인해서
-                .where(itemImg.repImgYn.eq("Y")) //대표이미지와
+                .where(
+                        itemImg.repImgYn.eq("Y"),
+                        itemImg.item.itemCategory.like("TOOLS")
+                ) //대표이미지와
+//                .where(itemImg.item.itemCategory.like("TOOLS"))
                 .where(itemNmLike(itemSearchDto.getSearchQuery())) //상품명 검색
                 .fetchOne() //궈리 결과를 단일 값으로 반환
                 ; //전체 갯수를 조회
-        return  new PageImpl<>(content, pageable, total);
+        return  new PageImpl<>(content, toolsPageable, total);
         //PageImple 를 사용하여 페이지 네이션 될 결과를 page<MainItemDto> 형태로 반환
     }
 

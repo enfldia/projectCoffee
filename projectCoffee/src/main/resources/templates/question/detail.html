@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layouts/layout1}">
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function (){
+           $(".delete").on("click", function (){
+               if(window.confirm("정 말 로 삭 제 하 시 겠 습 니 까?")) {
+                   location.href = this.dataset.uri;
+               }
+           });
+        });
+        $(document).ready(function (){
+            $(".recommend").on("click", function (){
+                if(window.confirm("정 말 로 추 천 하 시 겠 습 니 까?")) {
+                    location.href = this.dataset.uri;
+                }
+            });
+        });
+        // const delete_elements = document.getElementsByClassName("delete");
+        // Array.from(delete_elements).forEach(function(element) {
+        //     element.addEventListener('click', function() {
+        //         if(window.confirm("정 말 로 삭 제 하 시 겠 습 니 까?")) {
+        //             location.href = this.dataset.uri;
+        //         }
+        //     });
+        // });
+    </script>
+</th:block>
+    <div layout:fragment="content">
+        <div class="container my-3">
+            <!-- 질 문 -->
+            <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
+            <div class="card my-3">
+                <div class="card-body">
+                    <div class="card-text" th:utext="${@commonUtil.markdown(question.content)}"></div>
+                    <div class="d-flex justify-content-end">
+                        <div th:if="${question.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">
+                            <div class="mb-2" th:text="${question.member.email}"></div>
+                            <div th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                        <div class="badge bg-light text-dark p-2 text-start">
+                            <div class="mb-2">
+                                <span th:if="${question.member != null}" th:text="${question.member.email}"></span>
+                            </div>
+                            <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                    <div class="my-3">
+                        <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
+                           th:data-uri="@{|/question/vote/${question.id}|}" sec:authorize="isAuthenticated()">
+                            추천
+                            <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>
+                        </a>
+                        <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm btn-outline-secondary"
+                           sec:authorize="isAuthenticated()"
+                           th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.email}">수정</a>
+                        <a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}"
+                           class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+                           th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.email}">삭제</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- 답 변 의 갯 수 표 시 -->
+            <h5 class="border-bottom my-3 py-2"
+                th:text="|${#lists.size(question.answerList)}개 의 답 변 이 있 습 니 다.|"></h5>
+            <!-- 답 변 반 복 시 작 -->
+            <div class="card my-3" th:each="answer : ${question.answerList}">
+                <a th:id="|answer_${answer.id}|"></a>
+                <div class="card-body">
+                    <div class="card-text" th:utext="${@commonUtil.markdown(answer.content)}"></div>
+                    <div class="d-flex justify-content-end">
+                        <div th:if="${answer.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">
+                            <div class="mb-2" th:text="${answer.member.email}"></div>
+                            <div th:text="${#temporals.format(answer.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                        <div class="badge bg-light text-dark p-2 text-start">
+                            <div class="mb-2">
+                                <span th:if="${answer.member != null}" th:text="${answer.member.email}"></span>
+                            </div>
+                            <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                    <div class="my-3">
+                        <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
+                           th:data-uri="@{|/answer/vote/${answer.id}|}" sec:authorize="isAuthenticated()">
+                            추천
+                            <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>
+                        </a>
+                        <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary"
+                           sec:authorize="isAuthenticated()"
+                           th:if="${answer.member != null and #authentication.getPrincipal().getUsername() == answer.member.email}">수정</a>
+                        <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
+                           class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
+                           th:if="${answer.member != null and #authentication.getPrincipal().getUsername() == answer.member.email}">삭제</a>
+
+                    </div>
+                </div>
+            </div>
+            <!-- 답 변 반 복 끝 -->
+            <!-- 답 변 작 성 -->
+            <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerDto}" method="post" class="my-3">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+                    <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                </div>
+                <textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" rows="10" class="form-control"></textarea>
+                <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
+                <input type="submit" value="답 변 등 록" class="btn btn-info my-2" sec:authorize="isAuthenticated()">
+                <a href="/question/list" class="btn btn-info my-2">목록</a>
+        </form>
+    </div>
+</div>
+</html>
