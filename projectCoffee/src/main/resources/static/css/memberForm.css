@@ -1,7 +1,5 @@
-.fieldError, #confirmMsg {
-    color: #D26F64;
-    font-size: 0.9rem;
-    margin-top: 2px;
+.fieldError {
+    color: #bd2130;
 }
 
 .joinWrap {
@@ -26,16 +24,13 @@ label {
 }
 
 .form-group p {
-
+    font-size: 0.9rem;
+    margin-top: 2px;
 }
 
-#zipCode {
+#address {
     width: 40%;
     display: inline-block;
-}
-
-.streetAddress {
-    top: 5px;
 }
 
 .searchBtn {
@@ -46,6 +41,7 @@ label {
 }
 
 .btnGroup {
+    /*border-radius: 0;*/
     width: 300px;
     display: flex;
     justify-content: space-between;

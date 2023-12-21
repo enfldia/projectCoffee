@@ -1,7 +1,10 @@
 .fieldError {
-    color: #D26F64;
-    font-size: 0.9rem;
-    margin-top: 2px;
+    color: #bd2130;
+}
+
+a {
+    text-decoration: none;
+    color: #111111;
 }
 
 .updateWrap {
@@ -21,30 +24,18 @@ label {
     margin: 16px 0 8px;
 }
 
-.labelSub {
-    display: flex;
-    justify-content: space-between;
-}
-
-.note {
-    margin: 20px 0 4px;
-    display: inline-block;
-    font-size: 0.8rem;
-    color: #555555;
-    vertical-align: bottom;
-}
-
 .updateWrap .form-control {
     border-radius: 0;
 }
 
-#zipCode {
-    width: 40%;
-    display: inline-block;
+.form-group p {
+    font-size: 0.9rem;
+    margin-top: 2px;
 }
 
-.streetAddress {
-    top: 5px;
+#address {
+    width: 40%;
+    display: inline-block;
 }
 
 .searchBtn {
@@ -61,14 +52,14 @@ label {
     margin: 40px auto;
 }
 
-.editBtn, .cancelBtn, .deleteBtn {
+.editBtn, .homeBtn, .deleteBtn {
     width: 145px;
     height: 45px;
     border: none;
     border-radius: 0;
 }
 
-.cancelBtn {
+.homeBtn {
     border: 1px solid #bbbbbb;
     background-color: #fff;
     color: #222222;
