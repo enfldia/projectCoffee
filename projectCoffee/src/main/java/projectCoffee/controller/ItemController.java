@@ -189,7 +189,7 @@ public class ItemController {
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage",5);
 
-        return "/item/showCoffee";
+        return "item/showCoffee";
     }
 
     @GetMapping("/show/tools")
@@ -202,7 +202,7 @@ public class ItemController {
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage",5);
 
-        return "/item/showTools";
+        return "item/showTools";
     }
 
     @GetMapping("/show/etc")
@@ -215,6 +215,6 @@ public class ItemController {
         model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage",5);
 
-        return "/item/showEtc";
+        return "item/showEtc";
     }
 }
