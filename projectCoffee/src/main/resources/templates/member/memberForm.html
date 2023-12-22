@@ -2,11 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
-<header>
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-
-</header>
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
@@ -18,24 +13,7 @@
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script type="text/javascript" th:src="@{/js/address.js}"></script>
     <script th:inline="javascript">
-        // csrf
-        const token = $("meta[name='_csrf']").attr("content")
-        const header = $("meta[name='_csrf_header']").attr("content");
-        const name = $("#userName").val();
-
-        $.ajax({
-            type:"POST",
-            url:"/comments/save/reply/" + data.writer_id,
-            dataType : 'json',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(data),
-            cache : false,
-
-            //추가해야 하는 부분
-            beforeSend : function(xhr) {
-                xhr.setRequestHeader(header, token);
-            },
-
+        // 알림창
         function showAlert() {
             const successMsg = [[${successMsg}]];
             const errorMsg = [[${errorMsg}]];
