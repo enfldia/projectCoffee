@@ -99,7 +99,7 @@ public class MemberController {
             model.addAttribute("errorMsg", "오류가 발생했습니다.");
             return "member/memberUpdateForm";
         }
-        return "redirect:/";
+        return "member/memberUpdateForm";
 
         /*
           try {
