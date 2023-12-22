@@ -62,8 +62,6 @@ public class CustomOAuthService implements OAuth2UserService<OAuth2UserRequest, 
         if (member == null) {
             member = attributes.toEntity();
         }
-        System.out.println("************************* 정보" + member.toString());
         return memberRepository.save(member);
-
     }
 }

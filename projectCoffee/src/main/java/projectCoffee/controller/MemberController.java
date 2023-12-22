@@ -52,13 +52,15 @@ public class MemberController {
     public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("errorMsg", "회원 가입을 실패했습니다.");
             return "member/memberForm";
         }
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
+            model.addAttribute("successMsg", "회원 가입을 완료했습니다. 환영합니다!");
         } catch (IllegalStateException e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("errorMsg", "오류가 발생했습니다.");
             return "member/memberForm";
         }
         return "redirect:/";
@@ -71,7 +73,7 @@ public class MemberController {
     }
 
 
-    // 회원 정보 변경 폼 (GET)
+    // 회원 정보 조회
     @GetMapping(value = "/info")
     public String updateMemberForm(Principal principal, Model model) {
         if (principal != null) {
@@ -83,7 +85,7 @@ public class MemberController {
         return "member/memberUpdateForm";
     }
 
-    // 회원 정보 조회, 변경 (POST)
+    // 회원 정보 수정
     @PostMapping(value = "/update")
     public String updateMember(@Valid MemberUpdateDto memberUpdateDto, BindingResult bindingResult, Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
@@ -100,23 +102,7 @@ public class MemberController {
             return "member/memberUpdateForm";
         }
         return "member/memberUpdateForm";
-
-        /*
-          try {
-            if (principal.getName().equals(memberUpdateDto.getEmail())) {
-                memberService.updateMember((memberUpdateDto));
-                if (bindingResult.hasErrors()) {
-                    model.addAttribute("errorMsg", "회원 정보 수정에 실패했습니다.");
-                    return "member/memberUpdateForm";
-                }
-                model.addAttribute("successMsg", "회원 정보 수정이 완료되었습니다.");
-            }
-        } catch (Exception e) {
-            model.addAttribute("errorMsg", "오류가 발생했습니다.");
-            return "member/memberUpdateForm";
-        }
-        return "redirect:/";*/
-    }
+}
 
     // 회원 삭제
     @GetMapping("/delete/{memberId}")
