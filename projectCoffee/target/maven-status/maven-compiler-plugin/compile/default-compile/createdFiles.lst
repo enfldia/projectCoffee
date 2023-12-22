@@ -36,7 +36,6 @@ projectCoffee\entity\QOrderItem.class
 projectCoffee\entity\QAnswer.class
 projectCoffee\dto\QToolsItemDto.class
 projectCoffee\service\ArticleService.class
-projectCoffee\service\OAuth2MemberService.class
 projectCoffee\repository\ArticleRepositoryCustomImpl.class
 projectCoffee\repository\CartRepository.class
 projectCoffee\controller\MemberController.class

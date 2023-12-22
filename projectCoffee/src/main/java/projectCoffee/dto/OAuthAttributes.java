@@ -38,7 +38,7 @@ public class OAuthAttributes {
 
     // ofKakao
     private static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
-        // kakao는 kakao_account에 유저정보가 있다. (email)
+        // kakao_account에 유저정보가 있다. (email)
         Map<String, Object> kakaoAccount = (Map<String, Object>)attributes.get("kakao_account");
         // kakao_account안에 또 profile이라는 JSON객체가 있다. (nickname, profile_image)
         Map<String, Object> kakaoProfile = (Map<String, Object>)kakaoAccount.get("profile");
@@ -53,7 +53,7 @@ public class OAuthAttributes {
 
     // ofNaver
     private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
-        // JSON형태이기 떄문에 Map을 통해서 데이터를 가져온다.
+        // Map을 통해서 JSON 형태의 데이터를 가져온다.
         Map<String, Object> response = (Map<String, Object>)attributes.get("response");
 
         return OAuthAttributes.builder()
@@ -64,7 +64,7 @@ public class OAuthAttributes {
                 .build();
     }
 
-
+    // ofGoogle
     private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
@@ -76,7 +76,6 @@ public class OAuthAttributes {
 
     // 처음 로그인할 때 OAuthAttributes 에서 엔티티를 생성
     public Member toEntity(){
-        Member member = new Member();
         return Member.builder()
                 .name(name)
                 .email(email)
