@@ -17,6 +17,7 @@
         function showAlert() {
             const successMsg = [[${successMsg}]];
             const errorMsg = [[${errorMsg}]];
+            const errorDelete = [[${errorDelete}]];
 
             if (successMsg) {
                 alert(successMsg);
@@ -24,6 +25,9 @@
             }
             if (errorMsg) {
                 alert(errorMsg);
+            }
+            if (errorDelete) {
+                alert(errorDelete);
             }
         }
 

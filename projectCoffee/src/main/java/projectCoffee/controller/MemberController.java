@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import projectCoffee.dto.MemberUpdateDto;
 import projectCoffee.dto.MemberFormDto;
+
 import projectCoffee.entity.Member;
 import projectCoffee.repository.MemberRepository;
 import projectCoffee.service.MemberService;
@@ -34,10 +35,15 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
-
     // 로그인
     @GetMapping(value = "/login")
     public String loginMember() {
+        return "/member/memberLoginForm";
+    }
+
+    @GetMapping(value = "/login/error")
+    public String loginError(Model model) {
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         return "/member/memberLoginForm";
     }
 
@@ -55,23 +61,22 @@ public class MemberController {
             model.addAttribute("errorMsg", "회원 가입을 실패했습니다.");
             return "member/memberForm";
         }
+        // 비밀번호 일치 확인
+        if (!memberFormDto.getPassword().equals(memberFormDto.getPasswordConfirm())) {
+            bindingResult.rejectValue("passwordConfirm",
+                    "password.mismatch", "비밀번호가 일치하지 않습니다.");
+            return "member/memberForm";
+        }
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
-            model.addAttribute("successMsg", "회원 가입을 완료했습니다. 환영합니다!");
+            model.addAttribute("successMsg", "회원가입을 완료했습니다. 환영합니다!");
         } catch (IllegalStateException e) {
             model.addAttribute("errorMsg", "오류가 발생했습니다.");
             return "member/memberForm";
         }
-        return "redirect:/";
+        return "member/memberForm";
     }
-
-    @GetMapping(value = "/login/error")
-    public String loginError(Model model) {
-        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
-        return "/member/memberLoginForm";
-    }
-
 
     // 회원 정보 조회
     @GetMapping(value = "/info")
@@ -88,8 +93,9 @@ public class MemberController {
     // 회원 정보 수정
     @PostMapping(value = "/update")
     public String updateMember(@Valid MemberUpdateDto memberUpdateDto, BindingResult bindingResult, Principal principal, Model model) {
+
         if (bindingResult.hasErrors()) {
-            model.addAttribute("errorMsg", "회원 정보 수정에 실패했습니다.");
+            model.addAttribute("errorMsg", "회원 정보 수정을 실패했습니다.");
             return "member/memberUpdateForm";
         }
         try {
@@ -98,11 +104,11 @@ public class MemberController {
                 model.addAttribute("successMsg", "회원 정보 수정이 완료되었습니다.");
             }
         } catch (Exception e) {
-            model.addAttribute("errorMsg", "오류가 발생했습니다.");
+            model.addAttribute("errorMsg", "회원 정보 수정 중 에러가 발생하였습니다");
             return "member/memberUpdateForm";
         }
         return "member/memberUpdateForm";
-}
+    }
 
     // 회원 삭제
     @GetMapping("/delete/{memberId}")
