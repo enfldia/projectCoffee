@@ -3,11 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
 <head>
-    <title>게시글수정</title>
+  <title>게시글수정</title>
 </head>
 
 <div layout:fragment="content">
-<!--  <div th:replace="fragments/adminNav::aside" class="adminNav"></div>-->
+  <!--  <div th:replace="fragments/adminNav::aside" class="adminNav"></div>-->
   <form class="container mt-3" action="/admin/notice/update" role="form" method="post" th:object="${ArticleDto}">
     <input type="hidden" th:value="${article.id}" name="id">
     <div class="mb-3">

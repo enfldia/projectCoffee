@@ -101,6 +101,7 @@ div.containerWrap {
     align-items: center;
     font-size: 14px;
     margin-left: 116px;
+    position: relative;
 }
 .search li{
     padding-right: 30px;
@@ -130,7 +131,7 @@ form{
 #Accordion_wrap{
     position: absolute;
     z-index: 99;
-    right: 266px;
+    right: 251px;
     top: 28px;
 }
 .que:first-child{

@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/footer.css" />
-
-
-
+    <link rel="stylesheet" href="/css/faq.css" />
 
 
     <!--css only-->
@@ -23,22 +21,21 @@
     <!--    aos.js 라이브러리-->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- 폰트어썸-->
-    <script src="https://kit.fontawesome.com/3cb34be75b.js" crossorigin="anonymous"></script>
 
     <th:block layout:fragment="script"></th:block>
     <th:block layout:fragment="css">
 
     </th:block>
+    <!-- 폰트어썸-->
+    <script src="https://kit.fontawesome.com/3cb34be75b.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
 
 <div th:replace="fragments/header::header"></div>
 
-<div layout:fragment="content" class="content">
-
-</div>
+<div layout:fragment="content" class="content"></div>
+<div layout:fragment="contents" class="contents"></div>
 
 <div th:replace="fragments/footer::footer"></div>
 

@@ -6,3 +6,9 @@ html{
 body {
     min-height:100%;
 }
+.content{
+    margin-bottom:100px;
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+}

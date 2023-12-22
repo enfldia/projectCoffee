@@ -3,12 +3,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
 <th:block layout:fragment="css">
-<!--  <link th:href="@{/css/adminArtiShow.css}" rel="stylesheet">-->
+  <!--  <link th:href="@{/css/adminArtiShow.css}" rel="stylesheet">-->
 </th:block>
 
 
 <div layout:fragment="content">
-<!--  <div th:replace="fragments/adminNav::aside" class="adminNav"></div>-->
+  <!--  <div th:replace="fragments/adminNav::aside" class="adminNav"></div>-->
   <input type="hidden" id="id" th:value="${article.id}">
   <table class="table">
     <thead>
@@ -20,7 +20,7 @@
         <p th:text="${#strings.substring(article.regTime, 0, 10)}" style="color:#888;"></p>
       </th>
       <th scope="col"></th>
-      <th scope="col"><p th:text="${article.createBy}" style="font-weight:400;text-align:right;
+      <th scope="col"><p th:text="${article.createdBy}" style="font-weight:400;text-align:right;
           margin-right:100px;"></p></th>
     </tr>
     </thead>
@@ -36,6 +36,6 @@
   <a th:href="@{/admin/notice/{id}/edit(id=${article.id})}" class="btn btn-warning">수정</a>
   <a th:href="@{/admin/notice/{id}/delete(id=${article.id})}" class="btn btn-danger">삭제</a>
   <!-- Include the comments template -->
-<!--  <div th:replace="comments/_comments"></div>-->
+  <!--  <div th:replace="comments/_comments"></div>-->
 </div>
 </html>

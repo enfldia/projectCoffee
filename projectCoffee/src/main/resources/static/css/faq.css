@@ -54,16 +54,16 @@ ul,li{list-style:none;padding-left:0 !important;}
 
 }
 .faqTab>li.active{
-      border : 1px solid #555;
-      border-bottom : none;
-      color:#333;
-      font-weight : bold;
-  }
+    border : 1px solid #555;
+    border-bottom : none;
+    color:#333;
+    font-weight : bold;
+}
 .faqTab>li>a:hover{
-     border : 2px solid #555;
-     border-bottom : none;
-     color:#D26F64;
-     font-weight : bold;
+    border : 2px solid #555;
+    border-bottom : none;
+    color:#D26F64;
+    font-weight : bold;
 }
 
 .faqCon{
@@ -125,4 +125,3 @@ ul,li{list-style:none;padding-left:0 !important;}
     color : #666;
     font-size : 14px;
 }
-

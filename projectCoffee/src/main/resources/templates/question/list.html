@@ -7,19 +7,19 @@
 </th:block>
 <th:block layout:fragment="script">
     <script th:inline="javascript">
-    $(document).ready(function() {
-        $(".page-link").on("click", function(event) {
-            event.preventDefault();
-            $("#page").val($(this).data("page"));
-            $("#searchForm").submit();
+        $(document).ready(function() {
+            $(".page-link").on("click", function(event) {
+                event.preventDefault();
+                $("#page").val($(this).data("page"));
+                $("#searchForm").submit();
+            });
+            $("#btn_search").on("click", function(event) {
+                event.preventDefault();
+                $("#kw").val($("#search_kw").val());
+                $("#page").val(0);
+                $("#searchForm").submit();
+            });
         });
-        $("#btn_search").on("click", function(event) {
-            event.preventDefault();
-            $("#kw").val($("#search_kw").val());
-            $("#page").val(0);
-            $("#searchForm").submit();
-        });
-    });
     </script>
 </th:block>
 <div layout:fragment="content">
@@ -63,7 +63,7 @@
             </thead>
             <tbody id="tbl_alist">
             <tr class="text-center" th:each="question, loop : ${paging}">
-            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+                <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
                 <td class="sub">
                     <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
                     <span class="text-danger small ms-2"
@@ -98,8 +98,8 @@
         </div>
         <!-- 페 이 징 처 리 끝 -->
         <form th:action="@{/question/list}" method="get" id="searchForm">
-        <input type="hidden" id="kw" name="kw" th:value="${kw}">
-        <input type="hidden" id="page" name="page" th:value="${paging.number}">
+            <input type="hidden" id="kw" name="kw" th:value="${kw}">
+            <input type="hidden" id="page" name="page" th:value="${paging.number}">
         </form>
         <div class="cusCenter cf">
             <div class="cs">

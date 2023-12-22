@@ -164,9 +164,9 @@ table.articleList thead{
     border: 1px solid #dedede;
 }
 .paging #div_pageNavi .pagination li a span{
-     height : 15px;
-     line-height : 15px;
-     font-size : 14px;
+    height : 15px;
+    line-height : 15px;
+    font-size : 14px;
 }
 
 
