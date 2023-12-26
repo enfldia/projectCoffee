@@ -176,7 +176,7 @@ public class ItemController {
         model.addAttribute("maxPage",5);
 
 
-        return "/item/shopItem";
+        return "item/shopItem";
     }
 
     @GetMapping("/show/coffee")
