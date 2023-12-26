@@ -156,7 +156,7 @@ public class ItemController {
         ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
         System.out.println("1234123412341234123412341" +itemFormDto.getItemImgDtoList().get(0).getImgUrl());
         model.addAttribute("item",itemFormDto);
-        return "item/ItemDtl";
+        return "item/itemDtl";
     }
 
     @GetMapping("/shopItem")
